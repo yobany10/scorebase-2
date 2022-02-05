@@ -1,0 +1,36 @@
+.scorebar-div {
+    grid-area: scoreBar;
+    align-self: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    color: rgb(67, 78, 78);
+    /* background: rgb(235, 235, 235); */
+    padding: 1rem;
+    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    grid-template-areas: 
+    'rScore yScore'
+    'rActions yActions';
+}
+
+.scorebar-r-score {
+    grid-area: rScore;
+}
+
+.scorebar-y-score {
+    grid-area: yScore;
+}
+
+.scorebar-r-actions {
+    grid-area: rActions;
+}
+
+.scorebar-y-actions {
+    grid-area: yActions;
+}
+
+.scorebar-menu-item {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

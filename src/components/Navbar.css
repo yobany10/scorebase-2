@@ -1,0 +1,23 @@
+.navbar-div {
+    background-color: rgb(233, 233, 233) !important;
+}
+
+.navbar-div a {
+    color: cornflowerblue !important;
+    text-decoration: none;
+}
+
+.navbar-brand {
+    color: cornflowerblue !important;
+    font-weight: bolder;
+    margin: 0 0 0 1rem;
+}
+
+.navbar-link a {
+    color: rgb(67, 78, 78) !important;
+    padding: 0 1rem;
+}
+
+.navbar-link a:hover {
+    color: orangered !important;
+}

@@ -1,0 +1,40 @@
+.timebar-div {
+    grid-area: timeBar;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    color: rgb(67, 78, 78);
+    /* background: rgb(235, 235, 235); */
+    padding: 1rem;
+    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    text-align: center;
+    grid-template-areas: 
+    'timebarDisplay'
+    'timeProgressBar'
+    'timebarButtons';
+}
+
+.timebar-time-display {
+    grid-area: timebarDisplay;
+    font-size: 2rem;
+}
+
+.timebar-btn {
+    grid-area: timebarButtons;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    background: lightsalmon;
+    color: white;
+    padding: 0.25rem 0.5rem;
+}
+
+.timebar-btn:hover {
+    background: lightslategray;
+}
+
+.timebar-btn:focus {
+    background: orangered;
+}
