@@ -1,5 +1,6 @@
 .scorekeep-div {
     display: grid;
+    max-width: 1400px;
     /* border: 5px green solid; */
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
