@@ -1,5 +1,5 @@
 .navbar-div {
-    background-color: rgb(233, 233, 233) !important;
+    background-color: white !important;
 }
 
 .navbar-div a {
@@ -8,7 +8,6 @@
 }
 
 .navbar-brand {
-    color: cornflowerblue !important;
     font-weight: bolder;
     margin: 0 0 0 1rem;
 }
@@ -19,5 +18,5 @@
 }
 
 .navbar-link a:hover {
-    color: orangered !important;
+    color: cornflowerblue !important;
 }

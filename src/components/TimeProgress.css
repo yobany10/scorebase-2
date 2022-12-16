@@ -1,3 +1,4 @@
 .progressbar-div {
     grid-area: timeProgressBar;
+    align-self: start;
 }

@@ -1,14 +1,19 @@
 import React from 'react'
 import Navbar from './components/Navbar'
+import Scorekeeper from './components/Scorekeeper'
 import Home from './components/Home'
-// import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import './App.css'
 
 const App = () => {
   return (
-    <div>
+      <div className='app'>
         <Navbar />
-        <Home />
-    </div>
+          <Routes>
+            <Route path='/' element={<Home/>} />
+            <Route path='/scorekeeping' element={<Scorekeeper/>} />
+          </Routes>
+      </div>
   )
 }
 

@@ -1,9 +1,62 @@
 .scoretable-div {
-    /* min-width: 1000px; */
-    grid-area: scoreTable;
     align-self: start;
+    height: 70vh !important;
+    overflow-y: scroll;
+    /* box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.1); */
+    background-color: rgb(236, 240, 244);
+    border-radius: 5px;
 }
 
 .scoretable {
-    /* border-radius: 5px; */
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+}
+
+.dark-cell {
+    background-color: rgb(242, 242, 242) !important;
+}
+
+thead {
+    background-color: rgb(242, 242, 242);
+}
+
+th {
+    width: 7.69%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    background-color: rgb(242, 242, 242) !important;
+    z-index: 99;
+}
+
+.scoretable sup {
+    border-radius: 3px;
+    padding: 1px 2px;
+    margin: 0 1px;
+}
+.scoretable sup.quizzer-action-sup-i {
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin: 0 1px;
+}
+
+.quizzer-action-sup-i {
+    background-color: rgb(0, 72, 206);
+    color: white;
+}
+
+.quizzer-action-sup-c {
+    background-color: rgb(0, 149, 20);
+    color: white;
+}
+
+.quizzer-action-sup-e {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.quizzer-action-sup-f {
+    background-color: rgb(255, 140, 0);
+    color: white;
 }

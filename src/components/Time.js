@@ -8,7 +8,7 @@ import './Time.css'
 const Time = props => {
     return (
         <div className='timebar-div'>
-            <p className='timebar-time-display'>Time: {props.currentTime}</p>
+            <p className='timebar-time-title'>Time: {props.currentTime}</p>
             <TimeProgress time={props.currentTime} />
             <ButtonGroup aria-label="Basic example">
                 <Button variant="secondary" onClick={props.handleClear}>Clear</Button>

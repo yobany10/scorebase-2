@@ -1,5 +1,6 @@
 .timebar-div {
     grid-area: timeBar;
+    align-self: start;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -7,28 +8,29 @@
     color: rgb(67, 78, 78);
     /* background: rgb(235, 235, 235); */
     padding: 1rem;
-    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.1);
+    box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.1);
+    background-color: white;
     border-radius: 5px;
     text-align: center;
     grid-template-areas: 
-    'timebarDisplay'
+    'timebarTitle'
     'timeProgressBar'
     'timebarButtons';
 }
 
-.timebar-time-display {
-    grid-area: timebarDisplay;
-    font-size: 2rem;
+.timebar-time-title {
+    grid-area: timebarTitle;
+    align-self: start;
+    font-size: 28px;
+    font-weight: bolder;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
-.timebar-btn {
+.timebar-div button {
     grid-area: timebarButtons;
-    border: none;
-    border-radius: 5px;
-    margin: 0 5px;
-    background: lightsalmon;
-    color: white;
-    padding: 0.25rem 0.5rem;
+    align-self: start;
+    font-size: 14px;
 }
 
 .timebar-btn:hover {

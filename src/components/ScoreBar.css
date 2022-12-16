@@ -1,25 +1,37 @@
 .scorebar-div {
-    grid-area: scoreBar;
     align-self: start;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+    gap: 5px;
     color: rgb(67, 78, 78);
-    /* background: rgb(235, 235, 235); */
     padding: 1rem;
-    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.1);
+    box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.1);
+    background-color: white;
     border-radius: 5px;
     grid-template-areas: 
     'rScore yScore'
     'rActions yActions';
 }
 
+.scorebar-div button {
+    font-size: 14px;
+}
+
 .scorebar-r-score {
     grid-area: rScore;
+    font-size: 28px;
+    font-weight: bolder;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
 .scorebar-y-score {
     grid-area: yScore;
+    font-size: 28px;
+    font-weight: bolder;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
 .scorebar-r-actions {
@@ -33,4 +45,16 @@
 .scorebar-menu-item {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.dropdown-menu {
+    padding: 5px;
+}
+
+.form-check :hover {
+    cursor: pointer;
+}
+
+.form-check-label {
+    cursor: pointer;
 }

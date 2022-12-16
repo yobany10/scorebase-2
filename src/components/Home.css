@@ -1,14 +1,45 @@
-.scorekeep-div {
+.full-page-banner {
     display: grid;
-    max-width: 1400px;
-    justify-content: center;
-    /* border: 5px green solid; */
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    padding: 0.5rem;
-    gap: 1rem;
-    grid-template-areas: 
-    'scoreBar scoreBar scoreBar questionBar'
-    'scoreTable scoreTable scoreTable timeBar'
-    'scoreTable scoreTable scoreTable .'
+    background: rgb(255,255,255);
+background: -moz-linear-gradient(166deg, rgba(255,255,255,1) 0%, rgba(243,246,249,1) 20%, rgba(236,240,244,1) 35%, rgba(230,247,255,1) 69%, rgba(221,244,255,1) 87%);
+background: -webkit-linear-gradient(166deg, rgba(255,255,255,1) 0%, rgba(243,246,249,1) 20%, rgba(236,240,244,1) 35%, rgba(230,247,255,1) 69%, rgba(221,244,255,1) 87%);
+background: linear-gradient(166deg, rgba(255,255,255,1) 0%, rgba(243,246,249,1) 20%, rgba(236,240,244,1) 35%, rgba(230,247,255,1) 69%, rgba(221,244,255,1) 87%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ddf4ff",GradientType=1);
+    padding: 1rem;
+    height: calc(100vh - 46px);
+    min-height: 500px;
+}
+
+#full-page-banner-text-container {
+    display: grid;
+    align-self: end;
+    justify-self: center;
+    padding: 0 0 5vh 0;
+}
+
+#full-page-banner-text-small {
+    align-self: end;
+    justify-self: center;
+    font-size: calc(4vw + 20px);
+    font-weight: 100;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+#full-page-banner-text-large {
+    align-self: start;
+    justify-self: center;
+    font-size: calc(6vw + 20px);
+    font-weight: 900;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+#full-page-banner-button-container {
+    align-self: start;
+    justify-self: center;
+}
+
+#full-page-banner-button {
+    padding: 5px 8px;
 }

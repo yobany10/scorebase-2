@@ -1,0 +1,55 @@
+.material-search {
+    grid-area: search;
+    align-self: stretch;
+    display: grid;
+    padding: 1rem;
+    gap: 5px;
+    background-color: white;
+    box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    max-height: 44vh;
+    overflow-y: hidden;
+    overflow: scroll;
+}
+
+.material-search-title {
+    font-size: 18px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.material-search-input {
+    justify-self: center;
+    border: none;
+    border: 1px solid gainsboro;
+    border-radius: 3px;
+    padding: 0 5px;
+}
+
+.material-search-result-count {
+    padding: 0 0 0 5px;
+    color: rgb(156, 156, 156);
+}
+
+.material-search-result {
+    background-color: rgb(236, 240, 244);
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.material-search-result-ref {
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.material-search-result-text {
+    font-size: 15px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.material-search-result-highlight {
+    background-color: rgb(255, 241, 138);
+}

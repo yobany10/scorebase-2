@@ -7,11 +7,13 @@ import './Navbar.css'
 const MainNavbar = () => {
     return (
         <>
-        <Navbar bg="light" className="navbar-div" sticky='top'>
-            <Navbar.Brand className='navbar-brand'>ScoreBase</Navbar.Brand>
+        <Navbar bg="light" className="navbar-div">
+            <Link to={'/'}>
+                <Navbar.Brand className='navbar-brand gradient-bg-purple-blue'>ScoreBase</Navbar.Brand>
+            </Link>
             {/* <Nav className="mr-auto navbar-link">
                 <Link to='/'>Home</Link>
-                <Link to='/scorekeep'>Scorekeep</Link>
+                <Link to='/scorekeeping'>Scorekeep</Link>
             </Nav> */}
         </Navbar>
         </>
