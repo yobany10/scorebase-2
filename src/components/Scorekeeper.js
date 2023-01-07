@@ -6,12 +6,15 @@ import QuestionBar from './QuestionBar'
 import TimeBar from './Time'
 import MaterialSearch from './MaterialSearch'
 import AlertBar from './AlertBar'
+import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
 
 const Scorekeeper = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
     const [yellowBonusStart, setYellowBonusStart] = useState(true)
+    const [redName, setRedName] = useState('Red')
+    const [yellowName, setYellowName] = useState('Yellow')
     const [red1Name, setRed1Name] = useState('R1')
     const [red2Name, setRed2Name] = useState('R2')
     const [red3Name, setRed3Name] = useState('R3')
@@ -22,7 +25,7 @@ const Scorekeeper = () => {
     const [yellow3Name, setYellow3Name] = useState('Y3')
     const [yellow4Name, setYellow4Name] = useState('Y4')
     const [yellow5Name, setYellow5Name] = useState('Y5')
-    const [division, setDivision] = useState('Senior')
+    const [division, setDivision] = useState('Junior')
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])
@@ -210,7 +213,11 @@ const Scorekeeper = () => {
         let question = item.question
         let value = 10
         let score = 0
-        question > 20 ? value = 20 : question > 17 && question <= 20 ? value = 30 : question <= 17 && question >= 9 ? value = 20 : value = 10;
+        if (division === 'Senior') {
+            question > 20 ? value = 20 : question > 17 && question <= 20 ? value = 30 : question <= 17 && question >= 9 ? value = 20 : value = 10;
+        } else {
+            question > 15 ? value = 20 : question > 12 && question <= 15 ? value = 30 : question <= 12 && question >= 7 ? value = 20 : value = 10;
+        }
         if (item[quizzer].correct === true) {
             score = score + value
         }
@@ -269,6 +276,7 @@ const Scorekeeper = () => {
             let value = newQuizTableData[(question - 1)][quizzer].correct ? false : true
             newQuizTableData[(question - 1)][quizzer].correct = value;
             setQuizTableData(newQuizTableData)
+            checkNumericalWinner()
             checkQuizOut(quizzer)
             if(value) {
                 addQuestionDecider()
@@ -278,6 +286,7 @@ const Scorekeeper = () => {
             let value = newQuizTableData[(question - 1)][quizzer].error ? false : true
             newQuizTableData[(question - 1)][quizzer].error = value;
             setQuizTableData(newQuizTableData)
+            checkNumericalWinner()
             checkQuizOut(quizzer)
             if(value) {
                 addQuestionDecider()
@@ -297,6 +306,24 @@ const Scorekeeper = () => {
         console.log(newQuizTableData)
     }
 
+    const checkNumericalWinner = () => {
+        if (question === 15) {
+            if (calculateTeamScore(question, 'red', true) !== calculateTeamScore(question, 'yellow', true)) {
+                addAlert(`We have a numerical winner!`)
+                toast.info('We have a numerical winner!', toastOptions)
+                return true
+            } else {
+                addAlert('It looks like we have a tie.')
+                toast.info('It looks like we have a tie.', toastOptions)
+                return false
+            }
+        }
+    }
+
+    const toastOptions = {
+        position: 'bottom-left'
+    }
+
     //check for quiz-out or error-out
     const checkQuizOut = (quizzer) => {
         let correctCount = 0
@@ -313,9 +340,11 @@ const Scorekeeper = () => {
             }
         })
         if (correctCount >= correctMax) {
+            toast.success(`${quizzer} has quizzed out!`, toastOptions)
             addAlert(`${quizzer} has quizzed out!`)
             return {quizOut: true, errorOut: false}
         } else if (errorCount >= errorMax) {
+            toast.error(`${quizzer} has errored out!`, toastOptions)
             addAlert(`${quizzer} has errored out!`)
             return {quizOut: false, errorOut: true}
         } else {
@@ -325,7 +354,7 @@ const Scorekeeper = () => {
 
     const addQuestionDecider = () => {
         let newQuizTableData = quizTableData.slice()
-        if(question >= 20) {
+        if(question >= 15) {
             newQuizTableData.push(
                 {
                     question: (question + 1),
@@ -406,11 +435,19 @@ const Scorekeeper = () => {
         }
     }
 
+    const handleNameChange = (side, name) => {
+        if (side === 'red') {
+            setRedName(name)
+        } else {
+            setYellowName(name)
+        }
+    }
+
     return (
         <div className='scorekeep-container'>
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
-                    <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} />
+                    <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} />
                     <ScoreTable render={renderScoreTable} />
                 </div>
                 <div className='scoresheet-tools'>

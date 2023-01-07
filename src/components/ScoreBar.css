@@ -10,7 +10,7 @@
     background-color: white;
     border-radius: 5px;
     grid-template-areas: 
-    'rScore yScore'
+    'rInfo yInfo'
     'rActions yActions';
 }
 
@@ -18,20 +18,52 @@
     font-size: 14px;
 }
 
+.scorebar-r-info-div {
+    grid-area: rInfo
+}
+
 .scorebar-r-score {
-    grid-area: rScore;
+    font-size: 28px;
+    padding: 0 1rem;
+    margin: 0 0 0 0;
+    float: left;
+    border-left: 4px solid red;
+}
+
+.scorebar-r-name {
     font-size: 28px;
     font-weight: bolder;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
+    border: none;
+}
+
+.scorebar-r-name:focus {
+    outline: none;
+}
+
+.scorebar-y-info-div {
+    grid-area: yInfo
 }
 
 .scorebar-y-score {
-    grid-area: yScore;
+    font-size: 28px;
+    padding: 0 1rem;
+    margin: 0 0 0 0;
+    float: left;
+    border-left: 4px solid yellow;
+}
+
+.scorebar-y-name {
     font-size: 28px;
     font-weight: bolder;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
+    border: none;
+}
+
+.scorebar-y-name:focus {
+    outline: none;
 }
 
 .scorebar-r-actions {

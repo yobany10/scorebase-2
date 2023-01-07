@@ -99,7 +99,13 @@ const ScoreBar = props => {
   }
     return (
         <div className='scorebar-div'>
-            <h1 className='scorebar-r-score'>Red: {props.rScore}</h1>
+            <div className='scorebar-r-info-div'>
+              <p className='scorebar-r-score'>{props.rScore}</p>
+              <input className='scorebar-r-name' type='text' defaultValue={props.redName} onChange={(event) => {
+                const value = event.target.value 
+                props.handleNameChange('red', value)
+              }} />
+            </div>
             <ButtonGroup className='scorebar-r-actions'>
                 <DropdownButton as={ButtonGroup} title={props.red1Name} id="bg-nested-dropdown" variant='secondary' show={isShownR1} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r1')}>
                 <Form>
@@ -644,7 +650,13 @@ const ScoreBar = props => {
                 </Form>
                 </DropdownButton>
             </ButtonGroup>
-            <h1 className='scorebar-y-score'>Yellow: {props.yScore}</h1>
+            <div className='scorebar-y-info-div'>
+              <p className='scorebar-y-score'>{props.yScore}</p>
+              <input className='scorebar-y-name' type='text' defaultValue={props.yellowName} onChange={(event) => {
+                const value = event.target.value 
+                props.handleNameChange('yellow', value)
+              }} />
+            </div>
         </div>
     )
 }

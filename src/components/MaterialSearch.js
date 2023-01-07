@@ -4,7 +4,7 @@ import './MaterialSearch.css'
 const MaterialSearch = () => {
   const [results, setResults] = useState([])
 
-    /* An Idea
+/* An Idea
 Write templates that can be filled in with 1,2,3,4 time words to generate practice questions.
 Maybe write other templates that can be filled for other types of questions.
 */
@@ -2229,18 +2229,332 @@ const material = [
   ]
   }
   ]
-  
-//   const search = query => {
-//     let output = []
-//     material[0].chapters[0].verses.forEach(item => {
-//       if (item.text.includes(query)) {
-//         output.push(item.text)
-//       }
-//     })
-//     console.log(output)
-//   }
-  
-  // search('Ephesus')
+
+const juniorMaterial = [
+  {
+    "book": "Galatians",
+    "chapters": [
+    {
+    "chapter": "1",
+    "verses": [
+    {
+    "verse": "1",
+    "text": "Paul, an apostle, (not of men, neither by man, but by Jesus Christ, and God the Father, who raised him from the dead;)"
+    },
+    {
+    "verse": "2",
+    "text": "And all the brethren which are with me, unto the churches of Galatia:"
+    },
+    {
+    "verse": "3",
+    "text": "Grace be to you and peace from God the Father, and from our Lord Jesus Christ,"
+    },
+    {
+    "verse": "4",
+    "text": "Who gave himself for our sins, that he might deliver us from this present evil world, according to the will of God and our Father:"
+    },
+    {
+    "verse": "5",
+    "text": "To whom be glory for ever and ever. Amen."
+    },
+    {
+    "verse": "6",
+    "text": "I marvel that ye are so soon removed from him that called you into the grace of Christ unto another gospel:"
+    },
+    {
+    "verse": "7",
+    "text": "Which is not another; but there be some that trouble you, and would pervert the gospel of Christ."
+    },
+    {
+    "verse": "8",
+    "text": "But though we, or an angel from heaven, preach any other gospel unto you than that which we have preached unto you, let him be accursed."
+    },
+    {
+    "verse": "9",
+    "text": "As we said before, so say I now again, If any man preach any other gospel unto you than that ye have received, let him be accursed."
+    },
+    {
+    "verse": "10",
+    "text": "For do I now persuade men, or God? or do I seek to please men? for if I yet pleased men, I should not be the servant of Christ."
+    },
+    {
+    "verse": "11",
+    "text": "But I certify you, brethren, that the gospel which was preached of me is not after man."
+    },
+    {
+    "verse": "12",
+    "text": "For I neither received it of man, neither was I taught it, but by the revelation of Jesus Christ."
+    },
+    {
+    "verse": "13",
+    "text": "For ye have heard of my conversation in time past in the Jews’ religion, how that beyond measure I persecuted the church of God, and wasted it:"
+    },
+    {
+    "verse": "14",
+    "text": "And profited in the Jews’ religion above many my equals in mine own nation, being more exceedingly zealous of the traditions of my fathers."
+    },
+    {
+    "verse": "15",
+    "text": "But when it pleased God, who separated me from my mother’s womb, and called me by his grace,"
+    },
+    {
+    "verse": "16",
+    "text": "To reveal his Son in me, that I might preach him among the heathen; immediately I conferred not with flesh and blood:"
+    },
+    {
+    "verse": "17",
+    "text": "Neither went I up to Jerusalem to them which were apostles before me; but I went into Arabia, and returned again unto Damascus."
+    },
+    {
+    "verse": "18",
+    "text": "Then after three years I went up to Jerusalem to see Peter, and abode with him fifteen days."
+    },
+    {
+    "verse": "19",
+    "text": "But other of the apostles saw I none, save James the Lord’s brother."
+    },
+    {
+    "verse": "20",
+    "text": "Now the things which I write unto you, behold, before God, I lie not."
+    },
+    {
+    "verse": "21",
+    "text": "Afterwards I came into the regions of Syria and Cilicia;"
+    },
+    {
+    "verse": "22",
+    "text": "And was unknown by face unto the churches of Judaea which were in Christ:"
+    },
+    {
+    "verse": "23",
+    "text": "But they had heard only, That he which persecuted us in times past now preacheth the faith which once he destroyed."
+    },
+    {
+    "verse": "24",
+    "text": "And they glorified God in me."
+    }
+    ]
+    },
+    {
+    "chapter": "2",
+    "verses": [
+    {
+    "verse": "1",
+    "text": "Then fourteen years after I went up again to Jerusalem with Barnabas, and took Titus with me also."
+    },
+    {
+    "verse": "2",
+    "text": "And I went up by revelation, and communicated unto them that gospel which I preach among the Gentiles, but privately to them which were of reputation, lest by any means I should run, or had run, in vain."
+    },
+    {
+    "verse": "3",
+    "text": "But neither Titus, who was with me, being a Greek, was compelled to be circumcised:"
+    },
+    {
+    "verse": "4",
+    "text": "And that because of false brethren unawares brought in, who came in privily to spy out our liberty which we have in Christ Jesus, that they might bring us into bondage:"
+    },
+    {
+    "verse": "5",
+    "text": "To whom we gave place by subjection, no, not for an hour; that the truth of the gospel might continue with you."
+    },
+    {
+    "verse": "20",
+    "text": "I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me."
+    },
+    {
+    "verse": "21",
+    "text": "I do not frustrate the grace of God: for if righteousness come by the law, then Christ is dead in vain."
+    }
+    ]
+    },
+    {
+    "chapter": "3",
+    "verses": [
+    {
+    "verse": "26",
+    "text": "For ye are all the children of God by faith in Christ Jesus."
+    },
+    {
+    "verse": "27",
+    "text": "For as many of you as have been baptized into Christ have put on Christ."
+    },
+    {
+    "verse": "28",
+    "text": "There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for ye are all one in Christ Jesus."
+    },
+    {
+    "verse": "29",
+    "text": "And if ye be Christ’s, then are ye Abraham’s seed, and heirs according to the promise."
+    }
+    ]
+    },
+    {
+    "chapter": "4",
+    "verses": [
+    {
+    "verse": "1",
+    "text": "Now I say, That the heir, as long as he is a child, differeth nothing from a servant, though he be lord of all;"
+    },
+    {
+    "verse": "2",
+    "text": "But is under tutors and governors until the time appointed of the father."
+    },
+    {
+    "verse": "3",
+    "text": "Even so we, when we were children, were in bondage under the elements of the world:"
+    },
+    {
+    "verse": "4",
+    "text": "But when the fulness of the time was come, God sent forth his Son, made of a woman, made under the law,"
+    },
+    {
+    "verse": "5",
+    "text": "To redeem them that were under the law, that we might receive the adoption of sons."
+    },
+    {
+    "verse": "6",
+    "text": "And because ye are sons, God hath sent forth the Spirit of his Son into your hearts, crying, Abba, Father."
+    },
+    {
+    "verse": "7",
+    "text": "Wherefore thou art no more a servant, but a son; and if a son, then an heir of God through Christ."
+    }
+    ]
+    },
+    {
+    "chapter": "5",
+    "verses": [
+    {
+    "verse": "7",
+    "text": "Ye did run well; who did hinder you that ye should not obey the truth?"
+    },
+    {
+    "verse": "8",
+    "text": "This persuasion cometh not of him that calleth you."
+    },
+    {
+    "verse": "9",
+    "text": "A little leaven leaveneth the whole lump."
+    },
+    {
+    "verse": "10",
+    "text": "I have confidence in you through the Lord, that ye will be none otherwise minded: but he that troubleth you shall bear his judgment, whosoever he be."
+    },
+    {
+    "verse": "11",
+    "text": "And I, brethren, if I yet preach circumcision, why do I yet suffer persecution? then is the offence of the cross ceased."
+    },
+    {
+    "verse": "12",
+    "text": "I would they were even cut off which trouble you."
+    },
+    {
+    "verse": "13",
+    "text": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another."
+    },
+    {
+    "verse": "14",
+    "text": "For all the law is fulfilled in one word, even in this; Thou shalt love thy neighbour as thyself."
+    },
+    {
+    "verse": "15",
+    "text": "But if ye bite and devour one another, take heed that ye be not consumed one of another."
+    },
+    {
+    "verse": "16",
+    "text": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh."
+    },
+    {
+    "verse": "17",
+    "text": "For the flesh lusteth against the Spirit, and the Spirit against the flesh: and these are contrary the one to the other: so that ye cannot do the things that ye would."
+    },
+    {
+    "verse": "18",
+    "text": "But if ye be led of the Spirit, ye are not under the law."
+    },
+    {
+    "verse": "19",
+    "text": "Now the works of the flesh are manifest, which are these; Adultery, fornication, uncleanness, lasciviousness,"
+    },
+    {
+    "verse": "20",
+    "text": "Idolatry, witchcraft, hatred, variance, emulations, wrath, strife, seditions, heresies,"
+    },
+    {
+    "verse": "21",
+    "text": "Envyings, murders, drunkenness, revellings, and such like: of the which I tell you before, as I have also told you in time past, that they which do such things shall not inherit the kingdom of God."
+    },
+    {
+    "verse": "22",
+    "text": "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith,"
+    },
+    {
+    "verse": "23",
+    "text": "Meekness, temperance: against such there is no law."
+    },
+    {
+    "verse": "24",
+    "text": "And they that are Christ’s have crucified the flesh with the affections and lusts."
+    },
+    {
+    "verse": "25",
+    "text": "If we live in the Spirit, let us also walk in the Spirit."
+    },
+    {
+    "verse": "26",
+    "text": "Let us not be desirous of vain glory, provoking one another, envying one another."
+    }
+    ]
+    },
+    {
+    "chapter": "6",
+    "verses": [
+    {
+    "verse": "1",
+    "text": "Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness; considering thyself, lest thou also be tempted."
+    },
+    {
+    "verse": "2",
+    "text": "Bear ye one another’s burdens, and so fulfil the law of Christ."
+    },
+    {
+    "verse": "3",
+    "text": "For if a man think himself to be something, when he is nothing, he deceiveth himself."
+    },
+    {
+    "verse": "4",
+    "text": "But let every man prove his own work, and then shall he have rejoicing in himself alone, and not in another."
+    },
+    {
+    "verse": "5",
+    "text": "For every man shall bear his own burden."
+    },
+    {
+    "verse": "6",
+    "text": "Let him that is taught in the word communicate unto him that teacheth in all good things."
+    },
+    {
+    "verse": "7",
+    "text": "Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."
+    },
+    {
+    "verse": "8",
+    "text": "For he that soweth to his flesh shall of the flesh reap corruption; but he that soweth to the Spirit shall of the Spirit reap life everlasting."
+    },
+    {
+    "verse": "9",
+    "text": "And let us not be weary in well doing: for in due season we shall reap, if we faint not."
+    },
+    {
+    "verse": "10",
+    "text": "As we have therefore opportunity, let us do good unto all men, especially unto them who are of the household of faith."
+    }
+    ]
+    }
+    ]
+    }
+]
 
 const handleSearch = event => {
   event.preventDefault()
@@ -2251,7 +2565,7 @@ const handleSearch = event => {
     return
   }
   // iterate through books
-          material.forEach((element, index) => {
+          juniorMaterial.forEach((element, index) => {
             let book = element.book
             // iterate through chapters found in a specific book
             element.chapters.forEach((element, index) => {
@@ -2308,9 +2622,8 @@ const handleSearch = event => {
             <form className='material-search-form' autoComplete='off' onSubmit={(event) => event.preventDefault()}>
                 <input className='material-search-input' type='text' placeholder='words or phrases' onChange={handleSearch}></input>
             </form>
-          <p className='material-search-result-count'>results: {results.length} verses</p>
+          <p className='material-search-result-count'>results: {results.length}</p>
           {results.map((item, index) => {
-            // let startFinishArr = item.text.split(item.query)
             let firstPhrase = item.text.slice(0,item.queryIndex)
             let middlePhrase = item.text.slice(item.queryIndex, (item.queryIndex + item.query.length))
             let lastPhrase = item.text.slice(item.endingIndex)
