@@ -427,6 +427,7 @@ const Scorekeeper = () => {
     const handleQuestionChange = (direction) => {
         addQuestionDecider()
         if(direction === 'plus') {
+            checkNumericalWinner()
             setQuestion(q => q + 1)
         } else {
             if(question > 1) {
