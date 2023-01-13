@@ -11,10 +11,10 @@ const Time = props => {
             <p className='timebar-time-title'>Time: {props.currentTime}</p>
             <TimeProgress time={props.currentTime} />
             <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary" onClick={props.handleClear}>Clear</Button>
-                <Button variant="secondary" onClick={props.handle5}>5</Button>
-                <Button variant="secondary" onClick={props.handle30}>30</Button>
-                <Button variant="secondary" onClick={props.handle60}>60</Button>
+                <Button variant="secondary" size='sm' onClick={props.handleClear}>Clear</Button>
+                <Button variant="secondary" size='sm' onClick={props.handle5}>5</Button>
+                <Button variant="secondary" size='sm' onClick={props.handle30}>30</Button>
+                <Button variant="secondary" size='sm' onClick={props.handle60}>60</Button>
             </ButtonGroup>
         </div>
     )

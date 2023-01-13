@@ -2,12 +2,11 @@
     grid-area: search;
     align-self: stretch;
     display: grid;
-    padding: 1rem;
+    padding: 0.75rem;
     gap: 5px;
     background-color: white;
     box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.1);
     border-radius: 5px;
-    max-height: 44vh;
     overflow-y: hidden;
     overflow: scroll;
 }
@@ -33,7 +32,7 @@
 
 .material-search-result {
     background-color: rgb(236, 240, 244);
-    padding: 3px;
+    padding: 3px 5px;
     border-radius: 3px;
 }
 

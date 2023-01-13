@@ -1,5 +1,6 @@
 // todo: add highest question to keep track of where zeros should start for table. Maybe that part of the table can be faded as well.
 import React, { useState, useEffect } from 'react'
+import ToolBar from './ToolBar'
 import ScoreTable from './ScoreTable'
 import ScoreBar from './ScoreBar'
 import QuestionBar from './QuestionBar'
@@ -25,7 +26,7 @@ const Scorekeeper = () => {
     const [yellow3Name, setYellow3Name] = useState('Y3')
     const [yellow4Name, setYellow4Name] = useState('Y4')
     const [yellow5Name, setYellow5Name] = useState('Y5')
-    const [division, setDivision] = useState('Junior')
+    const [division, setDivision] = useState('Senior')
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])
@@ -34,6 +35,31 @@ const Scorekeeper = () => {
     const addAlert = (alert) => {
         setAlerts(prev => [alert, ...prev])
     }
+
+    const handleResetQuiz = () => {
+        setRedBonusStart(true)
+        setYellowBonusStart(true)
+        setRedName('Red')
+        setYellowName('Yellow')
+        setRed1Name('R1')
+        setRed2Name('R2')
+        setRed3Name('R3')
+        setRed4Name('R4')
+        setRed5Name('R5')
+        setYellow1Name('Y1')
+        setYellow2Name('Y2')
+        setYellow3Name('Y3')
+        setYellow4Name('Y4')
+        setYellow5Name('Y5')
+        setQuestion(1)
+        setCurrentTime(0)
+        setQuizTableData(initialQuizData)
+        setAlerts([])
+    }
+
+    useEffect(() => {
+        handleResetQuiz()
+    }, [division])
 
     let initialQuizData = []
 
@@ -108,6 +134,10 @@ const Scorekeeper = () => {
     useEffect(() => {
         setQuizTableData(initialQuizData)
     }, [])
+
+    useEffect(() => {
+        setQuizTableData(initialQuizData)
+    }, [division])
 
     const renderScoreTable = () => {
         if (quizTableData !== []) {
@@ -307,7 +337,8 @@ const Scorekeeper = () => {
     }
 
     const checkNumericalWinner = () => {
-        if (question === 15) {
+        let finalQuestion = division === 'Senior' ? 20 : 15
+        if (question === finalQuestion) {
             if (calculateTeamScore(question, 'red', true) !== calculateTeamScore(question, 'yellow', true)) {
                 addAlert(`We have a numerical winner!`)
                 toast.info('We have a numerical winner!', toastOptions)
@@ -354,7 +385,9 @@ const Scorekeeper = () => {
 
     const addQuestionDecider = () => {
         let newQuizTableData = quizTableData.slice()
-        if(question >= 15) {
+        let finalQuestion = division === 'Senior' ? 20 : 15
+        let questionCount = newQuizTableData.length
+        if(question >= finalQuestion && (question === questionCount)) {
             newQuizTableData.push(
                 {
                     question: (question + 1),
@@ -445,7 +478,9 @@ const Scorekeeper = () => {
     }
 
     return (
+        <div className='scorekeep-bg'>
         <div className='scorekeep-container'>
+            <ToolBar setDivision={setDivision} handleResetQuiz={handleResetQuiz}/>
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
                     <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} />
@@ -455,9 +490,10 @@ const Scorekeeper = () => {
                     <QuestionBar question={question} handleQuestionChange={handleQuestionChange} className='question-bar' />
                     <TimeBar currentTime={currentTime} handleClear={handleClear} handle5={handle5} handle30={handle30} handle60={handle60}/>
                     <AlertBar alerts={alerts} />
-                    <MaterialSearch />
+                    <MaterialSearch division={division} />
                 </div>
             </div>
+        </div>
         </div>
     )
 }

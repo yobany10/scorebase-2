@@ -3,9 +3,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    gap: 5px;
+    gap: 0.25rem;
     color: rgb(67, 78, 78);
     padding: 1rem;
+    margin: 0.5rem 0 0 0;
     box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.1);
     background-color: white;
     border-radius: 5px;
@@ -15,11 +16,13 @@
 }
 
 .scorebar-div button {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .scorebar-r-info-div {
-    grid-area: rInfo
+    grid-area: rInfo;
+    display: grid;
+    grid-auto-flow: column;
 }
 
 .scorebar-r-score {
@@ -28,6 +31,7 @@
     margin: 0 0 0 0;
     float: left;
     border-left: 4px solid red;
+    justify-content: start;
 }
 
 .scorebar-r-name {
@@ -36,6 +40,8 @@
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     border: none;
+    justify-content: start;
+    width: 100%;
 }
 
 .scorebar-r-name:focus {
@@ -43,7 +49,9 @@
 }
 
 .scorebar-y-info-div {
-    grid-area: yInfo
+    grid-area: yInfo;
+    display: grid;
+    grid-auto-flow: column;
 }
 
 .scorebar-y-score {
@@ -52,6 +60,7 @@
     margin: 0 0 0 0;
     float: left;
     border-left: 4px solid yellow;
+    justify-content: start;
 }
 
 .scorebar-y-name {
@@ -60,6 +69,8 @@
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     border: none;
+    justify-content: start;
+    width: 100%;
 }
 
 .scorebar-y-name:focus {

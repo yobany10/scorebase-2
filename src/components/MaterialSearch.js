@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import './MaterialSearch.css'
 
-const MaterialSearch = () => {
+const MaterialSearch = (props) => {
   const [results, setResults] = useState([])
+  const [isReference, setIsReference] = useState(false)
 
 /* An Idea
 Write templates that can be filled in with 1,2,3,4 time words to generate practice questions.
 Maybe write other templates that can be filled for other types of questions.
 */
 
-const material = [
+const seniorMaterial = [
     {
   "book": "Ephesians",
   "chapters": [
@@ -2561,59 +2562,96 @@ const handleSearch = event => {
   let query = event.target.value
   let resultsHolder = []
   setResults(resultsHolder)
+  let material = props.division === 'Senior' ? seniorMaterial : juniorMaterial
   if (query.length <= 1) {
     return
   }
-  // iterate through books
-          juniorMaterial.forEach((element, index) => {
-            let book = element.book
-            // iterate through chapters found in a specific book
-            element.chapters.forEach((element, index) => {
-              let chapter = element.chapter
-              let verse = 0
-              let text = ''
-              // iterate through verses found in a specific chapter
-              element.verses.forEach((element, index) => {
-                let textArr = element.text.split(/([ .,:;])+/gi)
-                let upperCaseTextArr = textArr.map(item => item.toUpperCase())
-                let upperCaseQuery = query.toUpperCase()
-                // check if verse contains search query (word)
-                if (upperCaseTextArr.includes(upperCaseQuery)) {
-                  verse = element.verse
-                  text = textArr.join('')
-                  // loop to find the index of the query in the verse text
-                  textArr.forEach((element, index, array) => {
-                    if (element.toUpperCase() === query.toUpperCase()) {
-                      let newTextArr = textArr
-                      text = newTextArr.join('')
-                      // see how many characters there are before the query
-                      let queryIndex = textArr.slice(0, index).join('').split('').length
-                      let endingIndex = queryIndex + query.length
-                      resultsHolder.push({book: book, chapter: chapter, verse: verse, text: text, query: query, array: array, index: index, queryIndex: queryIndex, endingIndex: endingIndex})
-                    }
-                  })
-                } 
-                // join upperCaseTextArr and check for query inclusion
-                else {
-                  let upperCaseTextArrJoined = upperCaseTextArr.join('')
-                  let upperCaseQuery = query.toUpperCase()
-                  // check if query is found in verse text
-                  if (upperCaseTextArrJoined.includes(upperCaseQuery)) {
-                    verse = element.verse
-                    text = textArr.join('')
-                    let endingIndex = 0
-                    let queryIndex = 0
-                    // use index to fix this below
-                    queryIndex = text.toUpperCase().indexOf(query.toUpperCase())
-                    endingIndex = text.toUpperCase().indexOf(text.toUpperCase().split(query.toUpperCase())[1])
-                    resultsHolder.push({book: book, chapter: chapter, verse: verse, text: text, query: query, queryIndex: queryIndex, endingIndex: endingIndex})
-                  }
-                }
-                setResults(resultsHolder)
+  // search for reference
+  if (query.search(/\d/) > -1) {
+    if (query.split(' ').length < 3) {
+      return
+    }
+    setIsReference(true)
+    let queryBook = query.split(' ')[0]
+    let queryChapter = query.split(' ')[1]
+    let queryVerse = query.split(' ')[2]
+    material.forEach((item, index) => {
+      let book = item.book
+      let bookIndex = index
+      // check if book matches
+      if (new RegExp(queryBook, 'i').test(book)) {
+        material[bookIndex].chapters.forEach((item, index) => {
+          let chapter = item.chapter
+          // check if chapter matches
+          if (item.chapter == queryChapter) {
+            item.verses.forEach((item, index) => {
+              let text = item.text
+              let verse = item.verse
+              if (item.verse == queryVerse) {
+                resultsHolder.push({book: book, chapter: chapter, verse: verse, text: text})
                 console.log(resultsHolder)
-              })
+                console.log(item.text)
+              }
             })
+          }  
+        })
+      }
+    })
+    setResults(resultsHolder)
+    console.log(resultsHolder)
+    return
+  }
+  // iterate through books
+  material.forEach((element, index) => {
+    setIsReference(false)
+    let book = element.book
+    // iterate through chapters found in a specific book
+    element.chapters.forEach((element, index) => {
+      let chapter = element.chapter
+      let verse = 0
+      let text = ''
+      // iterate through verses found in a specific chapter
+      element.verses.forEach((element, index) => {
+        let textArr = element.text.split(/([ .,:;])+/gi)
+        let upperCaseTextArr = textArr.map(item => item.toUpperCase())
+        let upperCaseQuery = query.toUpperCase()
+        // check if verse contains search query (word)
+        if (upperCaseTextArr.includes(upperCaseQuery)) {
+          verse = element.verse
+          text = textArr.join('')
+          // loop to find the index of the query in the verse text
+          textArr.forEach((element, index, array) => {
+            if (element.toUpperCase() === query.toUpperCase()) {
+              let newTextArr = textArr
+              text = newTextArr.join('')
+              // see how many characters there are before the query
+              let queryIndex = textArr.slice(0, index).join('').split('').length
+              let endingIndex = queryIndex + query.length
+              resultsHolder.push({book: book, chapter: chapter, verse: verse, text: text, query: query, array: array, index: index, queryIndex: queryIndex, endingIndex: endingIndex})
+            }
           })
+        } 
+        // join upperCaseTextArr and check for query inclusion
+        else {
+          let upperCaseTextArrJoined = upperCaseTextArr.join('')
+          let upperCaseQuery = query.toUpperCase()
+          // check if query is found in verse text
+          if (upperCaseTextArrJoined.includes(upperCaseQuery)) {
+            verse = element.verse
+            text = textArr.join('')
+            let endingIndex = 0
+            let queryIndex = 0
+            // use index to fix this below
+            queryIndex = text.toUpperCase().indexOf(query.toUpperCase())
+            endingIndex = text.toUpperCase().indexOf(text.toUpperCase().split(query.toUpperCase())[1])
+            resultsHolder.push({book: book, chapter: chapter, verse: verse, text: text, query: query, queryIndex: queryIndex, endingIndex: endingIndex})
+          }
+        }
+        setResults(resultsHolder)
+        // console.log(resultsHolder)
+      })
+    })
+  })
   }
 
     return (
@@ -2623,7 +2661,14 @@ const handleSearch = event => {
                 <input className='material-search-input' type='text' placeholder='words or phrases' onChange={handleSearch}></input>
             </form>
           <p className='material-search-result-count'>results: {results.length}</p>
-          {results.map((item, index) => {
+          {isReference && results.map((item, index) => {
+            return <div className='material-search-result' key={index}>
+                      <p className='material-search-result-ref'>{`${item.book} ${item.chapter}:${item.verse}`}</p>
+                      <p className='material-search-result-text'>{item.text}</p>
+                    </div>
+          })
+          }
+          {!isReference && results.map((item, index) => {
             let firstPhrase = item.text.slice(0,item.queryIndex)
             let middlePhrase = item.text.slice(item.queryIndex, (item.queryIndex + item.query.length))
             let lastPhrase = item.text.slice(item.endingIndex)
