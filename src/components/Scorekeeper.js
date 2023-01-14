@@ -71,61 +71,71 @@ const Scorekeeper = () => {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 red2 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 red3 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 red4 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 red5 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 yellow1 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 yellow2 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 yellow3 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 yellow4 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 },
                 yellow5 : {
                     interruption: false,
                     correct: false,
                     error: false,
-                    foul: false
+                    foul: false,
+                    quizOut: false
                 }
             }
         )
@@ -257,6 +267,9 @@ const Scorekeeper = () => {
         if (item[quizzer].foul === true) {
             score = score - 5
         }
+        if (item[quizzer].quizOut === true) {
+            score = score + 10
+        }
         return score
     }
 
@@ -312,6 +325,20 @@ const Scorekeeper = () => {
                 addQuestionDecider()
                 setQuestion(q => q + 1)
             }
+            console.log(newQuizTableData.filter(item => item[quizzer].correct == true).length, question)
+            if (newQuizTableData.filter(item => item[quizzer].correct == true).length > 7) {
+                let newQuizTableData = quizTableData.slice()
+                let value = newQuizTableData[question - 1][quizzer].quizOut ? false : true
+                console.log(`the value is ${value}`)
+                newQuizTableData[question - 1][quizzer].quizOut = value
+                setQuizTableData(newQuizTableData)
+            } else {
+                let newQuizTableData = quizTableData.slice()
+                newQuizTableData.forEach((item, index) => {
+                    newQuizTableData[index][quizzer].quizOut = false
+                })
+                setQuizTableData(newQuizTableData)
+            }
         } else if (answer === 'error') {
             let value = newQuizTableData[(question - 1)][quizzer].error ? false : true
             newQuizTableData[(question - 1)][quizzer].error = value;
@@ -361,7 +388,6 @@ const Scorekeeper = () => {
         let errorCount = 0
         let correctMax = division === 'Senior' ? 8 : 6
         let errorMax = 5
-        //need to add foul-out
         quizTableData.forEach(item => {
             if (item[quizzer].correct) {
                 correctCount += 1
@@ -395,61 +421,71 @@ const Scorekeeper = () => {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     red2 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     red3 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     red4 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     red5 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     yellow1 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     yellow2 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     yellow3 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     yellow4 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     },
                     yellow5 : {
                         interruption: false,
                         correct: false,
                         error: false,
-                        foul: false
+                        foul: false,
+                        quizOut: false
                     }
                 }
             )
