@@ -7,7 +7,7 @@ import './ToolBar.css'
 const ToolBar = (props) => {
 
     const toastOptions = {
-        position: 'bottom-left'
+        position: 'bottom-right'
     }
 
     const handleJuniorSetting = () => {
