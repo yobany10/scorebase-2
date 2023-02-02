@@ -41,6 +41,7 @@
     border: none;
     justify-content: start;
     width: 100%;
+    color: black;
 }
 
 .scorebar-r-name:focus {
@@ -70,6 +71,7 @@
     border: none;
     justify-content: start;
     width: 100%;
+    color: black;
 }
 
 .scorebar-y-name:focus {

@@ -1,22 +1,61 @@
 .navbar-div {
-    background-color: white !important;
+    background-color: white;
+}
+
+.navbar-div-content {
+    display: grid;
+    gap: 2rem;
+    grid-auto-flow: column;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    max-width: 1400px;
+    margin: auto;
 }
 
 .navbar-div a {
-    color: cornflowerblue !important;
     text-decoration: none;
+    align-self: center;
+    justify-self: start
 }
 
-.navbar-brand {
+.navbar-logo {
     font-weight: bolder;
-    margin: 0 0 0 1rem;
+    font-size: 20px;
+    margin: 0 0 0 0;
+    justify-self: start;
 }
 
-.navbar-link a {
-    color: rgb(67, 78, 78) !important;
-    padding: 0 1rem;
+.navbar-links-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    gap: 2rem;
+    justify-self: end;
 }
 
-.navbar-link a:hover {
-    color: cornflowerblue !important;
+.navbar-link {
+    align-self: center;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    /* font-weight: bold; */
+    color: #434E4E;
+    justify-self: end;
+}
+
+.navbar-link:hover {
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
+.navbar-login {
+    justify-self: end;
+}
+
+.navbar-user-avatar {
+    justify-self: end;
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+    border-radius: 20px;
+    cursor: pointer;
 }

@@ -1,21 +1,20 @@
 // todo: add highest question to keep track of where zeros should start for table. Maybe that part of the table can be faded as well.
 import React, { useState, useEffect } from 'react'
-import {collection, doc, addDoc, updateDoc, serverTimestamp} from 'firebase/firestore'
+import {collection, doc, addDoc, getDoc, updateDoc, serverTimestamp} from 'firebase/firestore'
 import {auth, db} from '../Firebase/config'
 import {useAuthState} from 'react-firebase-hooks/auth'
 import {useNavigate} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import ToolBar from './ToolBar'
 import ScoreTable from './ScoreTable'
 import ScoreBar from './ScoreBar'
 import QuestionBar from './QuestionBar'
-import TimeBar from './Time'
-import MaterialSearch from './MaterialSearch'
 import NotesBar from './NotesBar'
 import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
 
-const Scorekeeper = () => {
+const ViewQuiz = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
     const [yellowBonusStart, setYellowBonusStart] = useState(true)
     const [redName, setRedName] = useState('Red')
@@ -34,6 +33,7 @@ const Scorekeeper = () => {
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])
+    const [quizData, setQuizData] = useState([])
     const [notes, setNotes] = useState([])
     const [isSaved, setIsSaved] = useState(false)
     const [quizId, setQuizId] = useState(null)
@@ -41,6 +41,23 @@ const Scorekeeper = () => {
     const [user, loading] = useAuthState(auth)
 
     const navigate = useNavigate()
+    const {id} = useParams()
+
+    const getQuizData = async () => {
+        const quizRef = doc(db, 'quizzes', id)
+        const res = await getDoc(quizRef)
+        setDivision(res.data().division)
+        setQuizTableData(res.data().quizTableData)
+        setNotes(res.data().notes)
+        setRedName(res.data().redName)
+        setYellowName(res.data().yellowName)
+        setQuizData(res.data())
+        console.log(res.data())
+    }
+
+    useEffect(() => {
+        getQuizData()
+    },[])
 
     useEffect(() => {
         if (user) {
@@ -74,10 +91,6 @@ const Scorekeeper = () => {
         setQuizTableData(initialQuizData)
         setNotes(initialNotesData)
     }
-
-    useEffect(() => {
-        handleResetQuiz()
-    }, [division])
 
     let initialQuizData = []
 
@@ -177,6 +190,7 @@ const Scorekeeper = () => {
 
     const renderScoreTable = () => {
         if (quizTableData !== []) {
+            console.log('scoretable rendered')
             return quizTableData.map((item) => {
                 return <tr key={`${item.question}tr`} className={item.question === question ? 'highlight-row' : null} onClick={() => handleTableRowClick(item)}>
                             <td key={`${item.question}`} className='dark-cell'>{item.question}</td>
@@ -341,29 +355,28 @@ const Scorekeeper = () => {
         let answer = event.target.id.split('-')[1]
         let newQuizTableData = quizTableData.slice()
         if(answer === 'correct') {
-            // Value variable checks what the checkbox was before clicking. It will equal what it now needs to be.
             let value = newQuizTableData[(question - 1)][quizzer].correct ? false : true
             newQuizTableData[(question - 1)][quizzer].correct = value;
             setQuizTableData(newQuizTableData)
             checkNumericalWinner()
             checkQuizOut(quizzer)
+            if(value) {
+                addQuestionDecider()
+                setQuestion(q => q + 1)
+            }
+            console.log(newQuizTableData.filter(item => item[quizzer].correct == true).length, question)
             if (newQuizTableData.filter(item => item[quizzer].correct == true).length > 7) {
                 let newQuizTableData = quizTableData.slice()
                 let value = newQuizTableData[question - 1][quizzer].quizOut ? false : true
                 console.log(`the value is ${value}`)
                 newQuizTableData[question - 1][quizzer].quizOut = value
-                setQuizTableData(newQuizTableData, () => console.log(quizTableData))
+                setQuizTableData(newQuizTableData)
             } else {
                 let newQuizTableData = quizTableData.slice()
                 newQuizTableData.forEach((item, index) => {
                     newQuizTableData[index][quizzer].quizOut = false
                 })
                 setQuizTableData(newQuizTableData)
-            }
-            // If checkbox is now checked, do this.
-            if(value) {
-                addQuestionDecider()
-                setQuestion(q => q + 1)
             }
         } else if (answer === 'error') {
             let value = newQuizTableData[(question - 1)][quizzer].error ? false : true
@@ -386,6 +399,7 @@ const Scorekeeper = () => {
             newQuizTableData[(question - 1)][quizzer].interruption = value;
             setQuizTableData(newQuizTableData)
         }
+        console.log(newQuizTableData)
     }
 
     const checkNumericalWinner = () => {
@@ -402,7 +416,7 @@ const Scorekeeper = () => {
     }
 
     const toastOptions = {
-        position: 'bottom-right'
+        position: 'bottom-left'
     }
 
     //check for quiz-out or error-out
@@ -430,19 +444,11 @@ const Scorekeeper = () => {
         }
     }
 
-    const addQuestionDecider = (direction = 'plus') => {
+    const addQuestionDecider = () => {
         let newQuizTableData = quizTableData.slice()
-        let newNotesData = notes.slice()
         let finalQuestion = division === 'Senior' ? 20 : 15
         let questionCount = newQuizTableData.length
-        console.log(`question:${question}, finalQuestions: ${finalQuestion}, questionCount: ${questionCount}, direction: ${direction}`)
-        if(question >= finalQuestion && (question === questionCount) && direction == 'plus') {
-            newNotesData.push(
-                {
-                    question: (question + 1),
-                    note: ''
-                }
-            )
+        if(question >= finalQuestion && (question === questionCount)) {
             newQuizTableData.push(
                 {
                     question: (question + 1),
@@ -518,16 +524,17 @@ const Scorekeeper = () => {
                     }
                 }
             )
-            console.log(newQuizTableData)
-            setNotes(newNotesData)
             setQuizTableData(newQuizTableData)
         }
     }
 
     const handleQuestionChange = (direction) => {
-        addQuestionDecider(direction)
+        // addQuestionDecider()
         if(direction === 'plus') {
-            checkNumericalWinner()
+            // checkNumericalWinner()
+            if (question == quizTableData.length) {
+                return
+            }
             setQuestion(q => q + 1)
         } else {
             if(question > 1) {
@@ -613,17 +620,15 @@ const Scorekeeper = () => {
     return (
         <div className='scorekeep-bg'>
         <div className='scorekeep-container'>
-            <ToolBar setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} />
+            <ToolBar quizData={quizData} setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} viewOnly={true} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
-                    <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} />
+                    <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} viewOnly={true} />
                     <ScoreTable render={renderScoreTable} />
                 </div>
                 <div className='scoresheet-tools'>
-                    <QuestionBar question={question} handleQuestionChange={handleQuestionChange} className='question-bar' />
-                    <TimeBar currentTime={currentTime} handleClear={handleClear} handle5={handle5} handle30={handle30} handle60={handle60}/>
-                    <NotesBar question={question} notes={notes} setNotes={setNotes} />
-                    <MaterialSearch division={division} />
+                    <QuestionBar question={question} division={division} handleQuestionChange={handleQuestionChange} viewOnly={true} quizData={quizData} className='question-bar' />
+                    <NotesBar question={question} notes={notes} setNotes={setNotes} viewOnly={true} />
                 </div>
             </div>
         </div>
@@ -631,4 +636,4 @@ const Scorekeeper = () => {
     )
 }
 
-export default Scorekeeper
+export default ViewQuiz

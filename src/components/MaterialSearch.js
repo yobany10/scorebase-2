@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {CgSearch} from 'react-icons/cg'
 import './MaterialSearch.css'
 
 const MaterialSearch = (props) => {
@@ -2656,7 +2657,7 @@ const handleSearch = event => {
 
     return (
         <div className='material-search'>
-          <h1 className='material-search-title'>Search</h1>
+          <h1 className='material-search-title'><CgSearch/> Search</h1>
             <form className='material-search-form' autoComplete='off' onSubmit={(event) => event.preventDefault()}>
                 <input className='material-search-input' type='text' placeholder='words or phrases' onChange={handleSearch}></input>
             </form>

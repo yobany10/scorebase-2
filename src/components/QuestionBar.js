@@ -2,6 +2,7 @@ import React from 'react'
 import './QuestionBar.css'
 
 const QuestionBar = props => {
+
     return (
         <div className='questionbar-div'>
             <button className='questionbar-button' type='button' onClick={() => props.handleQuestionChange('minus')}>&lt;</button>

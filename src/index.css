@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: rgb(236, 240, 244);
 }
 
 /* gradients */
@@ -11,13 +12,13 @@ body {
 
 /* button styling */
 .primary-button {
-  background-color: rgb(44, 44, 44);
+  background-color: #6c757d;
   color: white;
   border: none;
   border-radius: 5px;
 }
 .primary-button:hover {
-  background-color: rgb(86, 86, 86);
+  background-color: #434E4E;
 }
 
 /* animations */

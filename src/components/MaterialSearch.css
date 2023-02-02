@@ -19,6 +19,7 @@
 
 .material-search-input {
     justify-self: center;
+    width: 100%;
     border: none;
     border: 1px solid gainsboro;
     border-radius: 3px;
