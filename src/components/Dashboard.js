@@ -25,6 +25,7 @@ const Dashboard = (props) => {
     const checkAuth = async () => {
         if (user) {
             getQuizzes()
+            console.log(user)
             return;
         }
         if (loading) return;
@@ -37,8 +38,12 @@ const Dashboard = (props) => {
 
     return (
         <div className='dashboard-page-container'>
+            {/* <div className='dashboard-title-container'>
+                <h1 className='dashboard-title'>Hello, {user.displayName.split(' ')[0]}!</h1>
+                <p>Welcome to your dashboard. You can find your saved quizzes below!</p>
+            </div> */}
             <div className='quizzes-container'>
-                <h1 className='dashboard-title'>My quizzes</h1>
+                <h1 className='dashboard-title'>Saved Quizzes</h1>
                 <p className='dashboard-info-subtitle'>{quizzes.length} quizzes</p>
                 <div className='dashboard-quiz-list'>
                     {quizzes != [] && quizzes.map(item => {

@@ -1,5 +1,6 @@
 .dashboard-page-container {
     display: grid;
+    gap: 1rem;
     padding: 2rem 1rem 1rem 1rem;
 }
 
@@ -13,6 +14,16 @@
     border-radius: 10px;
     border: 1px solid rgb(201, 201, 201);
     max-width: 1400px;
+}
+
+.dashboard-title-container {
+    display: grid;
+    max-width: 1400px;
+    justify-self: center;
+    background-color: rgb(242, 251, 255);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .dashboard-title {
@@ -32,4 +43,10 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+@media (min-width: 800px) and (max-width: 4800px) {
+    .dashboard-quiz-list {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 0.5fr));
+    }
 }
