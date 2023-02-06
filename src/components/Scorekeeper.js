@@ -613,7 +613,7 @@ const Scorekeeper = () => {
     return (
         <div className='scorekeep-bg'>
         <div className='scorekeep-container'>
-            <ToolBar setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} />
+            <ToolBar division={division} setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
                     <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} />
@@ -623,7 +623,7 @@ const Scorekeeper = () => {
                     <QuestionBar question={question} handleQuestionChange={handleQuestionChange} className='question-bar' />
                     <TimeBar currentTime={currentTime} handleClear={handleClear} handle5={handle5} handle30={handle30} handle60={handle60}/>
                     <NotesBar question={question} notes={notes} setNotes={setNotes} />
-                    <MaterialSearch division={division} />
+                    <MaterialSearch division={division} question={question} />
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import {useAuthState} from 'react-firebase-hooks/auth'
 import {useNavigate} from 'react-router-dom'
 import QuizItem from './QuizItem'
 import './Dashboard.css'
+import noData from '../assets/svg/no-data.svg'
 
 const Dashboard = (props) => {
     const [quizzes, setQuizzes] = useState([])
@@ -50,7 +51,15 @@ const Dashboard = (props) => {
                         return <QuizItem key={item.id} quiz={item} />
                     })}
                 </div>
-                {/* <button className='primary-button' type='button'>See all</button> */}
+                {quizzes.length < 1 &&
+                <div className='dashboard-no-quizzes-container'>
+                    <img src={noData} className='svg-lg' alt='No quizzes yet' />
+                    <div className='dashboard-no-quizzes-text-container'>
+                        <p className='dashboard-no-quizzes-title'>Nothing yet</p>
+                        <p className='dashboard-no-quizzes-message'>Save quizzes and view them here later.</p>
+                    </div>
+                </div>
+                }
             </div>
         </div>
     )

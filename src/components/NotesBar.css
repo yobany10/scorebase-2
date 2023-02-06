@@ -29,4 +29,6 @@
     border-radius: 3px;
     padding: 5px;
     width: 100%;
+    -webkit-text-fill-color: black;
+    opacity: 1; /* required on iOS */
 }

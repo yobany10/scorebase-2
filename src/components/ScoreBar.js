@@ -101,7 +101,7 @@ const ScoreBar = props => {
               <p className='scorebar-r-score'>{props.rScore}</p>
               {props.viewOnly && <p className='scorebar-r-name'>{props.redName}</p>}
               {!props.viewOnly && 
-                <input className='scorebar-r-name' type='text' defaultValue={props.redName} onChange={(event) => {
+                <input className='scorebar-r-name' type='text' value={props.redName} onChange={(event) => {
                   const value = event.target.value 
                   props.handleNameChange('red', value)
                 }} />
@@ -659,7 +659,7 @@ const ScoreBar = props => {
               <p className='scorebar-y-score'>{props.yScore}</p>
               {props.viewOnly && <p className='scorebar-y-name'>{props.yellowName}</p>}
               {!props.viewOnly && 
-                <input className='scorebar-y-name' type='text' defaultValue={props.yellowName} onChange={(event) => {
+                <input className='scorebar-y-name' type='text' value={props.yellowName} onChange={(event) => {
                   const value = event.target.value 
                   props.handleNameChange('yellow', value)
                 }} />

@@ -28,7 +28,7 @@
 
 .dashboard-title {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 500;
     color: #434E4E;
     margin: 0 0 0 0;
 }
@@ -43,6 +43,28 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.dashboard-no-quizzes-container {
+    justify-self: center;
+    display: flex;
+    gap: 2rem;
+}
+
+.dashboard-no-quizzes-text-container {
+    /* display: grid; */
+}
+
+.dashboard-no-quizzes-title {
+    color: #F9A826;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.dashboard-no-quizzes-message {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
 }
 
 @media (min-width: 800px) and (max-width: 4800px) {

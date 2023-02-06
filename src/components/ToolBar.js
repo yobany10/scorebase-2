@@ -26,6 +26,7 @@ const ToolBar = (props) => {
                 props.quizData.length != [] && 
                 <div id='toolbar-div'>
                     <p className='toolbar-badge'><TbReportSearch /> View Only</p>
+                    <p className='toolbar-data'>Division: {props.division}</p>
                     <p className='toolbar-data'>{new Date(props.quizData.saved.seconds * 1000).toLocaleDateString()}</p>
                     <p className='toolbar-data'>{new Date(props.quizData.saved.seconds * 1000).toLocaleTimeString('en-US')}</p>
                 </div>
@@ -33,7 +34,7 @@ const ToolBar = (props) => {
             {!props.viewOnly && 
                 <div id='toolbar-div'>
                     <button className='toolbar-button' onClick={props.handleResetQuiz}>Reset Quiz</button>
-                    <DropdownButton className='toolbar-button' bsPrefix='toolbar-button' title="Division">
+                    <DropdownButton className='toolbar-button' bsPrefix='toolbar-button' title={`Division: ${props.division}`}>
                         <Dropdown.Item onClick={handleJuniorSetting}>Junior</Dropdown.Item>
                         <Dropdown.Item onClick={handleSeniorSetting}>Senior</Dropdown.Item>
                     </DropdownButton>
