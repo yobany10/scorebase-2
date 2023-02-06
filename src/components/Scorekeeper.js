@@ -35,6 +35,7 @@ const Scorekeeper = () => {
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])
     const [notes, setNotes] = useState([])
+    const [searchList, setSearchList] = useState([])
     const [isSaved, setIsSaved] = useState(false)
     const [quizId, setQuizId] = useState(null)
     
@@ -73,6 +74,7 @@ const Scorekeeper = () => {
         setCurrentTime(0)
         setQuizTableData(initialQuizData)
         setNotes(initialNotesData)
+        setSearchList(initialSearchListData)
     }
 
     useEffect(() => {
@@ -170,9 +172,18 @@ const Scorekeeper = () => {
         )
     }
 
+    let initialSearchListData = []
+
+    for (let i = 1; i <= (division === 'Senior' ? 20 : 15); i++) {
+        initialSearchListData.push(
+            ''
+        )
+    }
+
     useEffect(() => {
         setQuizTableData(initialQuizData)
         setNotes(initialNotesData)
+        setSearchList(initialSearchListData)
     }, [])
 
     const renderScoreTable = () => {
@@ -356,7 +367,7 @@ const Scorekeeper = () => {
             } else {
                 let newQuizTableData = quizTableData.slice()
                 newQuizTableData.forEach((item, index) => {
-                    newQuizTableData[index][quizzer].quizOut = false
+                newQuizTableData[index][quizzer].quizOut = false
                 })
                 setQuizTableData(newQuizTableData)
             }
@@ -433,6 +444,7 @@ const Scorekeeper = () => {
     const addQuestionDecider = (direction = 'plus') => {
         let newQuizTableData = quizTableData.slice()
         let newNotesData = notes.slice()
+        let newSearchListData = searchList.slice()
         let finalQuestion = division === 'Senior' ? 20 : 15
         let questionCount = newQuizTableData.length
         console.log(`question:${question}, finalQuestions: ${finalQuestion}, questionCount: ${questionCount}, direction: ${direction}`)
@@ -443,6 +455,7 @@ const Scorekeeper = () => {
                     note: ''
                 }
             )
+            newSearchListData.push('')
             newQuizTableData.push(
                 {
                     question: (question + 1),
@@ -520,6 +533,7 @@ const Scorekeeper = () => {
             )
             console.log(newQuizTableData)
             setNotes(newNotesData)
+            setSearchList(newSearchListData)
             setQuizTableData(newQuizTableData)
         }
     }
@@ -567,6 +581,7 @@ const Scorekeeper = () => {
                     yScore: calculateTeamScore(question, 'yellow', true),
                     division: division,
                     notes: notes,
+                    searchList: searchList,
                     saved: serverTimestamp()
                 })
                 setIsSaved(true)
@@ -596,6 +611,7 @@ const Scorekeeper = () => {
                     yScore: calculateTeamScore(question, 'yellow', true),
                     division: division,
                     notes: notes,
+                    searchList: searchList,
                     user: user.uid,
                     avatar: user.photoURL,
                     username: user.displayName,
@@ -623,7 +639,7 @@ const Scorekeeper = () => {
                     <QuestionBar question={question} handleQuestionChange={handleQuestionChange} className='question-bar' />
                     <TimeBar currentTime={currentTime} handleClear={handleClear} handle5={handle5} handle30={handle30} handle60={handle60}/>
                     <NotesBar question={question} notes={notes} setNotes={setNotes} />
-                    <MaterialSearch division={division} question={question} />
+                    <MaterialSearch division={division} question={question} searchList={searchList} setSearchList={setSearchList} viewOnly={false} />
                 </div>
             </div>
         </div>

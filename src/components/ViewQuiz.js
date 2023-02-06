@@ -10,6 +10,7 @@ import ScoreTable from './ScoreTable'
 import ScoreBar from './ScoreBar'
 import QuestionBar from './QuestionBar'
 import NotesBar from './NotesBar'
+import MaterialSearch from './MaterialSearch'
 import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
@@ -35,6 +36,7 @@ const ViewQuiz = () => {
     const [quizTableData, setQuizTableData] = useState([])
     const [quizData, setQuizData] = useState([])
     const [notes, setNotes] = useState([])
+    const [searchList, setSearchList] = useState([])
     const [isSaved, setIsSaved] = useState(false)
     const [quizId, setQuizId] = useState(null)
     
@@ -49,6 +51,9 @@ const ViewQuiz = () => {
         setDivision(res.data().division)
         setQuizTableData(res.data().quizTableData)
         setNotes(res.data().notes)
+        if (res.data().hasOwnProperty('searchList')) {
+            setSearchList(res.data().searchList)
+        }
         setRedName(res.data().redName)
         setYellowName(res.data().yellowName)
         setQuizData(res.data())
@@ -183,9 +188,18 @@ const ViewQuiz = () => {
         )
     }
 
+    let initialSearchListData = []
+
+    for (let i = 1; i <= (division === 'Senior' ? 20 : 15); i++) {
+        initialSearchListData.push(
+            ''
+        )
+    }
+
     useEffect(() => {
         setQuizTableData(initialQuizData)
         setNotes(initialNotesData)
+        setSearchList(initialSearchListData)
     }, [])
 
     const renderScoreTable = () => {
@@ -626,9 +640,10 @@ const ViewQuiz = () => {
                     <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} viewOnly={true} />
                     <ScoreTable render={renderScoreTable} />
                 </div>
-                <div className='scoresheet-tools'>
+                <div className='scoresheet-tools-view-only'>
                     <QuestionBar question={question} division={division} handleQuestionChange={handleQuestionChange} viewOnly={true} quizData={quizData} className='question-bar' />
                     <NotesBar question={question} notes={notes} setNotes={setNotes} viewOnly={true} />
+                    <MaterialSearch division={division} question={question} searchList={searchList} setSearchList={setSearchList} viewOnly={true} />
                 </div>
             </div>
         </div>

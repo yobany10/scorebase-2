@@ -24,6 +24,8 @@
     border: 1px solid gainsboro;
     border-radius: 3px;
     padding: 0 5px;
+    -webkit-text-fill-color: black;
+    opacity: 1; /* required on iOS */
 }
 
 .material-search-result-count {

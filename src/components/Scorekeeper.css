@@ -20,6 +20,7 @@
 }
 
 .highlight-row {
+    /* border: 2px solid rgb(0, 145, 255); */
     border: 2px solid rgb(0, 145, 255);
 }
 
@@ -48,6 +49,22 @@
     grid-template-areas:
     'questionBar'
     'timeBar'
-    'alertBar'
+    'notesBar'
+    'search';
+}
+
+.scoresheet-tools-view-only {
+    grid-area: tools;
+    align-self: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    grid-template-areas:
+    'questionBar'
+    'notesBar'
     'search';
 }

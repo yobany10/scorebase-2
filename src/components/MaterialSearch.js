@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {CgSearch} from 'react-icons/cg'
 import './MaterialSearch.css'
 
@@ -3097,9 +3097,9 @@ const juniorMaterial = [
       }
 ]
 
-const handleSearch = event => {
-  event.preventDefault()
-  let query = event.target.value
+const handleSearch = () => {
+  let query = props.searchList.length > 0 ? props.searchList[props.question - 1] : ''
+  console.log(query)
   let resultsHolder = []
   setResults(resultsHolder)
   let material = props.division === 'Senior' ? seniorMaterial : juniorMaterial
@@ -3225,13 +3225,23 @@ const handleSearch = event => {
   })
   }
 
+  const handleSearchListUpdate = (event) => {
+    const searchListTemp = props.searchList.slice()
+    searchListTemp[props.question - 1] = event.target.value
+    props.setSearchList(searchListTemp)
+  }
+
+  useEffect(() => {
+    handleSearch()
+  }, [props.question, props.searchList])
+
     return (
         <div className='material-search'>
           <h1 className='material-search-title'><CgSearch/> Search</h1>
             <form className='material-search-form' autoComplete='off' onSubmit={(event) => event.preventDefault()}>
-                <input className='material-search-input' type='text' placeholder='words and phrases' onChange={handleSearch}></input>
+              {props.searchList.length > 0 && <input className='material-search-input' type='text' disabled={props.viewOnly ? true : false} value={props.searchList[props.question - 1]} onChange={handleSearchListUpdate}></input>}
             </form>
-          <p className='material-search-result-count'>results: {results.length}</p>
+          <p className='material-search-result-count' onClick={() => console.log(props.searchList)}>results: {results.length}</p>
           {isReference && results.map((item, index) => {
             return <div className='material-search-result' key={index}>
                       <p className='material-search-result-ref'>{`${item.book} ${item.chapter}:${item.verse}`}</p>
