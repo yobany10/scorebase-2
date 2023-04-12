@@ -1,0 +1,29 @@
+.quizzers-list-div {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.quizzers-list-item {
+    color: #434E4E;
+    display: grid;
+    gap: 1rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    border: 2px solid rgb(201, 201, 201);
+}
+
+.quizzers-list-item:hover {
+    background-color: rgb(242, 251, 255);
+    border: 2px solid rgb(123, 123, 123);
+}
+
+.quizzers-list-item-info-div {
+    background-color: aqua;
+}
+
+@media (min-width: 800px) and (max-width: 4800px) {
+    .quizzers-list-div {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 0.5fr));
+    }
+}

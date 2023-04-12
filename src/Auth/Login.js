@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <div className='login-page-container'>
-            <div className='login-options-container scale-in-ver-bottom'>
+            <div className='login-options-container'>
                 <div className='login-options-header'>
                     <h1 className='login-options-title'>Welcome!</h1>
                     <p className='login-options-subtitle'>Sign-in below to get started.</p>

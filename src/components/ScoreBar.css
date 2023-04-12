@@ -113,3 +113,11 @@
     border-bottom: 0;
     border-left: 0.3em solid transparent;
 }
+
+.dropdown-quizzer-name {
+    color: #434E4E;
+    margin: 0 0 0 0;
+    text-align: center;
+    background-color: rgb(236, 240, 244);
+    border-radius: 3px;
+}

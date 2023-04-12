@@ -29,8 +29,8 @@ const MainNavbar = () => {
                 </Link>
                 <div className='navbar-links-container'>
                     {!user && <p className='navbar-link navbar-login' onClick={() => navigate('/login')}>Login</p>}
-                    {user && <p className='navbar-link navbar-dashboard' onClick={() => navigate('/dashboard')}>Dashboard</p>}
                     {user && <p className='navbar-link navbar-scorekeep' onClick={() => navigate('/scorekeeping')}>Scorekeep</p>}
+                    {user && <p className='navbar-link navbar-dashboard' onClick={() => navigate('/dashboard')}>Dashboard</p>}
                     {user &&
                         <DropdownButton className='navbar-user-dropdown-button' align='end' bsPrefix='navbar-user-dropdown-button' title={<img src={user.photoURL} className='navbar-user-avatar' referrerPolicy="no-referrer" />}>
                             <Dropdown.Item onClick={handleLogoutClick}>Logout</Dropdown.Item>

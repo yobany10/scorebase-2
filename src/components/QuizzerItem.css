@@ -1,0 +1,91 @@
+.quizzers-list-item-names {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
+
+.quizzers-list-item-firstname {
+    font-size: 22px;
+    font-weight: 500;
+    justify-self: center;
+    color: #434E4E;
+    margin: 0 0 0 0;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.quizzers-list-item-lastname {
+    font-size: 22px;
+    font-weight: 500;
+    justify-self: center;
+    color: #434E4E;
+    margin: 0 0 0 0;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.quizzers-list-item-firstname:focus {
+    outline: none;
+}
+
+.quizzers-list-item-lastname:focus {
+    outline: none;
+}
+
+.quizzers-list-item-division {
+    justify-self: center;
+    font-size: 18px;
+    color: #434E4E;
+    color: cornflowerblue;
+    margin: 0 0 0 0;
+}
+
+.quizzers-list-item-dob {
+    justify-self: center;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    padding: 2px 1rem;
+    font-size: 16px;
+    color: #434E4E;
+    margin: 0 0 0 0;
+}
+
+.quizzers-list-item-actions {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.quizzers-list-item-actions-edit {
+    font-size: 24px;
+    color: rgb(221, 221, 221);
+    justify-self: start;
+}
+
+.quizzers-list-item-actions-edit:hover {
+    color: darkblue;
+    cursor: pointer;
+}
+
+.quizzers-list-item-actions-delete {
+    font-size: 24px;
+    color: rgb(221, 221, 221);
+    justify-self: end;
+}
+
+.quizzers-list-item-actions-delete:hover {
+    color: red;
+    cursor: pointer;
+}
+
+#quizzer-list-item-actions-submit {
+    justify-self: stretch;
+}
+
+#quizzer-list-item-actions-cancel {
+    justify-self: stretch;
+}

@@ -1,0 +1,8 @@
+/* make the customizations */
+$theme-colors: (
+    "primary": #2563EB,
+    "secondary": rgb(45, 68, 110),
+);
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";

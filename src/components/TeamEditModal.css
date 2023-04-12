@@ -1,0 +1,78 @@
+.team-edit-body {
+    display: grid;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: auto;
+    padding: 2rem 0;
+}
+
+.team-edit-create-quizzer {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.team-edit-create-quizzer-form {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgb(236, 240, 244);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+@media (min-width: 0px) and (max-width: 600px) {
+    .team-edit-create-quizzer-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+#team-edit-create-quizzer-button {
+    width: 30%;
+}
+
+.team-edit-teams-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+    justify-self: center;
+    width: 100%;
+}
+
+.red-team-edit-container {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.yellow-team-edit-container {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.edit-teams-form {
+    display: grid;
+    gap: 1rem;
+    background-color: rgb(236, 240, 244);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.team-edit-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #434E4E;
+    margin: 0 0 0 0;
+}
+
+.edit-teams-input {
+    display: block;
+    border: 1px solid gainsboro;
+    border-radius: 3px;
+    width: 100%;
+    padding: 0.4rem;
+}
+
+.team-edit-my-quizzers {
+    display: grid;
+    gap: 0.5rem;
+}

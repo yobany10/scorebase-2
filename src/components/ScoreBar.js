@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Form from 'react-bootstrap/Form';
 import './ScoreBar.css'
@@ -18,6 +17,7 @@ const ScoreBar = props => {
   const [isShownY5, setIsShownY5] = useState(false)
 
   const handleDropdownToggle = (isOpen, quizzer) => {
+    props.setIsPending(true)
     if (quizzer === 'r1') {
       if (isShownR1) {
         setIsShownR1(false)
@@ -88,11 +88,10 @@ const ScoreBar = props => {
         setIsShownY5(true)
       }
     }
-    if (isOpen) {
-      props.handleClear()
-      props.handle30()
-    } else {
-      props.handleClear()
+    if (!props.isPending) {
+      if (isOpen) {
+        props.handle30()
+      }
     }
   }
     return (
@@ -109,7 +108,7 @@ const ScoreBar = props => {
             </div>
             {!props.viewOnly &&
             <ButtonGroup className='scorebar-r-actions'>
-            <DropdownButton as={ButtonGroup} title={props.red1Name} id="bg-nested-dropdown" variant='secondary' show={isShownR1} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r1')}>
+            <DropdownButton as={ButtonGroup} title='R1' id="bg-nested-dropdown" variant='secondary' show={isShownR1} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r1')}>
             <Form>
               <div key={`red1`} className="answer-checkbox">
                 <Form.Check 
@@ -119,6 +118,7 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red1'].interruption}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -133,6 +133,7 @@ const ScoreBar = props => {
                     }
                     props.handleClear()
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -147,6 +148,7 @@ const ScoreBar = props => {
                     }
                     props.handleClear()
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -157,11 +159,13 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red1'].foul}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
               </div>
             </Form>
+            <p className='dropdown-quizzer-name'>{props.red1Name}</p>
             </DropdownButton>
             <DropdownButton as={ButtonGroup} title="R2" id="bg-nested-dropdown" variant='secondary' show={isShownR2} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r2')}>
             <Form>
@@ -173,6 +177,7 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red2'].interruption}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -187,6 +192,7 @@ const ScoreBar = props => {
                     }
                     props.handleClear()
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -201,6 +207,7 @@ const ScoreBar = props => {
                       setIsShownR2(false)
                     }
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -211,11 +218,13 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red2'].foul}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
               </div>
             </Form>
+            <p className='dropdown-quizzer-name'>{props.red2Name}</p>
             </DropdownButton>
             <DropdownButton as={ButtonGroup} title="R3" id="bg-nested-dropdown" variant='secondary' show={isShownR3} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r3')}>
             <Form>
@@ -227,6 +236,7 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red3'].interruption}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -241,6 +251,7 @@ const ScoreBar = props => {
                     }
                     props.handleClear()
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -255,6 +266,7 @@ const ScoreBar = props => {
                       setIsShownR3(false)
                     }
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -265,11 +277,13 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red3'].foul}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
               </div>
             </Form>
+            <p className='dropdown-quizzer-name'>{props.red3Name}</p>
             </DropdownButton>
             <DropdownButton as={ButtonGroup} title="R4" id="bg-nested-dropdown" variant='secondary' show={isShownR4} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r4')}>
             <Form>
@@ -281,6 +295,7 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red4'].interruption}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -295,6 +310,7 @@ const ScoreBar = props => {
                     }
                     props.handleClear()
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -309,6 +325,7 @@ const ScoreBar = props => {
                       setIsShownR4(false)
                     }
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -319,11 +336,13 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red4'].foul}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
               </div>
             </Form>
+            <p className='dropdown-quizzer-name'>{props.red4Name}</p>
             </DropdownButton>
             <DropdownButton as={ButtonGroup} title="R5" id="bg-nested-dropdown" variant='secondary' show={isShownR5} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'r5')}>
             <Form>
@@ -335,6 +354,7 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red5'].interruption}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -349,6 +369,7 @@ const ScoreBar = props => {
                     }
                     props.handleClear()
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -363,6 +384,7 @@ const ScoreBar = props => {
                       setIsShownR5(false)
                     }
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
@@ -373,11 +395,13 @@ const ScoreBar = props => {
                   checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['red5'].foul}
                   onChange={(event) => {
                     props.handleCheckboxChange(event)
+                    props.setIsPending(false)
                   }
                 }
                   />
               </div>
             </Form>
+            <p className='dropdown-quizzer-name'>{props.red5Name}</p>
             </DropdownButton>
             </ButtonGroup>
             }
@@ -393,6 +417,7 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow1'].interruption}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -407,6 +432,7 @@ const ScoreBar = props => {
                         }
                         props.handleClear()
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -421,6 +447,7 @@ const ScoreBar = props => {
                           setIsShownY1(false)
                         }
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -431,11 +458,13 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow1'].foul}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
                   </div>
                 </Form>
+            <p className='dropdown-quizzer-name'>{props.yellow1Name}</p>
                 </DropdownButton>
                 <DropdownButton as={ButtonGroup} title="Y2" id="bg-nested-dropdown" variant='secondary' show={isShownY2} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'y2')}>
                 <Form>
@@ -447,6 +476,7 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow2'].interruption}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -461,6 +491,7 @@ const ScoreBar = props => {
                         }
                         props.handleClear()
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -475,6 +506,7 @@ const ScoreBar = props => {
                           setIsShownY2(false)
                         }
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -485,11 +517,13 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow2'].foul}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
                   </div>
                 </Form>
+                <p className='dropdown-quizzer-name'>{props.yellow2Name}</p>
                 </DropdownButton>
                 <DropdownButton as={ButtonGroup} title="Y3" id="bg-nested-dropdown" variant='secondary' show={isShownY3} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'y3')}>
                 <Form>
@@ -501,6 +535,7 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow3'].interruption}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -515,6 +550,7 @@ const ScoreBar = props => {
                         }
                         props.handleClear()
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -529,6 +565,7 @@ const ScoreBar = props => {
                           setIsShownY3(false)
                         }
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -539,11 +576,13 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow3'].foul}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
                   </div>
                 </Form>
+                <p className='dropdown-quizzer-name'>{props.yellow3Name}</p>
                 </DropdownButton>
                 <DropdownButton as={ButtonGroup} title="Y4" id="bg-nested-dropdown" variant='secondary' show={isShownY4} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'y4')}>
                 <Form>
@@ -555,6 +594,7 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow4'].interruption}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -569,6 +609,7 @@ const ScoreBar = props => {
                         }
                         props.handleClear()
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -583,6 +624,7 @@ const ScoreBar = props => {
                           setIsShownY4(false)
                         }
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -593,11 +635,13 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow4'].foul}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
                   </div>
                 </Form>
+                <p className='dropdown-quizzer-name'>{props.yellow4Name}</p>
                 </DropdownButton>
                 <DropdownButton as={ButtonGroup} title="Y5" id="bg-nested-dropdown" variant='secondary' show={isShownY5} onToggle={(isOpen) => handleDropdownToggle(isOpen, 'y5')}>
                 <Form>
@@ -609,6 +653,7 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow5'].interruption}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -623,6 +668,7 @@ const ScoreBar = props => {
                         }
                         props.handleClear()
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -637,6 +683,7 @@ const ScoreBar = props => {
                           setIsShownY5(false)
                         }
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
@@ -647,11 +694,13 @@ const ScoreBar = props => {
                       checked={props.quizTableData[props.question - 1] === undefined ? true : props.quizTableData[props.question - 1]['yellow5'].foul}
                       onChange={(event) => {
                         props.handleCheckboxChange(event)
+                        props.setIsPending(false)
                       }
                     }
                       />
                   </div>
                 </Form>
+                <p className='dropdown-quizzer-name'>{props.yellow5Name}</p>
                 </DropdownButton>
             </ButtonGroup>
             }

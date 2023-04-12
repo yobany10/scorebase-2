@@ -15,12 +15,12 @@
 }
 
 .toolbar-button:hover {
-    background-color: #6c757d;
+    background-color: rgb(18, 41, 82);
     color: white;
 }
 
 .toolbar-button:focus {
-    background-color: #6c757d;
+    background-color: #2563EB;
     color: white;
 }
 
