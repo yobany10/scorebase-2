@@ -23,10 +23,9 @@ const TeamEditModal = (props) => {
   }
 
   function getQuizzers () {
-    console.log('getting quizzers')
     const q = query(collection(db, 'quizzers'), where('createdByUser', '==', `${user.uid}`), orderBy('firstName', 'asc'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.docs.map(doc => console.log(doc.data()))
+        // querySnapshot.docs.map(doc => console.log(doc.data()))
         setQuizzers(querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
     })
     return unsubscribe
@@ -44,7 +43,6 @@ const checkAuth = async () => {
 
 useEffect(() => {
   checkAuth()
-  return setQuizzers([])
 },[user, loading])
 
 const toastOptions = {
@@ -138,7 +136,7 @@ const deleteQuizzer = async (id) => {
                     Red 1 Name
                     <Form.Select value={props.red1Name} onChange={(e) => {
                       const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
+                      // console.log(e.target.options[index].getAttribute('data-quizzerid'))
                       props.setRed1Name(e.target.value)
                       props.setRed1Id(e.target.options[index].getAttribute('data-quizzerid'))
                     }}>

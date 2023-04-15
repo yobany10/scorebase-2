@@ -49,6 +49,16 @@ const Scorekeeper = () => {
     const [isSaved, setIsSaved] = useState(false)
     const [quizId, setQuizId] = useState(null)
     const [isPending, setIsPending] = useState(false)
+    const [isShownR1, setIsShownR1] = useState(false)
+    const [isShownR2, setIsShownR2] = useState(false)
+    const [isShownR3, setIsShownR3] = useState(false)
+    const [isShownR4, setIsShownR4] = useState(false)
+    const [isShownR5, setIsShownR5] = useState(false)
+    const [isShownY1, setIsShownY1] = useState(false)
+    const [isShownY2, setIsShownY2] = useState(false)
+    const [isShownY3, setIsShownY3] = useState(false)
+    const [isShownY4, setIsShownY4] = useState(false)
+    const [isShownY5, setIsShownY5] = useState(false)
     
     const [user, loading] = useAuthState(auth)
 
@@ -214,7 +224,7 @@ const Scorekeeper = () => {
     const renderScoreTable = () => {
         if (quizTableData !== []) {
             return quizTableData.map((item) => {
-                return <tr key={`${item.question}tr`} className={item.question === question ? 'highlight-row' : null} onClick={() => handleTableRowClick(item)}>
+                return <tr key={`${item.question}tr`} className={item.question === question ? 'highlight-row' : null} onClick={(e) => handleTableRowClick(e, item)}>
                             <td key={`${item.question}`} className='dark-cell'>{item.question}</td>
                             <td key={`${item.question}r1`}>{calculateQuizzerValue(item, 'red1')}{calculateQuizzerActions(item, 'red1')}</td>
                             <td key={`${item.question}r2`}>{calculateQuizzerValue(item, 'red2')}{calculateQuizzerActions(item, 'red2')}</td>
@@ -283,7 +293,18 @@ const Scorekeeper = () => {
         }
     }
 
-    const handleTableRowClick = (item) => {
+    const handleTableRowClick = (e, item) => {
+        e.stopPropagation()
+        setIsShownR1(false)
+        setIsShownR2(false)
+        setIsShownR3(false)
+        setIsShownR4(false)
+        setIsShownR5(false)
+        setIsShownY1(false)
+        setIsShownY2(false)
+        setIsShownY3(false)
+        setIsShownY4(false)
+        setIsShownY5(false)
         setQuestion(item.question)
     }
 
@@ -476,7 +497,7 @@ const Scorekeeper = () => {
         let newSearchListData = searchList.slice()
         let finalQuestion = division === 'Senior' ? 20 : 15
         let questionCount = newQuizTableData.length
-        console.log(`question:${question}, finalQuestions: ${finalQuestion}, questionCount: ${questionCount}, direction: ${direction}`)
+        // console.log(`question:${question}, finalQuestions: ${finalQuestion}, questionCount: ${questionCount}, direction: ${direction}`)
         if(question >= finalQuestion && (question === questionCount) && direction == 'plus') {
             newNotesData.push(
                 {
@@ -568,6 +589,7 @@ const Scorekeeper = () => {
     }
 
     const handleQuestionChange = (direction) => {
+        setIsPending(false)
         addQuestionDecider(direction)
         if(direction === 'plus') {
             checkNumericalWinner()
@@ -583,6 +605,10 @@ const Scorekeeper = () => {
         setIsPending(false)
         handleClear()
     }, [question])
+
+    useEffect(() => {
+        console.log('isPendingUpdate: ', isPending)
+    },[isPending])
 
     const handleNameChange = (side, name) => {
         if (side === 'red') {
@@ -690,11 +716,11 @@ const Scorekeeper = () => {
             <ToolBar division={division} setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
-                    <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} isPending={isPending} setIsPending={setIsPending} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} />
+                    <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} isPending={isPending} setIsPending={setIsPending} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} isShownR1={isShownR1} isShownR2={isShownR2} isShownR3={isShownR3} isShownR4={isShownR4} isShownR5={isShownR5} isShownY1={isShownY1} isShownY2={isShownY2} isShownY3={isShownY3} isShownY4={isShownY4} isShownY5={isShownY5} setIsShownR1={setIsShownR1} setIsShownR2={setIsShownR2} setIsShownR3={setIsShownR3} setIsShownR4={setIsShownR4} setIsShownR5={setIsShownR5} setIsShownY1={setIsShownY1} setIsShownY2={setIsShownY2} setIsShownY3={setIsShownY3} setIsShownY4={setIsShownY4} setIsShownY5={setIsShownY5} />
                     <ScoreTable render={renderScoreTable} />
                 </div>
                 <div className='scoresheet-tools'>
-                    <QuestionBar question={question} handleQuestionChange={handleQuestionChange} className='question-bar' />
+                    <QuestionBar question={question} handleQuestionChange={handleQuestionChange} className='question-bar' isShownR1={isShownR1} isShownR2={isShownR2} isShownR3={isShownR3} isShownR4={isShownR4} isShownR5={isShownR5} isShownY1={isShownY1} isShownY2={isShownY2} isShownY3={isShownY3} isShownY4={isShownY4} isShownY5={isShownY5} setIsShownR1={setIsShownR1} setIsShownR2={setIsShownR2} setIsShownR3={setIsShownR3} setIsShownR4={setIsShownR4} setIsShownR5={setIsShownR5} setIsShownY1={setIsShownY1} setIsShownY2={setIsShownY2} setIsShownY3={setIsShownY3} setIsShownY4={setIsShownY4} setIsShownY5={setIsShownY5}/>
                     <TimeBar currentTime={currentTime} handleClear={handleClear} handle5={handle5} handle30={handle30} handle60={handle60}/>
                     <NotesBar question={question} notes={notes} setNotes={setNotes} />
                     <MaterialSearch division={division} question={question} searchList={searchList} setSearchList={setSearchList} viewOnly={false} />
