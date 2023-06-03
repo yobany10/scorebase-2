@@ -24,6 +24,10 @@
     border: 2px solid #2563EB;
 }
 
+.highlight-cell {
+    background-color: rgb(199, 233, 213) !important;
+}
+
 .scoresheet-div {
     grid-area: scoresheet;
     align-self: start;

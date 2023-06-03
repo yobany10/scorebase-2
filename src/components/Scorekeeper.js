@@ -40,7 +40,7 @@ const Scorekeeper = () => {
     const [yellow3Id, setYellow3Id] = useState(null)
     const [yellow4Id, setYellow4Id] = useState(null)
     const [yellow5Id, setYellow5Id] = useState(null)
-    const [division, setDivision] = useState('Senior')
+    const [division, setDivision] = useState('Junior')
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])

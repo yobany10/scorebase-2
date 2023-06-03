@@ -3136,6 +3136,7 @@ const handleSearch = () => {
       }
     }
     if (query.split(/[ .,:;]+/gi).length > 3) {
+      console.log('this does it')
       let queryArray = query.split(/[ .,:;]+/gi)
       queryBook = queryArray.filter((item, index, array) => index < (array.length - 2)).join(' ')
       queryChapter = queryArray[queryArray.length - 2]
