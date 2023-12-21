@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: rgb(236, 240, 244);
+    margin: 0;
 }
 
 /* gradients */
@@ -16,6 +17,39 @@ body {
         background: -webkit-linear-gradient(152deg, rgba(119,75,195,1) 0%, rgba(129,116,230,1) 50%, rgba(85,137,235,1) 100%);
         background: linear-gradient(152deg, rgba(119,75,195,1) 0%, rgba(129,116,230,1) 50%, rgba(85,137,235,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#774bc3",endColorstr="#5589eb",GradientType=1);
+}
+
+/* background colors */
+.navy-bg {
+        background-color: rgb(45, 68, 110);
+}
+
+.orange-bg {
+        background-color: #F9A826;
+}
+
+.orange-txt {
+        color: #F9A826;
+}
+
+.orange-dark-bg {
+        background-color: #ee4540;
+}
+
+.red-bg {
+        background-color: #C72C41;
+}
+
+.red-dark-bg {
+        background-color: #801336;
+}
+
+.purple-bg {
+        background-color: #510A32;
+}
+
+.purple-dark-bg {
+        background-color: #2D142C;
 }
 
 /* button styling */

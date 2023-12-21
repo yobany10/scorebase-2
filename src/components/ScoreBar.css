@@ -48,6 +48,10 @@
     outline: none;
 }
 
+.scorebar-r-name:hover {
+    color: #2563EB;
+}
+
 .scorebar-y-info-div {
     grid-area: yInfo;
     display: flex;
@@ -76,6 +80,10 @@
 
 .scorebar-y-name:focus {
     outline: none;
+}
+
+.scorebar-y-name:hover {
+    color: #2563EB;
 }
 
 .scorebar-r-actions {

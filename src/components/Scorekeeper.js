@@ -40,13 +40,14 @@ const Scorekeeper = () => {
     const [yellow3Id, setYellow3Id] = useState(null)
     const [yellow4Id, setYellow4Id] = useState(null)
     const [yellow5Id, setYellow5Id] = useState(null)
-    const [division, setDivision] = useState('Junior')
+    const [division, setDivision] = useState('Senior')
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])
     const [notes, setNotes] = useState([])
     const [searchList, setSearchList] = useState([])
     const [isSaved, setIsSaved] = useState(false)
+    const [isSaving, setIsSaving] = useState(false)
     const [quizId, setQuizId] = useState(null)
     const [isPending, setIsPending] = useState(false)
     const [isShownR1, setIsShownR1] = useState(false)
@@ -97,6 +98,7 @@ const Scorekeeper = () => {
         setNotes(initialNotesData)
         setSearchList(initialSearchListData)
         setIsPending(false)
+        setIsSaved(false)
     }
 
     const handleDivisionChange = () => {
@@ -110,6 +112,7 @@ const Scorekeeper = () => {
         setNotes(initialNotesData)
         setSearchList(initialSearchListData)
         setIsPending(false)
+        setIsSaved(false)
     }
 
     useEffect(() => {
@@ -619,6 +622,8 @@ const Scorekeeper = () => {
     }
 
     const handleSaveQuiz = async () => {
+        //todo: load spinner if saving
+        setIsSaving(true)
         if (isSaved) {
             try {
                 const quizRef = doc(db, 'quizzes', quizId)
@@ -657,9 +662,11 @@ const Scorekeeper = () => {
                 })
                 setIsSaved(true)
                 toast.success('Your quiz has been saved.', toastOptions)
+                setIsSaving(false)
             } catch (error) {
                 console.log(error)
                 toast.error('There was an error saving your quiz. Please try again.', toastOptions)
+                setIsSaving(false)
             }
         } else {
             try {
@@ -703,17 +710,18 @@ const Scorekeeper = () => {
                 setIsSaved(true)
                 setQuizId(res.id)
                 toast.success('Your quiz has been saved.', toastOptions)
+                setIsSaving(false)
             } catch (error) {
                 console.log(error)
                 toast.error('There was an error saving your quiz. Please try again.', toastOptions)
+                setIsSaving(false)
             }
         }
     }
 
     return (
-        <div className='scorekeep-bg'>
         <div className='scorekeep-container'>
-            <ToolBar division={division} setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
+            <ToolBar division={division} setDivision={setDivision} isSaving={isSaving} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
                     <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} isPending={isPending} setIsPending={setIsPending} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} isShownR1={isShownR1} isShownR2={isShownR2} isShownR3={isShownR3} isShownR4={isShownR4} isShownR5={isShownR5} isShownY1={isShownY1} isShownY2={isShownY2} isShownY3={isShownY3} isShownY4={isShownY4} isShownY5={isShownY5} setIsShownR1={setIsShownR1} setIsShownR2={setIsShownR2} setIsShownR3={setIsShownR3} setIsShownR4={setIsShownR4} setIsShownR5={setIsShownR5} setIsShownY1={setIsShownY1} setIsShownY2={setIsShownY2} setIsShownY3={setIsShownY3} setIsShownY4={setIsShownY4} setIsShownY5={setIsShownY5} />
@@ -726,7 +734,6 @@ const Scorekeeper = () => {
                     <MaterialSearch division={division} question={question} searchList={searchList} setSearchList={setSearchList} viewOnly={false} />
                 </div>
             </div>
-        </div>
         </div>
     )
 }

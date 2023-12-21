@@ -2,6 +2,7 @@
     display: grid;
     gap: 1rem;
     padding: 2rem 1rem 1rem 1rem;
+    min-height: 100vh;
 }
 
 .quizzes-container {
@@ -9,6 +10,7 @@
     gap: 1rem;
     background-color: white;
     justify-self: center;
+    align-self: start;
     width: 100%;
     padding: 1rem;
     border-radius: 10px;

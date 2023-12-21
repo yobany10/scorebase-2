@@ -1,6 +1,7 @@
 .scoretable-div {
     align-self: start;
     height: calc(100vh - 180px);
+    max-height: 850px;
     overflow-y: scroll;
     background-color: rgb(236, 240, 244);
     border-radius: 5px;

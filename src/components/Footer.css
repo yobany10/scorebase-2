@@ -1,0 +1,12 @@
+#main-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 2rem 0.5rem;
+}
+
+#main-footer p {
+    text-align: center;
+    margin: 0 0 0 0;
+}
