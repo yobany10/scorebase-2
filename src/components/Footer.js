@@ -3,8 +3,8 @@ import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer className='purple-dark-bg' id='main-footer'>
-            <p className='orange-txt'>© 2023 ScoreBase</p>
+        <footer className='blue-bg' id='main-footer'>
+            <p>© 2023 ScoreBase</p>
         </footer>
     )
 }

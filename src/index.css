@@ -20,6 +20,11 @@ body {
 }
 
 /* background colors */
+
+.blue-bg {
+        background-color: cornflowerblue;
+}
+
 .navy-bg {
         background-color: rgb(45, 68, 110);
 }

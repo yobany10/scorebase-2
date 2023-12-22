@@ -1,18 +1,18 @@
 .login-page-container {
     display: grid;
     padding: 1rem 1rem 1rem 1rem;
-    background-color: #0f172A;
     height: calc(100vh - 46px);
 }
 
 .login-options-container {
     display: grid;
     gap: 1rem;
-    background-color: #2563EB;
     justify-self: center;
     align-self: center;
     padding: 5rem 2rem;
     border-radius: 5px;
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
 }
 
 .login-options-title {
@@ -21,13 +21,11 @@
     font-weight: bold;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
-    color: white;
 }
 
 .login-options-subtitle {
     text-align: center;
     font-size: 18px;
-    color: white;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
 }
@@ -36,7 +34,6 @@
     font-size: 24px;
     text-align: center;
     justify-self: center;
-    color: white;
 }
 
 .login-provider-button {
@@ -45,13 +42,13 @@
     margin: 0 0 0 0;
     padding: 5px 1rem;
     border-radius: 5px;
-    background-color: white;
     font-size: 18px;
+    color: white;
     border: none;
 }
 
 .login-provider-button:hover {
-    background-color: white;
+    background-color: cornflowerblue;
 }
 
 .provider-google-icon {

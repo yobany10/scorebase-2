@@ -39,7 +39,7 @@ const Login = () => {
                 </div>
                 <AiOutlineArrowDown className='login-arrow-down' />
                 <button
-                    className='login-provider-button'
+                    className='login-provider-button navy-bg'
                     type='button'
                     onClick={GoogleLogin}>
                     <FcGoogle className='provider-google-icon' />
