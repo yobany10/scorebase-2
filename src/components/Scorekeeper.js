@@ -14,6 +14,7 @@ import NotesBar from './NotesBar'
 import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
+import ScoresheetSetupModal from './ScoresheetSetupModal'
 
 const Scorekeeper = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
@@ -60,6 +61,7 @@ const Scorekeeper = () => {
     const [isShownY3, setIsShownY3] = useState(false)
     const [isShownY4, setIsShownY4] = useState(false)
     const [isShownY5, setIsShownY5] = useState(false)
+    const [showSetupModal, setShowSetupModal] = useState(true);
     
     const [user, loading] = useAuthState(auth)
 
@@ -99,6 +101,7 @@ const Scorekeeper = () => {
         setSearchList(initialSearchListData)
         setIsPending(false)
         setIsSaved(false)
+        setShowSetupModal(true)
     }
 
     const handleDivisionChange = () => {
@@ -721,6 +724,7 @@ const Scorekeeper = () => {
 
     return (
         <div className='scorekeep-container'>
+            <ScoresheetSetupModal showSetupModal={showSetupModal} setShowSetupModal={setShowSetupModal} division={division} setDivision={setDivision} />
             <ToolBar division={division} setDivision={setDivision} isSaving={isSaving} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>

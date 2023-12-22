@@ -122,7 +122,7 @@ const deleteQuizzer = async (id) => {
     <button type='button' className="toolbar-button" onClick={() => handleShow(true)}>
       Edit Teams
     </button>
-      <Modal className='team-edit-modal' show={show} fullscreen={true} onHide={() => setShow(false)}>
+      <Modal className='team-edit-modal' show={show} size='lg' onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Teams</Modal.Title>
         </Modal.Header>
