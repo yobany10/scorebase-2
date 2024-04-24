@@ -63,6 +63,7 @@ body {
   color: white;
   border: none;
   border-radius: 5px;
+  padding: 0.25rem 1rem;
 }
 .primary-button:hover {
   background-color: #434E4E;
@@ -73,9 +74,21 @@ body {
   color: white;
   border: none;
   border-radius: 5px;
+  padding: 0.25rem 1rem;
 }
 .info-button:hover {
   background-color: rgb(18, 41, 82);
+}
+
+.submit-button {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.25rem 1rem;
+}
+.submit-button:hover {
+  background-color: var(--green-light);
 }
 
 /* dropdown styling */

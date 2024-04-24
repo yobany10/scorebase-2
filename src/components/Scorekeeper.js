@@ -41,7 +41,7 @@ const Scorekeeper = () => {
     const [yellow3Id, setYellow3Id] = useState(null)
     const [yellow4Id, setYellow4Id] = useState(null)
     const [yellow5Id, setYellow5Id] = useState(null)
-    const [division, setDivision] = useState('Senior')
+    const [division, setDivision] = useState('Experienced')
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
     const [quizTableData, setQuizTableData] = useState([])
@@ -124,7 +124,7 @@ const Scorekeeper = () => {
 
     let initialQuizData = []
 
-    for (let i = 1; i <= (division === 'Senior' ? 20 : 15); i++) {
+    for (let i = 1; i <= ((division === 'Intermediate' || division === 'Experienced') ? 20 : 15); i++) {
         initialQuizData.push(
             {
                 question: i,
@@ -204,7 +204,7 @@ const Scorekeeper = () => {
 
     let initialNotesData = []
 
-    for (let i = 1; i <= (division === 'Senior' ? 20 : 15); i++) {
+    for (let i = 1; i <= ((division === 'Intermediate' || division === 'Experienced') ? 20 : 15); i++) {
         initialNotesData.push(
             {
                 question: i,
@@ -215,7 +215,7 @@ const Scorekeeper = () => {
 
     let initialSearchListData = []
 
-    for (let i = 1; i <= (division === 'Senior' ? 20 : 15); i++) {
+    for (let i = 1; i <= ((division === 'Intermediate' || division === 'Experienced') ? 20 : 15); i++) {
         initialSearchListData.push(
             ''
         )
@@ -345,7 +345,7 @@ const Scorekeeper = () => {
         let question = item.question
         let value = 10
         let score = 0
-        if (division === 'Senior') {
+        if (division === 'Intermediate' || division === 'Experienced') {
             question > 20 ? value = 20 : question > 17 && question <= 20 ? value = 30 : question <= 17 && question >= 9 ? value = 20 : value = 10;
         } else {
             question > 15 ? value = 20 : question > 12 && question <= 15 ? value = 30 : question <= 12 && question >= 7 ? value = 20 : value = 10;
@@ -456,7 +456,7 @@ const Scorekeeper = () => {
     }
 
     const checkNumericalWinner = () => {
-        let finalQuestion = division === 'Senior' ? 20 : 15
+        let finalQuestion = (division === 'Intermediate' || division === 'Experienced') ? 20 : 15
         if (question === finalQuestion) {
             if (calculateTeamScore(question, 'red', true) !== calculateTeamScore(question, 'yellow', true)) {
                 toast.info('We have a numerical winner!', toastOptions)
@@ -476,7 +476,7 @@ const Scorekeeper = () => {
     const checkQuizOut = (quizzer) => {
         let correctCount = 0
         let errorCount = 0
-        let correctMax = division === 'Senior' ? 8 : 6
+        let correctMax = (division === 'Intermediate' || division === 'Experienced') ? 8 : 6
         let errorMax = 5
         quizTableData.forEach(item => {
             if (item[quizzer].correct) {
@@ -501,7 +501,7 @@ const Scorekeeper = () => {
         let newQuizTableData = quizTableData.slice()
         let newNotesData = notes.slice()
         let newSearchListData = searchList.slice()
-        let finalQuestion = division === 'Senior' ? 20 : 15
+        let finalQuestion = (division === 'Intermediate' || division === 'Experienced') ? 20 : 15
         let questionCount = newQuizTableData.length
         // console.log(`question:${question}, finalQuestions: ${finalQuestion}, questionCount: ${questionCount}, direction: ${direction}`)
         if(question >= finalQuestion && (question === questionCount) && direction == 'plus') {

@@ -62,12 +62,12 @@
 
 .quizzers-list-item-actions-edit {
     font-size: 24px;
-    color: rgb(221, 221, 221);
+    color: var(--blue-darker);
     justify-self: start;
 }
 
 .quizzers-list-item-actions-edit:hover {
-    color: darkblue;
+    color: var(--blue);
     cursor: pointer;
 }
 

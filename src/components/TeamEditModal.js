@@ -11,16 +11,10 @@ import QuizzersList from './QuizzersList'
 import './TeamEditModal.css'
 
 const TeamEditModal = (props) => {
-  const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
   const [quizzers, setQuizzers] = useState([])
   const [user, loading] = useAuthState(auth)
   const navigate = useNavigate()
-
-  const handleShow = (breakpoint) => {
-    setFullscreen(breakpoint);
-    setShow(true);
-  }
 
   function getQuizzers () {
     const q = query(collection(db, 'quizzers'), where('createdByUser', '==', `${user.uid}`), orderBy('firstName', 'asc'))
@@ -119,10 +113,10 @@ const deleteQuizzer = async (id) => {
 
   return (
     <>
-    <button type='button' className="toolbar-button" onClick={() => handleShow(true)}>
+    <button type='button' className="toolbar-button" onClick={() => setShow(true)}>
       Edit Teams
     </button>
-      <Modal className='team-edit-modal' show={show} size='lg' onHide={() => setShow(false)}>
+      <Modal className='team-edit-modal' show={show} size='lg' centered='true' onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Teams</Modal.Title>
         </Modal.Header>
@@ -304,7 +298,7 @@ const deleteQuizzer = async (id) => {
                   Date of Birth
                   <input type='date' name='dob' className='edit-teams-input' />
                 </label>
-                <button type='submit' className='info-button' id='team-edit-create-quizzer-button'>Submit</button>
+                <button type='submit' className='submit-button' id='team-edit-create-quizzer-button'>Submit</button>
               </form>
             </div>
             {quizzers.length > 0 &&

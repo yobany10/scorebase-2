@@ -26,18 +26,25 @@ const ScoresheetSetupModal = (props) => {
         props.setDivision(e.target.value)
     }
 
+    const handleSetupSubmit = () => {
+        props.setShowSetupModal(false)
+    }
+
     return (
-        <Modal show={props.showSetupModal} size='lg' onHide={() => props.setShowSetupModal(false)}>
+        <Modal show={props.showSetupModal} size='lg' centered='true' onHide={() => props.setShowSetupModal(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Quiz Setup</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Choose some options for your current quiz</p>
+                <p>Select a division for this quiz</p>
                 <form onSubmit={e => e.preventDefault()}>
                 <Form.Select name='division' defaultValue={props.division} onChange={e => handleDivisionChange(e)}>
+                    <option value='Beginner'>Beginner</option>
                     <option value='Junior'>Junior</option>
-                    <option value='Senior'>Senior</option>
+                    <option value='Intermediate'>Intermediate</option>
+                    <option value='Experienced'>Experienced</option>
                 </Form.Select>
+                <button type='button' className='submit-button' id='quiz-setup-submit-button' onClick={handleSetupSubmit}>Start</button>
                 </form>
             </Modal.Body>
         </Modal>

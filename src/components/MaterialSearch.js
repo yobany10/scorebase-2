@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import {CgSearch} from 'react-icons/cg'
 import './MaterialSearch.css'
+import { experienced2024 } from '../data/2024/experienced2024'
 import { intermediate2024 } from '../data/2024/intermediate2024'
+import { junior2024 } from '../data/2024/junior2024'
+import { beginner2024 } from '../data/2024/beginner2024'
 
 const MaterialSearch = (props) => {
   const [results, setResults] = useState([])
@@ -12,7 +15,10 @@ Write templates that can be filled in with 1,2,3,4 time words to generate practi
 Maybe write other templates that can be filled for other types of questions.
 */
 
-const seniorMaterial = intermediate2024
+const experiencedMaterial = experienced2024;
+const intermediateMaterial = intermediate2024;
+const juniorMaterial = junior2024;
+const beginnerMaterial = beginner2024;
 
 // const seniorMaterial = [
 //     {
@@ -2235,876 +2241,879 @@ const seniorMaterial = intermediate2024
 //   }
 //   ]
 
-const juniorMaterial = [
-  {
-    "book": "Galatians",
-    "chapters": [
-    {
-    "chapter": "1",
-    "verses": [
-    {
-    "verse": "1",
-    "text": "Paul, an apostle, (not of men, neither by man, but by Jesus Christ, and God the Father, who raised him from the dead;)"
-    },
-    {
-    "verse": "2",
-    "text": "And all the brethren which are with me, unto the churches of Galatia:"
-    },
-    {
-    "verse": "3",
-    "text": "Grace be to you and peace from God the Father, and from our Lord Jesus Christ,"
-    },
-    {
-    "verse": "4",
-    "text": "Who gave himself for our sins, that he might deliver us from this present evil world, according to the will of God and our Father:"
-    },
-    {
-    "verse": "5",
-    "text": "To whom be glory for ever and ever. Amen."
-    },
-    {
-    "verse": "6",
-    "text": "I marvel that ye are so soon removed from him that called you into the grace of Christ unto another gospel:"
-    },
-    {
-    "verse": "7",
-    "text": "Which is not another; but there be some that trouble you, and would pervert the gospel of Christ."
-    },
-    {
-    "verse": "8",
-    "text": "But though we, or an angel from heaven, preach any other gospel unto you than that which we have preached unto you, let him be accursed."
-    },
-    {
-    "verse": "9",
-    "text": "As we said before, so say I now again, If any man preach any other gospel unto you than that ye have received, let him be accursed."
-    },
-    {
-    "verse": "10",
-    "text": "For do I now persuade men, or God? or do I seek to please men? for if I yet pleased men, I should not be the servant of Christ."
-    },
-    {
-    "verse": "11",
-    "text": "But I certify you, brethren, that the gospel which was preached of me is not after man."
-    },
-    {
-    "verse": "12",
-    "text": "For I neither received it of man, neither was I taught it, but by the revelation of Jesus Christ."
-    },
-    {
-    "verse": "13",
-    "text": "For ye have heard of my conversation in time past in the Jews’ religion, how that beyond measure I persecuted the church of God, and wasted it:"
-    },
-    {
-    "verse": "14",
-    "text": "And profited in the Jews’ religion above many my equals in mine own nation, being more exceedingly zealous of the traditions of my fathers."
-    },
-    {
-    "verse": "15",
-    "text": "But when it pleased God, who separated me from my mother’s womb, and called me by his grace,"
-    },
-    {
-    "verse": "16",
-    "text": "To reveal his Son in me, that I might preach him among the heathen; immediately I conferred not with flesh and blood:"
-    },
-    {
-    "verse": "17",
-    "text": "Neither went I up to Jerusalem to them which were apostles before me; but I went into Arabia, and returned again unto Damascus."
-    },
-    {
-    "verse": "18",
-    "text": "Then after three years I went up to Jerusalem to see Peter, and abode with him fifteen days."
-    },
-    {
-    "verse": "19",
-    "text": "But other of the apostles saw I none, save James the Lord’s brother."
-    },
-    {
-    "verse": "20",
-    "text": "Now the things which I write unto you, behold, before God, I lie not."
-    },
-    {
-    "verse": "21",
-    "text": "Afterwards I came into the regions of Syria and Cilicia;"
-    },
-    {
-    "verse": "22",
-    "text": "And was unknown by face unto the churches of Judaea which were in Christ:"
-    },
-    {
-    "verse": "23",
-    "text": "But they had heard only, That he which persecuted us in times past now preacheth the faith which once he destroyed."
-    },
-    {
-    "verse": "24",
-    "text": "And they glorified God in me."
-    }
-    ]
-    },
-    {
-    "chapter": "2",
-    "verses": [
-    {
-    "verse": "1",
-    "text": "Then fourteen years after I went up again to Jerusalem with Barnabas, and took Titus with me also."
-    },
-    {
-    "verse": "2",
-    "text": "And I went up by revelation, and communicated unto them that gospel which I preach among the Gentiles, but privately to them which were of reputation, lest by any means I should run, or had run, in vain."
-    },
-    {
-    "verse": "3",
-    "text": "But neither Titus, who was with me, being a Greek, was compelled to be circumcised:"
-    },
-    {
-    "verse": "4",
-    "text": "And that because of false brethren unawares brought in, who came in privily to spy out our liberty which we have in Christ Jesus, that they might bring us into bondage:"
-    },
-    {
-    "verse": "5",
-    "text": "To whom we gave place by subjection, no, not for an hour; that the truth of the gospel might continue with you."
-    },
-    {
-    "verse": "20",
-    "text": "I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me."
-    },
-    {
-    "verse": "21",
-    "text": "I do not frustrate the grace of God: for if righteousness come by the law, then Christ is dead in vain."
-    }
-    ]
-    },
-    {
-    "chapter": "3",
-    "verses": [
-    {
-    "verse": "26",
-    "text": "For ye are all the children of God by faith in Christ Jesus."
-    },
-    {
-    "verse": "27",
-    "text": "For as many of you as have been baptized into Christ have put on Christ."
-    },
-    {
-    "verse": "28",
-    "text": "There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for ye are all one in Christ Jesus."
-    },
-    {
-    "verse": "29",
-    "text": "And if ye be Christ’s, then are ye Abraham’s seed, and heirs according to the promise."
-    }
-    ]
-    },
-    {
-    "chapter": "4",
-    "verses": [
-    {
-    "verse": "1",
-    "text": "Now I say, That the heir, as long as he is a child, differeth nothing from a servant, though he be lord of all;"
-    },
-    {
-    "verse": "2",
-    "text": "But is under tutors and governors until the time appointed of the father."
-    },
-    {
-    "verse": "3",
-    "text": "Even so we, when we were children, were in bondage under the elements of the world:"
-    },
-    {
-    "verse": "4",
-    "text": "But when the fulness of the time was come, God sent forth his Son, made of a woman, made under the law,"
-    },
-    {
-    "verse": "5",
-    "text": "To redeem them that were under the law, that we might receive the adoption of sons."
-    },
-    {
-    "verse": "6",
-    "text": "And because ye are sons, God hath sent forth the Spirit of his Son into your hearts, crying, Abba, Father."
-    },
-    {
-    "verse": "7",
-    "text": "Wherefore thou art no more a servant, but a son; and if a son, then an heir of God through Christ."
-    }
-    ]
-    },
-    {
-    "chapter": "5",
-    "verses": [
-    {
-    "verse": "7",
-    "text": "Ye did run well; who did hinder you that ye should not obey the truth?"
-    },
-    {
-    "verse": "8",
-    "text": "This persuasion cometh not of him that calleth you."
-    },
-    {
-    "verse": "9",
-    "text": "A little leaven leaveneth the whole lump."
-    },
-    {
-    "verse": "10",
-    "text": "I have confidence in you through the Lord, that ye will be none otherwise minded: but he that troubleth you shall bear his judgment, whosoever he be."
-    },
-    {
-    "verse": "11",
-    "text": "And I, brethren, if I yet preach circumcision, why do I yet suffer persecution? then is the offence of the cross ceased."
-    },
-    {
-    "verse": "12",
-    "text": "I would they were even cut off which trouble you."
-    },
-    {
-    "verse": "13",
-    "text": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another."
-    },
-    {
-    "verse": "14",
-    "text": "For all the law is fulfilled in one word, even in this; Thou shalt love thy neighbour as thyself."
-    },
-    {
-    "verse": "15",
-    "text": "But if ye bite and devour one another, take heed that ye be not consumed one of another."
-    },
-    {
-    "verse": "16",
-    "text": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh."
-    },
-    {
-    "verse": "17",
-    "text": "For the flesh lusteth against the Spirit, and the Spirit against the flesh: and these are contrary the one to the other: so that ye cannot do the things that ye would."
-    },
-    {
-    "verse": "18",
-    "text": "But if ye be led of the Spirit, ye are not under the law."
-    },
-    {
-    "verse": "19",
-    "text": "Now the works of the flesh are manifest, which are these; Adultery, fornication, uncleanness, lasciviousness,"
-    },
-    {
-    "verse": "20",
-    "text": "Idolatry, witchcraft, hatred, variance, emulations, wrath, strife, seditions, heresies,"
-    },
-    {
-    "verse": "21",
-    "text": "Envyings, murders, drunkenness, revellings, and such like: of the which I tell you before, as I have also told you in time past, that they which do such things shall not inherit the kingdom of God."
-    },
-    {
-    "verse": "22",
-    "text": "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith,"
-    },
-    {
-    "verse": "23",
-    "text": "Meekness, temperance: against such there is no law."
-    },
-    {
-    "verse": "24",
-    "text": "And they that are Christ’s have crucified the flesh with the affections and lusts."
-    },
-    {
-    "verse": "25",
-    "text": "If we live in the Spirit, let us also walk in the Spirit."
-    },
-    {
-    "verse": "26",
-    "text": "Let us not be desirous of vain glory, provoking one another, envying one another."
-    }
-    ]
-    },
-    {
-    "chapter": "6",
-    "verses": [
-    {
-    "verse": "1",
-    "text": "Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness; considering thyself, lest thou also be tempted."
-    },
-    {
-    "verse": "2",
-    "text": "Bear ye one another’s burdens, and so fulfil the law of Christ."
-    },
-    {
-    "verse": "3",
-    "text": "For if a man think himself to be something, when he is nothing, he deceiveth himself."
-    },
-    {
-    "verse": "4",
-    "text": "But let every man prove his own work, and then shall he have rejoicing in himself alone, and not in another."
-    },
-    {
-    "verse": "5",
-    "text": "For every man shall bear his own burden."
-    },
-    {
-    "verse": "6",
-    "text": "Let him that is taught in the word communicate unto him that teacheth in all good things."
-    },
-    {
-    "verse": "7",
-    "text": "Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."
-    },
-    {
-    "verse": "8",
-    "text": "For he that soweth to his flesh shall of the flesh reap corruption; but he that soweth to the Spirit shall of the Spirit reap life everlasting."
-    },
-    {
-    "verse": "9",
-    "text": "And let us not be weary in well doing: for in due season we shall reap, if we faint not."
-    },
-    {
-    "verse": "10",
-    "text": "As we have therefore opportunity, let us do good unto all men, especially unto them who are of the household of faith."
-    }
-    ]
-    }
-    ]
-    },
-    {
-      "book": "Ephesians",
-      "chapters": [
-      {
-      "chapter": "1",
-      "verses": [
-      {
-      "verse": "1",
-      "text": "Paul, an apostle of Jesus Christ by the will of God, to the saints which are at Ephesus, and to the faithful in Christ Jesus:"
-      },
-      {
-      "verse": "2",
-      "text": "Grace be to you, and peace, from God our Father, and from the Lord Jesus Christ."
-      },
-      {
-      "verse": "3",
-      "text": "Blessed be the God and Father of our Lord Jesus Christ, who hath blessed us with all spiritual blessings in heavenly places in Christ:"
-      },
-      {
-      "verse": "4",
-      "text": "According as he hath chosen us in him before the foundation of the world, that we should be holy and without blame before him in love:"
-      },
-      {
-      "verse": "5",
-      "text": "Having predestinated us unto the adoption of children by Jesus Christ to himself, according to the good pleasure of his will,"
-      },
-      {
-      "verse": "6",
-      "text": "To the praise of the glory of his grace, wherein he hath made us accepted in the beloved."
-      },
-      {
-      "verse": "7",
-      "text": "In whom we have redemption through his blood, the forgiveness of sins, according to the riches of his grace;"
-      },
-      {
-      "verse": "8",
-      "text": "Wherein he hath abounded toward us in all wisdom and prudence;"
-      },
-      {
-      "verse": "9",
-      "text": "Having made known unto us the mystery of his will, according to his good pleasure which he hath purposed in himself:"
-      },
-      {
-      "verse": "10",
-      "text": "That in the dispensation of the fulness of times he might gather together in one all things in Christ, both which are in heaven, and which are on earth; even in him:"
-      },
-      {
-      "verse": "11",
-      "text": "In whom also we have obtained an inheritance, being predestinated according to the purpose of him who worketh all things after the counsel of his own will:"
-      }
-      ]
-      },
-      {
-      "chapter": "2",
-      "verses": [
-      {
-      "verse": "1",
-      "text": "And you hath he quickened, who were dead in trespasses and sins;"
-      },
-      {
-      "verse": "2",
-      "text": "Wherein in time past ye walked according to the course of this world, according to the prince of the power of the air, the spirit that now worketh in the children of disobedience:"
-      },
-      {
-      "verse": "3",
-      "text": "Among whom also we all had our conversation in times past in the lusts of our flesh, fulfilling the desires of the flesh and of the mind; and were by nature the children of wrath, even as others."
-      },
-      {
-      "verse": "4",
-      "text": "But God, who is rich in mercy, for his great love wherewith he loved us,"
-      },
-      {
-      "verse": "5",
-      "text": "Even when we were dead in sins, hath quickened us together with Christ, (by grace ye are saved;)"
-      },
-      {
-      "verse": "6",
-      "text": "And hath raised us up together, and made us sit together in heavenly places in Christ Jesus:"
-      },
-      {
-      "verse": "7",
-      "text": "That in the ages to come he might shew the exceeding riches of his grace in his kindness toward us through Christ Jesus."
-      },
-      {
-      "verse": "8",
-      "text": "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:"
-      },
-      {
-      "verse": "9",
-      "text": "Not of works, lest any man should boast."
-      },
-      {
-      "verse": "10",
-      "text": "For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them."
-      },
-      {
-      "verse": "11",
-      "text": "Wherefore remember, that ye being in time past Gentiles in the flesh, who are called Uncircumcision by that which is called the Circumcision in the flesh made by hands;"
-      },
-      {
-      "verse": "12",
-      "text": "That at that time ye were without Christ, being aliens from the commonwealth of Israel, and strangers from the covenants of promise, having no hope, and without God in the world:"
-      },
-      {
-      "verse": "13",
-      "text": "But now in Christ Jesus ye who sometimes were far off are made nigh by the blood of Christ."
-      },
-      {
-      "verse": "14",
-      "text": "For he is our peace, who hath made both one, and hath broken down the middle wall of partition between us;"
-      },
-      {
-      "verse": "15",
-      "text": "Having abolished in his flesh the enmity, even the law of commandments contained in ordinances; for to make in himself of twain one new man, so making peace;"
-      },
-      {
-      "verse": "16",
-      "text": "And that he might reconcile both unto God in one body by the cross, having slain the enmity thereby:"
-      },
-      {
-      "verse": "17",
-      "text": "And came and preached peace to you which were afar off, and to them that were nigh."
-      },
-      {
-      "verse": "18",
-      "text": "For through him we both have access by one Spirit unto the Father."
-      },
-      {
-      "verse": "19",
-      "text": "Now therefore ye are no more strangers and foreigners, but fellowcitizens with the saints, and of the household of God;"
-      },
-      {
-      "verse": "20",
-      "text": "And are built upon the foundation of the apostles and prophets, Jesus Christ himself being the chief corner stone;"
-      },
-      {
-      "verse": "21",
-      "text": "In whom all the building fitly framed together groweth unto an holy temple in the Lord:"
-      },
-      {
-      "verse": "22",
-      "text": "In whom ye also are builded together for an habitation of God through the Spirit."
-      }
-      ]
-      },
-      {
-      "chapter": "3",
-      "verses": [
-      {
-      "verse": "14",
-      "text": "For this cause I bow my knees unto the Father of our Lord Jesus Christ,"
-      },
-      {
-      "verse": "15",
-      "text": "Of whom the whole family in heaven and earth is named,"
-      },
-      {
-      "verse": "16",
-      "text": "That he would grant you, according to the riches of his glory, to be strengthened with might by his Spirit in the inner man;"
-      },
-      {
-      "verse": "17",
-      "text": "That Christ may dwell in your hearts by faith; that ye, being rooted and grounded in love,"
-      },
-      {
-      "verse": "18",
-      "text": "May be able to comprehend with all saints what is the breadth, and length, and depth, and height;"
-      },
-      {
-      "verse": "19",
-      "text": "And to know the love of Christ, which passeth knowledge, that ye might be filled with all the fulness of God."
-      },
-      {
-      "verse": "20",
-      "text": "Now unto him that is able to do exceeding abundantly above all that we ask or think, according to the power that worketh in us,"
-      },
-      {
-      "verse": "21",
-      "text": "Unto him be glory in the church by Christ Jesus throughout all ages, world without end. Amen."
-      }
-      ]
-      },
-      {
-      "chapter": "4",
-      "verses": [
-      {
-      "verse": "1",
-      "text": "I therefore, the prisoner of the Lord, beseech you that ye walk worthy of the vocation wherewith ye are called,"
-      },
-      {
-      "verse": "2",
-      "text": "With all lowliness and meekness, with longsuffering, forbearing one another in love;"
-      },
-      {
-      "verse": "3",
-      "text": "Endeavouring to keep the unity of the Spirit in the bond of peace."
-      },
-      {
-      "verse": "4",
-      "text": "There is one body, and one Spirit, even as ye are called in one hope of your calling;"
-      },
-      {
-      "verse": "5",
-      "text": "One Lord, one faith, one baptism,"
-      },
-      {
-      "verse": "6",
-      "text": "One God and Father of all, who is above all, and through all, and in you all."
-      },
-      {
-      "verse": "7",
-      "text": "But unto every one of us is given grace according to the measure of the gift of Christ."
-      },
-      {
-      "verse": "8",
-      "text": "Wherefore he saith, When he ascended up on high, he led captivity captive, and gave gifts unto men."
-      },
-      {
-      "verse": "9",
-      "text": "(Now that he ascended, what is it but that he also descended first into the lower parts of the earth?"
-      },
-      {
-      "verse": "10",
-      "text": "He that descended is the same also that ascended up far above all heavens, that he might fill all things.)"
-      },
-      {
-      "verse": "11",
-      "text": "And he gave some, apostles; and some, prophets; and some, evangelists; and some, pastors and teachers;"
-      },
-      {
-      "verse": "12",
-      "text": "For the perfecting of the saints, for the work of the ministry, for the edifying of the body of Christ:"
-      },
-      {
-      "verse": "13",
-      "text": "Till we all come in the unity of the faith, and of the knowledge of the Son of God, unto a perfect man, unto the measure of the stature of the fulness of Christ:"
-      },
-      {
-      "verse": "14",
-      "text": "That we henceforth be no more children, tossed to and fro, and carried about with every wind of doctrine, by the sleight of men, and cunning craftiness, whereby they lie in wait to deceive;"
-      },
-      {
-      "verse": "15",
-      "text": "But speaking the truth in love, may grow up into him in all things, which is the head, even Christ:"
-      },
-      {
-      "verse": "16",
-      "text": "From whom the whole body fitly joined together and compacted by that which every joint supplieth, according to the effectual working in the measure of every part, maketh increase of the body unto the edifying of itself in love."
-      },
-      {
-      "verse": "17",
-      "text": "This I say therefore, and testify in the Lord, that ye henceforth walk not as other Gentiles walk, in the vanity of their mind,"
-      },
-      {
-      "verse": "18",
-      "text": "Having the understanding darkened, being alienated from the life of God through the ignorance that is in them, because of the blindness of their heart:"
-      },
-      {
-      "verse": "19",
-      "text": "Who being past feeling have given themselves over unto lasciviousness, to work all uncleanness with greediness."
-      },
-      {
-      "verse": "20",
-      "text": "But ye have not so learned Christ;"
-      },
-      {
-      "verse": "21",
-      "text": "If so be that ye have heard him, and have been taught by him, as the truth is in Jesus:"
-      },
-      {
-      "verse": "22",
-      "text": "That ye put off concerning the former conversation the old man, which is corrupt according to the deceitful lusts;"
-      },
-      {
-      "verse": "23",
-      "text": "And be renewed in the spirit of your mind;"
-      },
-      {
-      "verse": "24",
-      "text": "And that ye put on the new man, which after God is created in righteousness and true holiness."
-      },
-      {
-      "verse": "25",
-      "text": "Wherefore putting away lying, speak every man truth with his neighbour: for we are members one of another."
-      },
-      {
-      "verse": "26",
-      "text": "Be ye angry, and sin not: let not the sun go down upon your wrath:"
-      },
-      {
-      "verse": "27",
-      "text": "Neither give place to the devil."
-      },
-      {
-      "verse": "28",
-      "text": "Let him that stole steal no more: but rather let him labour, working with his hands the thing which is good, that he may have to give to him that needeth."
-      },
-      {
-      "verse": "29",
-      "text": "Let no corrupt communication proceed out of your mouth, but that which is good to the use of edifying, that it may minister grace unto the hearers."
-      },
-      {
-      "verse": "30",
-      "text": "And grieve not the holy Spirit of God, whereby ye are sealed unto the day of redemption."
-      },
-      {
-      "verse": "31",
-      "text": "Let all bitterness, and wrath, and anger, and clamour, and evil speaking, be put away from you, with all malice:"
-      },
-      {
-      "verse": "32",
-      "text": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ’s sake hath forgiven you."
-      }
-      ]
-      },
-      {
-      "chapter": "5",
-      "verses": [
-      {
-      "verse": "1",
-      "text": "Be ye therefore followers of God, as dear children;"
-      },
-      {
-      "verse": "2",
-      "text": "And walk in love, as Christ also hath loved us, and hath given himself for us an offering and a sacrifice to God for a sweetsmelling savour."
-      },
-      {
-      "verse": "3",
-      "text": "But fornication, and all uncleanness, or covetousness, let it not be once named among you, as becometh saints;"
-      },
-      {
-      "verse": "4",
-      "text": "Neither filthiness, nor foolish talking, nor jesting, which are not convenient: but rather giving of thanks."
-      },
-      {
-      "verse": "5",
-      "text": "For this ye know, that no whoremonger, nor unclean person, nor covetous man, who is an idolater, hath any inheritance in the kingdom of Christ and of God."
-      },
-      {
-      "verse": "6",
-      "text": "Let no man deceive you with vain words: for because of these things cometh the wrath of God upon the children of disobedience."
-      },
-      {
-      "verse": "7",
-      "text": "Be not ye therefore partakers with them."
-      },
-      {
-      "verse": "8",
-      "text": "For ye were sometimes darkness, but now are ye light in the Lord: walk as children of light:"
-      },
-      {
-      "verse": "9",
-      "text": "(For the fruit of the Spirit is in all goodness and righteousness and truth;)"
-      },
-      {
-      "verse": "10",
-      "text": "Proving what is acceptable unto the Lord."
-      },
-      {
-      "verse": "11",
-      "text": "And have no fellowship with the unfruitful works of darkness, but rather reprove them."
-      },
-      {
-      "verse": "12",
-      "text": "For it is a shame even to speak of those things which are done of them in secret."
-      },
-      {
-      "verse": "13",
-      "text": "But all things that are reproved are made manifest by the light: for whatsoever doth make manifest is light."
-      },
-      {
-      "verse": "14",
-      "text": "Wherefore he saith, Awake thou that sleepest, and arise from the dead, and Christ shall give thee light."
-      },
-      {
-      "verse": "15",
-      "text": "See then that ye walk circumspectly, not as fools, but as wise,"
-      },
-      {
-      "verse": "16",
-      "text": "Redeeming the time, because the days are evil."
-      },
-      {
-      "verse": "17",
-      "text": "Wherefore be ye not unwise, but understanding what the will of the Lord is."
-      },
-      {
-      "verse": "18",
-      "text": "And be not drunk with wine, wherein is excess; but be filled with the Spirit;"
-      },
-      {
-      "verse": "19",
-      "text": "Speaking to yourselves in psalms and hymns and spiritual songs, singing and making melody in your heart to the Lord;"
-      },
-      {
-      "verse": "20",
-      "text": "Giving thanks always for all things unto God and the Father in the name of our Lord Jesus Christ;"
-      },
-      {
-      "verse": "21",
-      "text": "Submitting yourselves one to another in the fear of God."
-      },
-      {
-      "verse": "22",
-      "text": "Wives, submit yourselves unto your own husbands, as unto the Lord."
-      },
-      {
-      "verse": "23",
-      "text": "For the husband is the head of the wife, even as Christ is the head of the church: and he is the saviour of the body."
-      },
-      {
-      "verse": "24",
-      "text": "Therefore as the church is subject unto Christ, so let the wives be to their own husbands in every thing."
-      },
-      {
-      "verse": "25",
-      "text": "Husbands, love your wives, even as Christ also loved the church, and gave himself for it;"
-      },
-      {
-      "verse": "26",
-      "text": "That he might sanctify and cleanse it with the washing of water by the word,"
-      },
-      {
-      "verse": "27",
-      "text": "That he might present it to himself a glorious church, not having spot, or wrinkle, or any such thing; but that it should be holy and without blemish."
-      },
-      {
-      "verse": "28",
-      "text": "So ought men to love their wives as their own bodies. He that loveth his wife loveth himself."
-      },
-      {
-      "verse": "29",
-      "text": "For no man ever yet hated his own flesh; but nourisheth and cherisheth it, even as the Lord the church:"
-      },
-      {
-      "verse": "30",
-      "text": "For we are members of his body, of his flesh, and of his bones."
-      },
-      {
-      "verse": "31",
-      "text": "For this cause shall a man leave his father and mother, and shall be joined unto his wife, and they two shall be one flesh."
-      },
-      {
-      "verse": "32",
-      "text": "This is a great mystery: but I speak concerning Christ and the church."
-      },
-      {
-      "verse": "33",
-      "text": "Nevertheless let every one of you in particular so love his wife even as himself; and the wife see that she reverence her husband."
-      }
-      ]
-      },
-      {
-      "chapter": "6",
-      "verses": [
-      {
-      "verse": "1",
-      "text": "Children, obey your parents in the Lord: for this is right."
-      },
-      {
-      "verse": "2",
-      "text": "Honour thy father and mother; which is the first commandment with promise;"
-      },
-      {
-      "verse": "3",
-      "text": "That it may be well with thee, and thou mayest live long on the earth."
-      },
-      {
-      "verse": "4",
-      "text": "And, ye fathers, provoke not your children to wrath: but bring them up in the nurture and admonition of the Lord."
-      },
-      {
-      "verse": "5",
-      "text": "Servants, be obedient to them that are your masters according to the flesh, with fear and trembling, in singleness of your heart, as unto Christ;"
-      },
-      {
-      "verse": "6",
-      "text": "Not with eyeservice, as menpleasers; but as the servants of Christ, doing the will of God from the heart;"
-      },
-      {
-      "verse": "7",
-      "text": "With good will doing service, as to the Lord, and not to men:"
-      },
-      {
-      "verse": "8",
-      "text": "Knowing that whatsoever good thing any man doeth, the same shall he receive of the Lord, whether he be bond or free."
-      },
-      {
-      "verse": "9",
-      "text": "And, ye masters, do the same things unto them, forbearing threatening: knowing that your Master also is in heaven; neither is there respect of persons with him."
-      },
-      {
-      "verse": "10",
-      "text": "Finally, my brethren, be strong in the Lord, and in the power of his might."
-      },
-      {
-      "verse": "11",
-      "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil."
-      },
-      {
-      "verse": "12",
-      "text": "For we wrestle not against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this world, against spiritual wickedness in high places."
-      },
-      {
-      "verse": "13",
-      "text": "Wherefore take unto you the whole armour of God, that ye may be able to withstand in the evil day, and having done all, to stand."
-      },
-      {
-      "verse": "14",
-      "text": "Stand therefore, having your loins girt about with truth, and having on the breastplate of righteousness;"
-      },
-      {
-      "verse": "15",
-      "text": "And your feet shod with the preparation of the gospel of peace;"
-      },
-      {
-      "verse": "16",
-      "text": "Above all, taking the shield of faith, wherewith ye shall be able to quench all the fiery darts of the wicked."
-      },
-      {
-      "verse": "17",
-      "text": "And take the helmet of salvation, and the sword of the Spirit, which is the word of God:"
-      },
-      {
-      "verse": "18",
-      "text": "Praying always with all prayer and supplication in the Spirit, and watching thereunto with all perseverance and supplication for all saints;"
-      },
-      {
-      "verse": "19",
-      "text": "And for me, that utterance may be given unto me, that I may open my mouth boldly, to make known the mystery of the gospel,"
-      },
-      {
-      "verse": "20",
-      "text": "For which I am an ambassador in bonds: that therein I may speak boldly, as I ought to speak."
-      }
-      ]
-      }
-      ]
-      }
-]
+// const juniorMaterial = [
+//   {
+//     "book": "Galatians",
+//     "chapters": [
+//     {
+//     "chapter": "1",
+//     "verses": [
+//     {
+//     "verse": "1",
+//     "text": "Paul, an apostle, (not of men, neither by man, but by Jesus Christ, and God the Father, who raised him from the dead;)"
+//     },
+//     {
+//     "verse": "2",
+//     "text": "And all the brethren which are with me, unto the churches of Galatia:"
+//     },
+//     {
+//     "verse": "3",
+//     "text": "Grace be to you and peace from God the Father, and from our Lord Jesus Christ,"
+//     },
+//     {
+//     "verse": "4",
+//     "text": "Who gave himself for our sins, that he might deliver us from this present evil world, according to the will of God and our Father:"
+//     },
+//     {
+//     "verse": "5",
+//     "text": "To whom be glory for ever and ever. Amen."
+//     },
+//     {
+//     "verse": "6",
+//     "text": "I marvel that ye are so soon removed from him that called you into the grace of Christ unto another gospel:"
+//     },
+//     {
+//     "verse": "7",
+//     "text": "Which is not another; but there be some that trouble you, and would pervert the gospel of Christ."
+//     },
+//     {
+//     "verse": "8",
+//     "text": "But though we, or an angel from heaven, preach any other gospel unto you than that which we have preached unto you, let him be accursed."
+//     },
+//     {
+//     "verse": "9",
+//     "text": "As we said before, so say I now again, If any man preach any other gospel unto you than that ye have received, let him be accursed."
+//     },
+//     {
+//     "verse": "10",
+//     "text": "For do I now persuade men, or God? or do I seek to please men? for if I yet pleased men, I should not be the servant of Christ."
+//     },
+//     {
+//     "verse": "11",
+//     "text": "But I certify you, brethren, that the gospel which was preached of me is not after man."
+//     },
+//     {
+//     "verse": "12",
+//     "text": "For I neither received it of man, neither was I taught it, but by the revelation of Jesus Christ."
+//     },
+//     {
+//     "verse": "13",
+//     "text": "For ye have heard of my conversation in time past in the Jews’ religion, how that beyond measure I persecuted the church of God, and wasted it:"
+//     },
+//     {
+//     "verse": "14",
+//     "text": "And profited in the Jews’ religion above many my equals in mine own nation, being more exceedingly zealous of the traditions of my fathers."
+//     },
+//     {
+//     "verse": "15",
+//     "text": "But when it pleased God, who separated me from my mother’s womb, and called me by his grace,"
+//     },
+//     {
+//     "verse": "16",
+//     "text": "To reveal his Son in me, that I might preach him among the heathen; immediately I conferred not with flesh and blood:"
+//     },
+//     {
+//     "verse": "17",
+//     "text": "Neither went I up to Jerusalem to them which were apostles before me; but I went into Arabia, and returned again unto Damascus."
+//     },
+//     {
+//     "verse": "18",
+//     "text": "Then after three years I went up to Jerusalem to see Peter, and abode with him fifteen days."
+//     },
+//     {
+//     "verse": "19",
+//     "text": "But other of the apostles saw I none, save James the Lord’s brother."
+//     },
+//     {
+//     "verse": "20",
+//     "text": "Now the things which I write unto you, behold, before God, I lie not."
+//     },
+//     {
+//     "verse": "21",
+//     "text": "Afterwards I came into the regions of Syria and Cilicia;"
+//     },
+//     {
+//     "verse": "22",
+//     "text": "And was unknown by face unto the churches of Judaea which were in Christ:"
+//     },
+//     {
+//     "verse": "23",
+//     "text": "But they had heard only, That he which persecuted us in times past now preacheth the faith which once he destroyed."
+//     },
+//     {
+//     "verse": "24",
+//     "text": "And they glorified God in me."
+//     }
+//     ]
+//     },
+//     {
+//     "chapter": "2",
+//     "verses": [
+//     {
+//     "verse": "1",
+//     "text": "Then fourteen years after I went up again to Jerusalem with Barnabas, and took Titus with me also."
+//     },
+//     {
+//     "verse": "2",
+//     "text": "And I went up by revelation, and communicated unto them that gospel which I preach among the Gentiles, but privately to them which were of reputation, lest by any means I should run, or had run, in vain."
+//     },
+//     {
+//     "verse": "3",
+//     "text": "But neither Titus, who was with me, being a Greek, was compelled to be circumcised:"
+//     },
+//     {
+//     "verse": "4",
+//     "text": "And that because of false brethren unawares brought in, who came in privily to spy out our liberty which we have in Christ Jesus, that they might bring us into bondage:"
+//     },
+//     {
+//     "verse": "5",
+//     "text": "To whom we gave place by subjection, no, not for an hour; that the truth of the gospel might continue with you."
+//     },
+//     {
+//     "verse": "20",
+//     "text": "I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me."
+//     },
+//     {
+//     "verse": "21",
+//     "text": "I do not frustrate the grace of God: for if righteousness come by the law, then Christ is dead in vain."
+//     }
+//     ]
+//     },
+//     {
+//     "chapter": "3",
+//     "verses": [
+//     {
+//     "verse": "26",
+//     "text": "For ye are all the children of God by faith in Christ Jesus."
+//     },
+//     {
+//     "verse": "27",
+//     "text": "For as many of you as have been baptized into Christ have put on Christ."
+//     },
+//     {
+//     "verse": "28",
+//     "text": "There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for ye are all one in Christ Jesus."
+//     },
+//     {
+//     "verse": "29",
+//     "text": "And if ye be Christ’s, then are ye Abraham’s seed, and heirs according to the promise."
+//     }
+//     ]
+//     },
+//     {
+//     "chapter": "4",
+//     "verses": [
+//     {
+//     "verse": "1",
+//     "text": "Now I say, That the heir, as long as he is a child, differeth nothing from a servant, though he be lord of all;"
+//     },
+//     {
+//     "verse": "2",
+//     "text": "But is under tutors and governors until the time appointed of the father."
+//     },
+//     {
+//     "verse": "3",
+//     "text": "Even so we, when we were children, were in bondage under the elements of the world:"
+//     },
+//     {
+//     "verse": "4",
+//     "text": "But when the fulness of the time was come, God sent forth his Son, made of a woman, made under the law,"
+//     },
+//     {
+//     "verse": "5",
+//     "text": "To redeem them that were under the law, that we might receive the adoption of sons."
+//     },
+//     {
+//     "verse": "6",
+//     "text": "And because ye are sons, God hath sent forth the Spirit of his Son into your hearts, crying, Abba, Father."
+//     },
+//     {
+//     "verse": "7",
+//     "text": "Wherefore thou art no more a servant, but a son; and if a son, then an heir of God through Christ."
+//     }
+//     ]
+//     },
+//     {
+//     "chapter": "5",
+//     "verses": [
+//     {
+//     "verse": "7",
+//     "text": "Ye did run well; who did hinder you that ye should not obey the truth?"
+//     },
+//     {
+//     "verse": "8",
+//     "text": "This persuasion cometh not of him that calleth you."
+//     },
+//     {
+//     "verse": "9",
+//     "text": "A little leaven leaveneth the whole lump."
+//     },
+//     {
+//     "verse": "10",
+//     "text": "I have confidence in you through the Lord, that ye will be none otherwise minded: but he that troubleth you shall bear his judgment, whosoever he be."
+//     },
+//     {
+//     "verse": "11",
+//     "text": "And I, brethren, if I yet preach circumcision, why do I yet suffer persecution? then is the offence of the cross ceased."
+//     },
+//     {
+//     "verse": "12",
+//     "text": "I would they were even cut off which trouble you."
+//     },
+//     {
+//     "verse": "13",
+//     "text": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another."
+//     },
+//     {
+//     "verse": "14",
+//     "text": "For all the law is fulfilled in one word, even in this; Thou shalt love thy neighbour as thyself."
+//     },
+//     {
+//     "verse": "15",
+//     "text": "But if ye bite and devour one another, take heed that ye be not consumed one of another."
+//     },
+//     {
+//     "verse": "16",
+//     "text": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh."
+//     },
+//     {
+//     "verse": "17",
+//     "text": "For the flesh lusteth against the Spirit, and the Spirit against the flesh: and these are contrary the one to the other: so that ye cannot do the things that ye would."
+//     },
+//     {
+//     "verse": "18",
+//     "text": "But if ye be led of the Spirit, ye are not under the law."
+//     },
+//     {
+//     "verse": "19",
+//     "text": "Now the works of the flesh are manifest, which are these; Adultery, fornication, uncleanness, lasciviousness,"
+//     },
+//     {
+//     "verse": "20",
+//     "text": "Idolatry, witchcraft, hatred, variance, emulations, wrath, strife, seditions, heresies,"
+//     },
+//     {
+//     "verse": "21",
+//     "text": "Envyings, murders, drunkenness, revellings, and such like: of the which I tell you before, as I have also told you in time past, that they which do such things shall not inherit the kingdom of God."
+//     },
+//     {
+//     "verse": "22",
+//     "text": "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith,"
+//     },
+//     {
+//     "verse": "23",
+//     "text": "Meekness, temperance: against such there is no law."
+//     },
+//     {
+//     "verse": "24",
+//     "text": "And they that are Christ’s have crucified the flesh with the affections and lusts."
+//     },
+//     {
+//     "verse": "25",
+//     "text": "If we live in the Spirit, let us also walk in the Spirit."
+//     },
+//     {
+//     "verse": "26",
+//     "text": "Let us not be desirous of vain glory, provoking one another, envying one another."
+//     }
+//     ]
+//     },
+//     {
+//     "chapter": "6",
+//     "verses": [
+//     {
+//     "verse": "1",
+//     "text": "Brethren, if a man be overtaken in a fault, ye which are spiritual, restore such an one in the spirit of meekness; considering thyself, lest thou also be tempted."
+//     },
+//     {
+//     "verse": "2",
+//     "text": "Bear ye one another’s burdens, and so fulfil the law of Christ."
+//     },
+//     {
+//     "verse": "3",
+//     "text": "For if a man think himself to be something, when he is nothing, he deceiveth himself."
+//     },
+//     {
+//     "verse": "4",
+//     "text": "But let every man prove his own work, and then shall he have rejoicing in himself alone, and not in another."
+//     },
+//     {
+//     "verse": "5",
+//     "text": "For every man shall bear his own burden."
+//     },
+//     {
+//     "verse": "6",
+//     "text": "Let him that is taught in the word communicate unto him that teacheth in all good things."
+//     },
+//     {
+//     "verse": "7",
+//     "text": "Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."
+//     },
+//     {
+//     "verse": "8",
+//     "text": "For he that soweth to his flesh shall of the flesh reap corruption; but he that soweth to the Spirit shall of the Spirit reap life everlasting."
+//     },
+//     {
+//     "verse": "9",
+//     "text": "And let us not be weary in well doing: for in due season we shall reap, if we faint not."
+//     },
+//     {
+//     "verse": "10",
+//     "text": "As we have therefore opportunity, let us do good unto all men, especially unto them who are of the household of faith."
+//     }
+//     ]
+//     }
+//     ]
+//     },
+//     {
+//       "book": "Ephesians",
+//       "chapters": [
+//       {
+//       "chapter": "1",
+//       "verses": [
+//       {
+//       "verse": "1",
+//       "text": "Paul, an apostle of Jesus Christ by the will of God, to the saints which are at Ephesus, and to the faithful in Christ Jesus:"
+//       },
+//       {
+//       "verse": "2",
+//       "text": "Grace be to you, and peace, from God our Father, and from the Lord Jesus Christ."
+//       },
+//       {
+//       "verse": "3",
+//       "text": "Blessed be the God and Father of our Lord Jesus Christ, who hath blessed us with all spiritual blessings in heavenly places in Christ:"
+//       },
+//       {
+//       "verse": "4",
+//       "text": "According as he hath chosen us in him before the foundation of the world, that we should be holy and without blame before him in love:"
+//       },
+//       {
+//       "verse": "5",
+//       "text": "Having predestinated us unto the adoption of children by Jesus Christ to himself, according to the good pleasure of his will,"
+//       },
+//       {
+//       "verse": "6",
+//       "text": "To the praise of the glory of his grace, wherein he hath made us accepted in the beloved."
+//       },
+//       {
+//       "verse": "7",
+//       "text": "In whom we have redemption through his blood, the forgiveness of sins, according to the riches of his grace;"
+//       },
+//       {
+//       "verse": "8",
+//       "text": "Wherein he hath abounded toward us in all wisdom and prudence;"
+//       },
+//       {
+//       "verse": "9",
+//       "text": "Having made known unto us the mystery of his will, according to his good pleasure which he hath purposed in himself:"
+//       },
+//       {
+//       "verse": "10",
+//       "text": "That in the dispensation of the fulness of times he might gather together in one all things in Christ, both which are in heaven, and which are on earth; even in him:"
+//       },
+//       {
+//       "verse": "11",
+//       "text": "In whom also we have obtained an inheritance, being predestinated according to the purpose of him who worketh all things after the counsel of his own will:"
+//       }
+//       ]
+//       },
+//       {
+//       "chapter": "2",
+//       "verses": [
+//       {
+//       "verse": "1",
+//       "text": "And you hath he quickened, who were dead in trespasses and sins;"
+//       },
+//       {
+//       "verse": "2",
+//       "text": "Wherein in time past ye walked according to the course of this world, according to the prince of the power of the air, the spirit that now worketh in the children of disobedience:"
+//       },
+//       {
+//       "verse": "3",
+//       "text": "Among whom also we all had our conversation in times past in the lusts of our flesh, fulfilling the desires of the flesh and of the mind; and were by nature the children of wrath, even as others."
+//       },
+//       {
+//       "verse": "4",
+//       "text": "But God, who is rich in mercy, for his great love wherewith he loved us,"
+//       },
+//       {
+//       "verse": "5",
+//       "text": "Even when we were dead in sins, hath quickened us together with Christ, (by grace ye are saved;)"
+//       },
+//       {
+//       "verse": "6",
+//       "text": "And hath raised us up together, and made us sit together in heavenly places in Christ Jesus:"
+//       },
+//       {
+//       "verse": "7",
+//       "text": "That in the ages to come he might shew the exceeding riches of his grace in his kindness toward us through Christ Jesus."
+//       },
+//       {
+//       "verse": "8",
+//       "text": "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:"
+//       },
+//       {
+//       "verse": "9",
+//       "text": "Not of works, lest any man should boast."
+//       },
+//       {
+//       "verse": "10",
+//       "text": "For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them."
+//       },
+//       {
+//       "verse": "11",
+//       "text": "Wherefore remember, that ye being in time past Gentiles in the flesh, who are called Uncircumcision by that which is called the Circumcision in the flesh made by hands;"
+//       },
+//       {
+//       "verse": "12",
+//       "text": "That at that time ye were without Christ, being aliens from the commonwealth of Israel, and strangers from the covenants of promise, having no hope, and without God in the world:"
+//       },
+//       {
+//       "verse": "13",
+//       "text": "But now in Christ Jesus ye who sometimes were far off are made nigh by the blood of Christ."
+//       },
+//       {
+//       "verse": "14",
+//       "text": "For he is our peace, who hath made both one, and hath broken down the middle wall of partition between us;"
+//       },
+//       {
+//       "verse": "15",
+//       "text": "Having abolished in his flesh the enmity, even the law of commandments contained in ordinances; for to make in himself of twain one new man, so making peace;"
+//       },
+//       {
+//       "verse": "16",
+//       "text": "And that he might reconcile both unto God in one body by the cross, having slain the enmity thereby:"
+//       },
+//       {
+//       "verse": "17",
+//       "text": "And came and preached peace to you which were afar off, and to them that were nigh."
+//       },
+//       {
+//       "verse": "18",
+//       "text": "For through him we both have access by one Spirit unto the Father."
+//       },
+//       {
+//       "verse": "19",
+//       "text": "Now therefore ye are no more strangers and foreigners, but fellowcitizens with the saints, and of the household of God;"
+//       },
+//       {
+//       "verse": "20",
+//       "text": "And are built upon the foundation of the apostles and prophets, Jesus Christ himself being the chief corner stone;"
+//       },
+//       {
+//       "verse": "21",
+//       "text": "In whom all the building fitly framed together groweth unto an holy temple in the Lord:"
+//       },
+//       {
+//       "verse": "22",
+//       "text": "In whom ye also are builded together for an habitation of God through the Spirit."
+//       }
+//       ]
+//       },
+//       {
+//       "chapter": "3",
+//       "verses": [
+//       {
+//       "verse": "14",
+//       "text": "For this cause I bow my knees unto the Father of our Lord Jesus Christ,"
+//       },
+//       {
+//       "verse": "15",
+//       "text": "Of whom the whole family in heaven and earth is named,"
+//       },
+//       {
+//       "verse": "16",
+//       "text": "That he would grant you, according to the riches of his glory, to be strengthened with might by his Spirit in the inner man;"
+//       },
+//       {
+//       "verse": "17",
+//       "text": "That Christ may dwell in your hearts by faith; that ye, being rooted and grounded in love,"
+//       },
+//       {
+//       "verse": "18",
+//       "text": "May be able to comprehend with all saints what is the breadth, and length, and depth, and height;"
+//       },
+//       {
+//       "verse": "19",
+//       "text": "And to know the love of Christ, which passeth knowledge, that ye might be filled with all the fulness of God."
+//       },
+//       {
+//       "verse": "20",
+//       "text": "Now unto him that is able to do exceeding abundantly above all that we ask or think, according to the power that worketh in us,"
+//       },
+//       {
+//       "verse": "21",
+//       "text": "Unto him be glory in the church by Christ Jesus throughout all ages, world without end. Amen."
+//       }
+//       ]
+//       },
+//       {
+//       "chapter": "4",
+//       "verses": [
+//       {
+//       "verse": "1",
+//       "text": "I therefore, the prisoner of the Lord, beseech you that ye walk worthy of the vocation wherewith ye are called,"
+//       },
+//       {
+//       "verse": "2",
+//       "text": "With all lowliness and meekness, with longsuffering, forbearing one another in love;"
+//       },
+//       {
+//       "verse": "3",
+//       "text": "Endeavouring to keep the unity of the Spirit in the bond of peace."
+//       },
+//       {
+//       "verse": "4",
+//       "text": "There is one body, and one Spirit, even as ye are called in one hope of your calling;"
+//       },
+//       {
+//       "verse": "5",
+//       "text": "One Lord, one faith, one baptism,"
+//       },
+//       {
+//       "verse": "6",
+//       "text": "One God and Father of all, who is above all, and through all, and in you all."
+//       },
+//       {
+//       "verse": "7",
+//       "text": "But unto every one of us is given grace according to the measure of the gift of Christ."
+//       },
+//       {
+//       "verse": "8",
+//       "text": "Wherefore he saith, When he ascended up on high, he led captivity captive, and gave gifts unto men."
+//       },
+//       {
+//       "verse": "9",
+//       "text": "(Now that he ascended, what is it but that he also descended first into the lower parts of the earth?"
+//       },
+//       {
+//       "verse": "10",
+//       "text": "He that descended is the same also that ascended up far above all heavens, that he might fill all things.)"
+//       },
+//       {
+//       "verse": "11",
+//       "text": "And he gave some, apostles; and some, prophets; and some, evangelists; and some, pastors and teachers;"
+//       },
+//       {
+//       "verse": "12",
+//       "text": "For the perfecting of the saints, for the work of the ministry, for the edifying of the body of Christ:"
+//       },
+//       {
+//       "verse": "13",
+//       "text": "Till we all come in the unity of the faith, and of the knowledge of the Son of God, unto a perfect man, unto the measure of the stature of the fulness of Christ:"
+//       },
+//       {
+//       "verse": "14",
+//       "text": "That we henceforth be no more children, tossed to and fro, and carried about with every wind of doctrine, by the sleight of men, and cunning craftiness, whereby they lie in wait to deceive;"
+//       },
+//       {
+//       "verse": "15",
+//       "text": "But speaking the truth in love, may grow up into him in all things, which is the head, even Christ:"
+//       },
+//       {
+//       "verse": "16",
+//       "text": "From whom the whole body fitly joined together and compacted by that which every joint supplieth, according to the effectual working in the measure of every part, maketh increase of the body unto the edifying of itself in love."
+//       },
+//       {
+//       "verse": "17",
+//       "text": "This I say therefore, and testify in the Lord, that ye henceforth walk not as other Gentiles walk, in the vanity of their mind,"
+//       },
+//       {
+//       "verse": "18",
+//       "text": "Having the understanding darkened, being alienated from the life of God through the ignorance that is in them, because of the blindness of their heart:"
+//       },
+//       {
+//       "verse": "19",
+//       "text": "Who being past feeling have given themselves over unto lasciviousness, to work all uncleanness with greediness."
+//       },
+//       {
+//       "verse": "20",
+//       "text": "But ye have not so learned Christ;"
+//       },
+//       {
+//       "verse": "21",
+//       "text": "If so be that ye have heard him, and have been taught by him, as the truth is in Jesus:"
+//       },
+//       {
+//       "verse": "22",
+//       "text": "That ye put off concerning the former conversation the old man, which is corrupt according to the deceitful lusts;"
+//       },
+//       {
+//       "verse": "23",
+//       "text": "And be renewed in the spirit of your mind;"
+//       },
+//       {
+//       "verse": "24",
+//       "text": "And that ye put on the new man, which after God is created in righteousness and true holiness."
+//       },
+//       {
+//       "verse": "25",
+//       "text": "Wherefore putting away lying, speak every man truth with his neighbour: for we are members one of another."
+//       },
+//       {
+//       "verse": "26",
+//       "text": "Be ye angry, and sin not: let not the sun go down upon your wrath:"
+//       },
+//       {
+//       "verse": "27",
+//       "text": "Neither give place to the devil."
+//       },
+//       {
+//       "verse": "28",
+//       "text": "Let him that stole steal no more: but rather let him labour, working with his hands the thing which is good, that he may have to give to him that needeth."
+//       },
+//       {
+//       "verse": "29",
+//       "text": "Let no corrupt communication proceed out of your mouth, but that which is good to the use of edifying, that it may minister grace unto the hearers."
+//       },
+//       {
+//       "verse": "30",
+//       "text": "And grieve not the holy Spirit of God, whereby ye are sealed unto the day of redemption."
+//       },
+//       {
+//       "verse": "31",
+//       "text": "Let all bitterness, and wrath, and anger, and clamour, and evil speaking, be put away from you, with all malice:"
+//       },
+//       {
+//       "verse": "32",
+//       "text": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ’s sake hath forgiven you."
+//       }
+//       ]
+//       },
+//       {
+//       "chapter": "5",
+//       "verses": [
+//       {
+//       "verse": "1",
+//       "text": "Be ye therefore followers of God, as dear children;"
+//       },
+//       {
+//       "verse": "2",
+//       "text": "And walk in love, as Christ also hath loved us, and hath given himself for us an offering and a sacrifice to God for a sweetsmelling savour."
+//       },
+//       {
+//       "verse": "3",
+//       "text": "But fornication, and all uncleanness, or covetousness, let it not be once named among you, as becometh saints;"
+//       },
+//       {
+//       "verse": "4",
+//       "text": "Neither filthiness, nor foolish talking, nor jesting, which are not convenient: but rather giving of thanks."
+//       },
+//       {
+//       "verse": "5",
+//       "text": "For this ye know, that no whoremonger, nor unclean person, nor covetous man, who is an idolater, hath any inheritance in the kingdom of Christ and of God."
+//       },
+//       {
+//       "verse": "6",
+//       "text": "Let no man deceive you with vain words: for because of these things cometh the wrath of God upon the children of disobedience."
+//       },
+//       {
+//       "verse": "7",
+//       "text": "Be not ye therefore partakers with them."
+//       },
+//       {
+//       "verse": "8",
+//       "text": "For ye were sometimes darkness, but now are ye light in the Lord: walk as children of light:"
+//       },
+//       {
+//       "verse": "9",
+//       "text": "(For the fruit of the Spirit is in all goodness and righteousness and truth;)"
+//       },
+//       {
+//       "verse": "10",
+//       "text": "Proving what is acceptable unto the Lord."
+//       },
+//       {
+//       "verse": "11",
+//       "text": "And have no fellowship with the unfruitful works of darkness, but rather reprove them."
+//       },
+//       {
+//       "verse": "12",
+//       "text": "For it is a shame even to speak of those things which are done of them in secret."
+//       },
+//       {
+//       "verse": "13",
+//       "text": "But all things that are reproved are made manifest by the light: for whatsoever doth make manifest is light."
+//       },
+//       {
+//       "verse": "14",
+//       "text": "Wherefore he saith, Awake thou that sleepest, and arise from the dead, and Christ shall give thee light."
+//       },
+//       {
+//       "verse": "15",
+//       "text": "See then that ye walk circumspectly, not as fools, but as wise,"
+//       },
+//       {
+//       "verse": "16",
+//       "text": "Redeeming the time, because the days are evil."
+//       },
+//       {
+//       "verse": "17",
+//       "text": "Wherefore be ye not unwise, but understanding what the will of the Lord is."
+//       },
+//       {
+//       "verse": "18",
+//       "text": "And be not drunk with wine, wherein is excess; but be filled with the Spirit;"
+//       },
+//       {
+//       "verse": "19",
+//       "text": "Speaking to yourselves in psalms and hymns and spiritual songs, singing and making melody in your heart to the Lord;"
+//       },
+//       {
+//       "verse": "20",
+//       "text": "Giving thanks always for all things unto God and the Father in the name of our Lord Jesus Christ;"
+//       },
+//       {
+//       "verse": "21",
+//       "text": "Submitting yourselves one to another in the fear of God."
+//       },
+//       {
+//       "verse": "22",
+//       "text": "Wives, submit yourselves unto your own husbands, as unto the Lord."
+//       },
+//       {
+//       "verse": "23",
+//       "text": "For the husband is the head of the wife, even as Christ is the head of the church: and he is the saviour of the body."
+//       },
+//       {
+//       "verse": "24",
+//       "text": "Therefore as the church is subject unto Christ, so let the wives be to their own husbands in every thing."
+//       },
+//       {
+//       "verse": "25",
+//       "text": "Husbands, love your wives, even as Christ also loved the church, and gave himself for it;"
+//       },
+//       {
+//       "verse": "26",
+//       "text": "That he might sanctify and cleanse it with the washing of water by the word,"
+//       },
+//       {
+//       "verse": "27",
+//       "text": "That he might present it to himself a glorious church, not having spot, or wrinkle, or any such thing; but that it should be holy and without blemish."
+//       },
+//       {
+//       "verse": "28",
+//       "text": "So ought men to love their wives as their own bodies. He that loveth his wife loveth himself."
+//       },
+//       {
+//       "verse": "29",
+//       "text": "For no man ever yet hated his own flesh; but nourisheth and cherisheth it, even as the Lord the church:"
+//       },
+//       {
+//       "verse": "30",
+//       "text": "For we are members of his body, of his flesh, and of his bones."
+//       },
+//       {
+//       "verse": "31",
+//       "text": "For this cause shall a man leave his father and mother, and shall be joined unto his wife, and they two shall be one flesh."
+//       },
+//       {
+//       "verse": "32",
+//       "text": "This is a great mystery: but I speak concerning Christ and the church."
+//       },
+//       {
+//       "verse": "33",
+//       "text": "Nevertheless let every one of you in particular so love his wife even as himself; and the wife see that she reverence her husband."
+//       }
+//       ]
+//       },
+//       {
+//       "chapter": "6",
+//       "verses": [
+//       {
+//       "verse": "1",
+//       "text": "Children, obey your parents in the Lord: for this is right."
+//       },
+//       {
+//       "verse": "2",
+//       "text": "Honour thy father and mother; which is the first commandment with promise;"
+//       },
+//       {
+//       "verse": "3",
+//       "text": "That it may be well with thee, and thou mayest live long on the earth."
+//       },
+//       {
+//       "verse": "4",
+//       "text": "And, ye fathers, provoke not your children to wrath: but bring them up in the nurture and admonition of the Lord."
+//       },
+//       {
+//       "verse": "5",
+//       "text": "Servants, be obedient to them that are your masters according to the flesh, with fear and trembling, in singleness of your heart, as unto Christ;"
+//       },
+//       {
+//       "verse": "6",
+//       "text": "Not with eyeservice, as menpleasers; but as the servants of Christ, doing the will of God from the heart;"
+//       },
+//       {
+//       "verse": "7",
+//       "text": "With good will doing service, as to the Lord, and not to men:"
+//       },
+//       {
+//       "verse": "8",
+//       "text": "Knowing that whatsoever good thing any man doeth, the same shall he receive of the Lord, whether he be bond or free."
+//       },
+//       {
+//       "verse": "9",
+//       "text": "And, ye masters, do the same things unto them, forbearing threatening: knowing that your Master also is in heaven; neither is there respect of persons with him."
+//       },
+//       {
+//       "verse": "10",
+//       "text": "Finally, my brethren, be strong in the Lord, and in the power of his might."
+//       },
+//       {
+//       "verse": "11",
+//       "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil."
+//       },
+//       {
+//       "verse": "12",
+//       "text": "For we wrestle not against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this world, against spiritual wickedness in high places."
+//       },
+//       {
+//       "verse": "13",
+//       "text": "Wherefore take unto you the whole armour of God, that ye may be able to withstand in the evil day, and having done all, to stand."
+//       },
+//       {
+//       "verse": "14",
+//       "text": "Stand therefore, having your loins girt about with truth, and having on the breastplate of righteousness;"
+//       },
+//       {
+//       "verse": "15",
+//       "text": "And your feet shod with the preparation of the gospel of peace;"
+//       },
+//       {
+//       "verse": "16",
+//       "text": "Above all, taking the shield of faith, wherewith ye shall be able to quench all the fiery darts of the wicked."
+//       },
+//       {
+//       "verse": "17",
+//       "text": "And take the helmet of salvation, and the sword of the Spirit, which is the word of God:"
+//       },
+//       {
+//       "verse": "18",
+//       "text": "Praying always with all prayer and supplication in the Spirit, and watching thereunto with all perseverance and supplication for all saints;"
+//       },
+//       {
+//       "verse": "19",
+//       "text": "And for me, that utterance may be given unto me, that I may open my mouth boldly, to make known the mystery of the gospel,"
+//       },
+//       {
+//       "verse": "20",
+//       "text": "For which I am an ambassador in bonds: that therein I may speak boldly, as I ought to speak."
+//       }
+//       ]
+//       }
+//       ]
+//       }
+// ]
 
 const handleSearch = () => {
   let query = props.searchList.length > 0 ? props.searchList[props.question - 1] : ''
   let resultsHolder = []
   setResults(resultsHolder)
-  let material = props.division === 'Senior' ? seniorMaterial : juniorMaterial
+  let material = props.division === 'Experienced' ?
+    experiencedMaterial : props.division === 'Intermediate' ?
+    intermediateMaterial : props.division === 'Junior' ?
+    juniorMaterial : beginnerMaterial;
   if (query.length <= 1) {
     return
   }

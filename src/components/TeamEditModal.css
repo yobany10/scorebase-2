@@ -27,7 +27,7 @@
 }
 
 #team-edit-create-quizzer-button {
-    width: 30%;
+    justify-self: start;
 }
 
 .team-edit-teams-container {
