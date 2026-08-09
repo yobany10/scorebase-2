@@ -1,16 +1,18 @@
 import {useEffect} from 'react'
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
 import {auth} from '../Firebase/config'
-import {useNavigate} from 'react-router-dom'
-import {useAuthState} from 'react-firebase-hooks/auth'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {FcGoogle} from 'react-icons/fc'
 import {AiOutlineArrowDown} from 'react-icons/ai'
+import {useAuthSubscription} from './AuthSubscriptionProvider'
 import './Login.css'
 
 const Login = () => {
     const navigate = useNavigate()
-    const [user, loading] = useAuthState(auth)
+    const location = useLocation()
+    const { user, loading, hasActiveSubscription } = useAuthSubscription()
     const googleProvider = new GoogleAuthProvider()
+    const redirectPath = location.state?.from?.pathname || '/scorekeeping'
 
     // Sign in with Google
     const GoogleLogin = async () => {
@@ -23,12 +25,16 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if (user) {
-            navigate('/scorekeeping')
-        } else {
+        if (loading) {
             return
         }
-    },[user])
+
+        if (!user) {
+            return
+        }
+
+        navigate(hasActiveSubscription ? redirectPath : '/billing', { replace: true })
+    },[user, loading, hasActiveSubscription, navigate, redirectPath])
 
     return (
         <div className='login-page-container'>
