@@ -1,3 +1,152 @@
+.quiz-setup-page {
+    width: min(1400px, calc(100% - 1.5rem));
+    margin: 2rem auto 2rem;
+    padding: 1.5rem;
+}
+
+.quiz-setup-header {
+    display: grid;
+    gap: 0.35rem;
+    margin-bottom: 1.5rem;
+}
+
+.quiz-setup-header h1 {
+    margin: 0;
+    color: #434e4e;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.quiz-setup-header p {
+    margin: 0;
+    color: #5d6767;
+}
+
+.quiz-setup-body {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.quiz-setup-division {
+    display: grid;
+    gap: 0.35rem;
+    max-width: 320px;
+}
+
+.quiz-setup-teams {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+}
+
+.quiz-setup-team {
+    display: grid;
+    gap: 0.75rem;
+    padding: 36px;
+    border-radius: 5px;
+    border: 2px solid var(--gray);
+}
+
+.quiz-setup-team-red {
+    /* border-top: 4px solid red; */
+}
+
+.quiz-setup-team-yellow {
+    /* border-top: 4px solid #d9aa00; */
+}
+
+.quiz-setup-team-name {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.quiz-setup-team-name input {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.quiz-setup-slot {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.quiz-setup-add-quizzer {
+    display: grid;
+    gap: 0.75rem;
+    margin: 24px 0;
+}
+
+.quiz-setup-add-quizzer h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.quiz-setup-add-quizzer p {
+    margin: 0;
+    color: #5d6767;
+}
+
+.quiz-setup-add-quizzer button {
+    justify-self: start;
+}
+
+.quiz-setup-my-quizzers {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.quiz-setup-my-quizzers h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.quiz-setup-add-quizzer-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+}
+
+.quiz-setup-add-quizzer-form label {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.quiz-setup-add-quizzer-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.quiz-setup-add-quizzer-form button {
+    justify-self: start;
+}
+
 #quiz-setup-submit-button {
-    margin-top: 1rem;
+    justify-self: start;
+}
+
+@media (max-width: 700px) {
+    .quiz-setup-page {
+        width: calc(100% - 1rem);
+        padding: 1rem;
+    }
+
+    .quiz-setup-teams {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz-setup-add-quizzer-form {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,8 +1,7 @@
 import './QuizItem.css'
 import {TbTrash} from 'react-icons/tb'
 import {useNavigate} from 'react-router-dom'
-import {db} from '../Firebase/config'
-import {doc, deleteDoc} from 'firebase/firestore'
+import { deleteQuiz } from '../storage/scorebaseDb'
 
 const QuizItem = (props) => {
 
@@ -10,7 +9,8 @@ const QuizItem = (props) => {
 
     const handleQuizDelete = async (e) => {
         e.stopPropagation()
-        await deleteDoc(doc(db, 'quizzes', props.quiz.id))
+        await deleteQuiz(props.quiz.id)
+        props.onDelete()
     }
 
     return (
@@ -19,8 +19,8 @@ const QuizItem = (props) => {
             <p className='quiz-item-score'>{props.quiz.rScore} / {props.quiz.yScore}</p>
             <p className='quiz-item-division'>{props.quiz.division}</p>
             <div className='quiz-item-date-container'>
-                <p className='quiz-item-date'>{new Date(props.quiz.saved.seconds * 1000).toLocaleDateString()}</p>
-                <p className='quiz-item-time'>{new Date(props.quiz.saved.seconds * 1000).toLocaleTimeString('en-US')}</p>
+                <p className='quiz-item-date'>{new Date(props.quiz.savedAt).toLocaleDateString()}</p>
+                <p className='quiz-item-time'>{new Date(props.quiz.savedAt).toLocaleTimeString('en-US')}</p>
             </div>
             <TbTrash className='quiz-item-delete-icon' onClick={(e) => handleQuizDelete(e)} />
         </div>

@@ -44,7 +44,8 @@
 .dashboard-quiz-list {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 420px));
+    justify-content: start;
 }
 
 .dashboard-no-quizzes-container {
@@ -67,10 +68,4 @@
     font-size: 16px;
     font-weight: 400;
     font-style: italic;
-}
-
-@media (min-width: 800px) and (max-width: 4800px) {
-    .dashboard-quiz-list {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 0.5fr));
-    }
 }

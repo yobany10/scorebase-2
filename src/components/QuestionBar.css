@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     align-self: start;
-    background-color: rgb(45, 68, 110);
+    background-color: var(--custom-black);
     color: white;
     padding: 5px;
     margin: 0.5rem 0 0 0;

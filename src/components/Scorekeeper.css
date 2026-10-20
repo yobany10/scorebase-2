@@ -68,3 +68,14 @@
     'notesBar'
     'search';
 }
+
+.scoresheet-tools button {
+    background-color: var(--custom-black);
+    border-color: var(--custom-black);
+}
+
+.scoresheet-tools button:hover,
+.scoresheet-tools button:focus {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}

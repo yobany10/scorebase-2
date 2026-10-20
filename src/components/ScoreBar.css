@@ -3,7 +3,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    gap: 0.25rem;
+    column-gap: 1rem;
+    row-gap: 0.25rem;
     color: rgb(67, 78, 78);
     padding: 1rem;
     margin: 0.5rem 0 0 0;
@@ -44,14 +45,6 @@
     color: black;
 }
 
-.scorebar-r-name:focus {
-    outline: none;
-}
-
-.scorebar-r-name:hover {
-    color: #2563EB;
-}
-
 .scorebar-y-info-div {
     grid-area: yInfo;
     display: flex;
@@ -78,20 +71,66 @@
     color: black;
 }
 
-.scorebar-y-name:focus {
-    outline: none;
-}
-
-.scorebar-y-name:hover {
-    color: #2563EB;
-}
-
 .scorebar-r-actions {
     grid-area: rActions;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
 }
 
 .scorebar-y-actions {
     grid-area: yActions;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+}
+
+.scorebar-r-actions > .btn-group,
+.scorebar-y-actions > .btn-group {
+    min-width: 0;
+    width: 100%;
+}
+
+.scorebar-r-actions > .btn-group + .btn-group,
+.scorebar-y-actions > .btn-group + .btn-group {
+    border-left: 1px solid white;
+}
+
+.scorebar-r-actions .dropdown-toggle,
+.scorebar-y-actions .dropdown-toggle {
+    background-color: var(--custom-black);
+    border-color: var(--custom-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scorebar-quizzer-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.scorebar-dropdown-icon {
+    flex: 0 0 auto;
+    font-size: 0.7em;
+}
+
+.scorebar-r-actions .dropdown-toggle:hover,
+.scorebar-r-actions .dropdown-toggle:focus,
+.scorebar-y-actions .dropdown-toggle:hover,
+.scorebar-y-actions .dropdown-toggle:focus {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
+.scorebar-div .dropdown-toggle::after {
+    display: none;
 }
 
 .scorebar-menu-item {

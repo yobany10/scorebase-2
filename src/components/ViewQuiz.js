@@ -1,8 +1,5 @@
 // todo: add highest question to keep track of where zeros should start for table. Maybe that part of the table can be faded as well.
 import React, { useState, useEffect } from 'react'
-import {collection, doc, addDoc, getDoc, updateDoc, serverTimestamp} from 'firebase/firestore'
-import {auth, db} from '../Firebase/config'
-import {useAuthState} from 'react-firebase-hooks/auth'
 import {useNavigate} from 'react-router-dom'
 import {useParams} from 'react-router-dom'
 import ToolBar from './ToolBar'
@@ -14,6 +11,7 @@ import MaterialSearch from './MaterialSearch'
 import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
+import { getQuiz } from '../storage/scorebaseDb'
 
 const ViewQuiz = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
@@ -37,44 +35,51 @@ const ViewQuiz = () => {
     const [quizData, setQuizData] = useState([])
     const [notes, setNotes] = useState([])
     const [searchList, setSearchList] = useState([])
-    const [isSaved, setIsSaved] = useState(false)
-    const [quizId, setQuizId] = useState(null)
-    
-    const [user, loading] = useAuthState(auth)
+    const [isMissing, setIsMissing] = useState(false)
 
     const navigate = useNavigate()
     const {id} = useParams()
 
-    const getQuizData = async () => {
-        const quizRef = doc(db, 'quizzes', id)
-        const res = await getDoc(quizRef)
-        setDivision(res.data().division)
-        setQuizTableData(res.data().quizTableData)
-        setNotes(res.data().notes)
-        if (res.data().hasOwnProperty('searchList')) {
-            setSearchList(res.data().searchList)
-        }
-        setRedName(res.data().redName)
-        setYellowName(res.data().yellowName)
-        setQuizData(res.data())
-        console.log(res.data())
-    }
-
     useEffect(() => {
-        getQuizData()
-    },[])
+        let isMounted = true
 
-    useEffect(() => {
-        if (user) {
-            return
+        const loadQuiz = async () => {
+            const quiz = await getQuiz(id)
+
+            if (!isMounted) {
+                return
+            }
+
+            if (!quiz) {
+                setIsMissing(true)
+                return
+            }
+
+            setDivision(quiz.division)
+            setQuizTableData(quiz.quizTableData)
+            setNotes(quiz.notes)
+            setSearchList(quiz.searchList || [])
+            setRedName(quiz.redName)
+            setYellowName(quiz.yellowName)
+            setRed1Name(quiz.red1Name)
+            setRed2Name(quiz.red2Name)
+            setRed3Name(quiz.red3Name)
+            setRed4Name(quiz.red4Name)
+            setRed5Name(quiz.red5Name)
+            setYellow1Name(quiz.yellow1Name)
+            setYellow2Name(quiz.yellow2Name)
+            setYellow3Name(quiz.yellow3Name)
+            setYellow4Name(quiz.yellow4Name)
+            setYellow5Name(quiz.yellow5Name)
+            setQuizData(quiz)
         }
-        if (loading) {
-            return
+
+        loadQuiz()
+
+        return () => {
+            isMounted = false
         }
-        if (!user) {
-            navigate('/login')
-        }
-    },[user, loading])
+    }, [id])
 
     const handleResetQuiz = () => {
         setRedBonusStart(true)
@@ -195,12 +200,6 @@ const ViewQuiz = () => {
             ''
         )
     }
-
-    useEffect(() => {
-        setQuizTableData(initialQuizData)
-        setNotes(initialNotesData)
-        setSearchList(initialSearchListData)
-    }, [])
 
     const renderScoreTable = () => {
         if (quizTableData !== []) {
@@ -565,76 +564,20 @@ const ViewQuiz = () => {
         }
     }
 
-    const handleSaveQuiz = async () => {
-        if (isSaved) {
-            try {
-                const quizRef = doc(db, 'quizzes', quizId)
-                const res = await updateDoc(quizRef, {
-                    name: `${redName} vs ${yellowName}`,
-                    redName: redName,
-                    yellowName: yellowName,
-                    quizTableData: quizTableData,
-                    red1Name: red1Name,
-                    red2Name: red2Name,
-                    red3Name: red3Name,
-                    red4Name: red4Name,
-                    red5Name: red5Name,
-                    yellow1Name: yellow1Name,
-                    yellow2Name: yellow2Name,
-                    yellow3Name: yellow3Name,
-                    yellow4Name: yellow4Name,
-                    yellow5Name: yellow5Name,
-                    rScore: calculateTeamScore(question, 'red', true),
-                    yScore: calculateTeamScore(question, 'yellow', true),
-                    division: division,
-                    notes: notes,
-                    saved: serverTimestamp()
-                })
-                setIsSaved(true)
-                toast.success('Your quiz has been saved.', toastOptions)
-            } catch (error) {
-                console.log(error)
-            }
-        } else {
-            try {
-                const quizzesRef = collection(db, 'quizzes')
-                const res = await addDoc(quizzesRef, {
-                    name: `${redName} vs ${yellowName}`,
-                    redName: redName,
-                    yellowName: yellowName,
-                    quizTableData: quizTableData,
-                    red1Name: red1Name,
-                    red2Name: red2Name,
-                    red3Name: red3Name,
-                    red4Name: red4Name,
-                    red5Name: red5Name,
-                    yellow1Name: yellow1Name,
-                    yellow2Name: yellow2Name,
-                    yellow3Name: yellow3Name,
-                    yellow4Name: yellow4Name,
-                    yellow5Name: yellow5Name,
-                    rScore: calculateTeamScore(question, 'red', true),
-                    yScore: calculateTeamScore(question, 'yellow', true),
-                    division: division,
-                    notes: notes,
-                    user: user.uid,
-                    avatar: user.photoURL,
-                    username: user.displayName,
-                    saved: serverTimestamp()
-                })
-                setIsSaved(true)
-                setQuizId(res.id)
-                toast.success('Your quiz has been saved.', toastOptions)
-            } catch (error) {
-                console.log(error)
-            }
-        }
+    if (isMissing) {
+        return (
+            <div className='container py-5 text-center'>
+                <h1 className='h3'>Saved quiz not found</h1>
+                <p className='text-muted'>It may have been deleted from this browser.</p>
+                <button className='btn btn-primary' onClick={() => navigate('/dashboard')} type='button'>Return to dashboard</button>
+            </div>
+        )
     }
 
     return (
         <div className='scorekeep-bg'>
         <div className='scorekeep-container'>
-            <ToolBar division={division} quizData={quizData} setDivision={setDivision} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} viewOnly={true} />
+            <ToolBar division={division} quizData={quizData} viewOnly={true} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
                     <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} viewOnly={true} />
