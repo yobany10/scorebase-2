@@ -11,7 +11,7 @@ const MainNavbar = () => {
         <nav className="navbar-div">
             <div className='navbar-div-content'>
                 <Link to={'/'}>
-                    <p className='navbar-logo gradient-bg-purple-blue'>ScoreBase</p>
+                    <p className='navbar-logo'>ScoreBase</p>
                 </Link>
                 <div className='navbar-links-container'>
                     {profile && <Link className='navbar-link navbar-scorekeep' to='/scorekeeping'>Scorekeep</Link>}

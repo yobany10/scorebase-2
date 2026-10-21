@@ -4,14 +4,91 @@
 
 .full-page-banner {
     display: grid;
-    background: rgb(255,255,255);
-    background: -moz-linear-gradient(166deg, rgba(255,255,255,1) 0%, rgba(243,246,249,1) 20%, rgba(236,240,244,1) 35%, rgba(230,247,255,1) 69%, rgba(221,244,255,1) 87%);
-    background: -webkit-linear-gradient(166deg, rgba(255,255,255,1) 0%, rgba(243,246,249,1) 20%, rgba(236,240,244,1) 35%, rgba(230,247,255,1) 69%, rgba(221,244,255,1) 87%);
-    background: linear-gradient(166deg, rgba(255,255,255,1) 0%, rgba(243,246,249,1) 20%, rgba(236,240,244,1) 35%, rgba(230,247,255,1) 69%, rgba(221,244,255,1) 87%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ddf4ff",GradientType=1);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-color: rgb(236, 240, 244);
     padding: 1rem;
     min-height: 100vh;
 }
+
+.full-page-banner::before {
+    content: '';
+    position: absolute;
+    inset: -25%;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 72% 58%, rgba(255, 255, 255, 0.82), transparent 48%),
+        radial-gradient(ellipse at 65% 20%, rgba(209, 220, 232, 0.55), transparent 50%);
+    filter: blur(48px);
+    transform: translate3d(-2%, -1%, 0) scale(1);
+    animation: landing-gradient-flow 36s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.full-page-banner::after {
+    content: '';
+    position: absolute;
+    left: var(--pointer-x, 50%);
+    top: var(--pointer-y, 42%);
+    width: clamp(20rem, 50vw, 48rem);
+    aspect-ratio: 1;
+    z-index: 0;
+    transform: translate3d(-50%, -50%, 0);
+    background: radial-gradient(ellipse at center, rgba(255, 140, 52, 0.18), transparent 70%);
+    filter: blur(40px);
+    transition: left 120ms ease-out, top 120ms ease-out;
+    pointer-events: none;
+}
+
+.landing-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(to right, rgba(48, 48, 48, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(48, 48, 48, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.55) 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.55) 62%, transparent 100%);
+    pointer-events: none;
+}
+
+.landing-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(236, 240, 244, 0.55);
+    background-image:
+        linear-gradient(to right, rgba(48, 48, 48, 0.13) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(48, 48, 48, 0.13) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: scale(1.22);
+    transform-origin: var(--pointer-x, 50%) var(--pointer-y, 42%);
+    -webkit-mask-image: radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 42%), #000 0%, #000 62%, transparent 100%);
+    mask-image: radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 42%), #000 0%, #000 62%, transparent 100%);
+    pointer-events: none;
+}
+
+.full-page-banner > :not(.landing-grid) {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes landing-gradient-flow {
+    from {
+        transform: translate3d(-2%, -1%, 0) scale(1);
+    }
+    to {
+        transform: translate3d(2%, 1%, 0) scale(1.05);
+    }
+}
+
+/* @media (prefers-reduced-motion: reduce) {
+    .full-page-banner::before {
+        animation: none;
+    }
+} */
 
 #full-page-banner-text-container {
     display: grid;
@@ -40,6 +117,35 @@
     font-weight: 900;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
+    color: var(--custom-black);
+}
+
+.typewriter-prefix {
+    display: block;
+}
+
+.typewriter-word {
+    display: block;
+    width: 5em;
+    margin: 0 auto;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    width: 0.06em;
+    height: 0.85em;
+    margin-left: 0.08em;
+    background-color: currentColor;
+    vertical-align: -0.08em;
+    animation: typewriter-cursor-blink 1s steps(2, start) infinite;
+}
+
+@keyframes typewriter-cursor-blink {
+    50% {
+        opacity: 0;
+    }
 }
 
 @media (min-width: 800px) {
@@ -58,4 +164,10 @@
 
 #full-page-banner-button {
     padding: 5px 8px;
+    background-color: var(--custom-black);
+}
+
+#full-page-banner-button:hover,
+#full-page-banner-button:focus {
+    background-color: var(--blue);
 }
