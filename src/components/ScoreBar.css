@@ -122,11 +122,18 @@
 }
 
 .scorebar-r-actions .dropdown-toggle:hover,
-.scorebar-r-actions .dropdown-toggle:focus,
+.scorebar-r-actions .dropdown-toggle:focus-visible,
 .scorebar-y-actions .dropdown-toggle:hover,
-.scorebar-y-actions .dropdown-toggle:focus {
+.scorebar-y-actions .dropdown-toggle:focus-visible {
     background-color: var(--blue);
     border-color: var(--blue);
+}
+
+.scorebar-r-actions .dropdown-toggle:focus:not(:focus-visible):not(:hover),
+.scorebar-y-actions .dropdown-toggle:focus:not(:focus-visible):not(:hover) {
+    background-color: var(--custom-black);
+    border-color: var(--custom-black);
+    box-shadow: none;
 }
 
 .scorebar-div .dropdown-toggle::after {

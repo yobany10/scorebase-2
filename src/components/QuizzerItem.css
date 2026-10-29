@@ -93,8 +93,7 @@
     border-radius: 4px;
 }
 
-.quizzer-edit-form-actions,
-.quizzer-delete-actions {
+.quizzer-edit-form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
@@ -102,22 +101,6 @@
 
 .quizzer-edit-form-actions {
     grid-column: 1 / -1;
-}
-
-.quizzer-delete-confirmation {
-    margin: 0 0 1rem;
-}
-
-.quizzer-delete-button {
-    border: 1px solid #b42318;
-    border-radius: 4px;
-    background-color: #b42318;
-    color: white;
-    padding: 0.375rem 0.75rem;
-}
-
-.quizzer-delete-button:hover {
-    background-color: #8f1c13;
 }
 
 @media (max-width: 480px) {

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import {TbTrash, TbEdit} from 'react-icons/tb'
 import './QuizzerItem.css'
 import { updateQuizzer as updateStoredQuizzer } from '../storage/scorebaseDb'
+import DeleteConfirmationModal from './DeleteConfirmationModal'
 
 const QuizzerItem = ({item, deleteQuizzer, onQuizzerUpdated}) => {
     const [showEditModal, setShowEditModal] = useState(false)
@@ -103,22 +104,16 @@ const QuizzerItem = ({item, deleteQuizzer, onQuizzerUpdated}) => {
                         </label>
                         <label>Birthdate<input type='date' name='dob' defaultValue={item.dob} /></label>
                         <div className='quizzer-edit-form-actions'>
-                            <button type='submit' className='submit-button'>Save changes</button>
+                            <button type='submit' className='primary-button'>Save changes</button>
                         </div>
                     </form>
                 </Modal.Body>
             </Modal>
-            <Modal show={showDeleteModal} centered onHide={() => setShowDeleteModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Quizzer</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p className='quizzer-delete-confirmation'>Delete {item.fullName}? This cannot be undone.</p>
-                    <div className='quizzer-delete-actions'>
-                        <button type='button' className='quizzer-delete-button' onClick={confirmDelete}>Delete Quizzer</button>
-                    </div>
-                </Modal.Body>
-            </Modal>
+            <DeleteConfirmationModal
+                show={showDeleteModal}
+                onCancel={() => setShowDeleteModal(false)}
+                onConfirm={confirmDelete}
+            />
         </>
     )
 }

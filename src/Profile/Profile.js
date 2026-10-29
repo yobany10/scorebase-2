@@ -43,7 +43,7 @@ const Profile = () => {
                         value={displayName}
                     />
                 </label>
-                <button className='submit-button' disabled={isSubmitting} type='submit'>
+                <button className='primary-button' disabled={isSubmitting} type='submit'>
                     {isSubmitting ? 'Saving...' : 'Save name'}
                 </button>
             </form>

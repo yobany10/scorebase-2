@@ -14,12 +14,17 @@ const TeamEditModal = (props) => {
 
   const getTeamSlots = (team) => {
     const prefix = team === 'red' ? 'red' : 'yellow'
+    const rawTeamName = team === 'red' ? props.redName : props.yellowName
+    const teamName = (rawTeamName || '').trim() || (team === 'red' ? 'Red' : 'Yellow')
 
     return [1, 2, 3, 4, 5].map(number => ({
       key: `${prefix}${number}`,
       name: props[`${prefix}${number}Name`],
       id: props[`${prefix}${number}Id`]
-    })).filter(slot => slot.id)
+    })).filter(slot => {
+      const seatNumber = slot.key.slice(prefix.length)
+      return slot.id || slot.name === `${teamName} ${seatNumber}`
+    })
   }
 
   const teamCanSubstitute = (team) => getTeamSlots(team).length > 3

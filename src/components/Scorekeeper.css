@@ -69,13 +69,16 @@
     'search';
 }
 
-.scoresheet-tools button {
+.scoresheet-tools button,
+.scoresheet-tools-view-only .questionbar-button {
     background-color: var(--custom-black);
     border-color: var(--custom-black);
 }
 
 .scoresheet-tools button:hover,
-.scoresheet-tools button:focus {
+.scoresheet-tools button:focus,
+.scoresheet-tools-view-only .questionbar-button:hover,
+.scoresheet-tools-view-only .questionbar-button:focus {
     background-color: var(--blue);
     border-color: var(--blue);
 }

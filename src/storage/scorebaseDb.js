@@ -1,10 +1,12 @@
 import { deleteDB, openDB } from 'idb'
 
 const DATABASE_NAME = 'scorebase'
-const DATABASE_VERSION = 1
+const DATABASE_VERSION = 2
 const PROFILE_STORE = 'profile'
 const QUIZ_STORE = 'quizzes'
 const QUIZZER_STORE = 'quizzers'
+const TEAM_SETUP_STORE = 'teamSetup'
+const LAST_TEAM_SETUP_ID = 'last'
 
 let databasePromise
 
@@ -12,15 +14,25 @@ const getDatabase = () => {
     if (!databasePromise) {
         databasePromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
             upgrade(database) {
-                const profileStore = database.createObjectStore(PROFILE_STORE, { keyPath: 'id' })
-                profileStore.createIndex('updatedAt', 'updatedAt')
+                if (!database.objectStoreNames.contains(PROFILE_STORE)) {
+                    const profileStore = database.createObjectStore(PROFILE_STORE, { keyPath: 'id' })
+                    profileStore.createIndex('updatedAt', 'updatedAt')
+                }
 
-                const quizStore = database.createObjectStore(QUIZ_STORE, { keyPath: 'id', autoIncrement: true })
-                quizStore.createIndex('savedAt', 'savedAt')
+                if (!database.objectStoreNames.contains(QUIZ_STORE)) {
+                    const quizStore = database.createObjectStore(QUIZ_STORE, { keyPath: 'id', autoIncrement: true })
+                    quizStore.createIndex('savedAt', 'savedAt')
+                }
 
-                const quizzerStore = database.createObjectStore(QUIZZER_STORE, { keyPath: 'id', autoIncrement: true })
-                quizzerStore.createIndex('fullName', 'fullName')
-                quizzerStore.createIndex('createdAt', 'createdAt')
+                if (!database.objectStoreNames.contains(QUIZZER_STORE)) {
+                    const quizzerStore = database.createObjectStore(QUIZZER_STORE, { keyPath: 'id', autoIncrement: true })
+                    quizzerStore.createIndex('fullName', 'fullName')
+                    quizzerStore.createIndex('createdAt', 'createdAt')
+                }
+
+                if (!database.objectStoreNames.contains(TEAM_SETUP_STORE)) {
+                    database.createObjectStore(TEAM_SETUP_STORE, { keyPath: 'id' })
+                }
             }
         })
     }
@@ -49,6 +61,23 @@ const saveProfile = async (displayName) => {
     await database.put(PROFILE_STORE, profile)
 
     return profile
+}
+
+const getLastTeamSetup = async () => {
+    const database = await getDatabase()
+    return database.get(TEAM_SETUP_STORE, LAST_TEAM_SETUP_ID)
+}
+
+const saveLastTeamSetup = async (teamSetup) => {
+    const savedTeamSetup = {
+        ...teamSetup,
+        id: LAST_TEAM_SETUP_ID,
+        updatedAt: Date.now()
+    }
+    const database = await getDatabase()
+    await database.put(TEAM_SETUP_STORE, savedTeamSetup)
+
+    return savedTeamSetup
 }
 
 const listQuizzes = async (limit) => {
@@ -153,10 +182,12 @@ export {
     deleteQuizzer,
     deleteScorebaseDatabase,
     getProfile,
+    getLastTeamSetup,
     getQuiz,
     listQuizzers,
     listQuizzes,
     saveProfile,
+    saveLastTeamSetup,
     updateQuiz,
     updateQuizzer
 }
