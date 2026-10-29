@@ -1,0 +1,73 @@
+.quizzer-picker {
+    position: relative;
+}
+
+.quizzer-picker-input-row {
+    position: relative;
+}
+
+.quizzer-picker input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.35rem 2rem 0.35rem 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.quizzer-picker-clear {
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    transform: translateY(-50%);
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    place-items: center;
+    color: #5d6767;
+    border: 0;
+    background: transparent;
+}
+
+.quizzer-picker-menu {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% + 0.25rem);
+    right: 0;
+    left: 0;
+    max-height: 12rem;
+    margin: 0;
+    padding: 0.25rem 0;
+    overflow-y: auto;
+    list-style: none;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.quizzer-picker-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    color: #212529;
+    text-align: left;
+    border: 0;
+    background: transparent;
+}
+
+.quizzer-picker-menu button:hover,
+.quizzer-picker-menu button:focus {
+    background: #e9ecef;
+}
+
+.quizzer-picker-menu button[aria-selected='true'] {
+    font-weight: 600;
+    color: white;
+    background: black;
+}
+
+.quizzer-picker-empty {
+    padding: 0.4rem 0.5rem;
+    color: #5d6767;
+}

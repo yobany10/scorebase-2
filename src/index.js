@@ -7,11 +7,14 @@ import './App.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
+import { LocalProfileProvider } from './Profile/LocalProfileProvider'
 
 ReactDOM.render(
     <BrowserRouter>
     <React.StrictMode>
-      <App />
+      <LocalProfileProvider>
+        <App />
+      </LocalProfileProvider>
     </React.StrictMode>
     </BrowserRouter>,
   document.getElementById('root')

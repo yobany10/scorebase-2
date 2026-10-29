@@ -41,11 +41,13 @@
 .red-team-edit-container {
     display: grid;
     gap: 0.5rem;
+    align-self: start;
 }
 
 .yellow-team-edit-container {
     display: grid;
     gap: 0.5rem;
+    align-self: start;
 }
 
 .edit-teams-form {
@@ -55,6 +57,106 @@
     width: 100%;
     padding: 1rem;
     border-radius: 5px;
+}
+
+.team-builder {
+    display: grid;
+    gap: 0.75rem;
+    background-color: rgb(236, 240, 244);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.team-builder-red {
+    border-top: 4px solid red;
+}
+
+.team-builder-yellow {
+    border-top: 4px solid #d9aa00;
+}
+
+.confirm-team-button {
+    justify-self: start;
+}
+
+.confirmed-quizzer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 42px;
+    align-items: stretch;
+    gap: 0.5rem;
+    height: 58px;
+}
+
+.confirmed-quizzer > div {
+    display: grid;
+    align-content: center;
+    gap: 0.15rem;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.confirmed-quizzer p,
+.confirmed-quizzer span {
+    margin: 0;
+}
+
+.confirmed-quizzer span {
+    color: #5d6767;
+    font-size: 13px;
+}
+
+.swap-button {
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    height: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    color: #434e4e;
+    font-size: 20px;
+}
+
+.swap-button:hover,
+.swap-button:focus-visible {
+    border-color: #6c757d;
+    background-color: #e9ecef;
+}
+
+.edit-team-button {
+    justify-self: start;
+    border: 0;
+    background: transparent;
+    color: #245c89;
+    padding: 0.25rem 0;
+    text-decoration: underline;
+}
+
+.swap-modal-body,
+.swap-options {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.swap-modal-body p {
+    margin: 0;
+}
+
+.swap-options button {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+}
+
+.swap-options button:hover,
+.swap-options button:focus-visible {
+    background-color: #e9ecef;
 }
 
 .team-edit-title {

@@ -1,41 +1,23 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import {auth} from '../Firebase/config'
-import {useAuthState} from 'react-firebase-hooks/auth'
-import {toast} from 'react-toastify'
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Link } from 'react-router-dom'
+import { useLocalProfile } from '../Profile/LocalProfileProvider'
 import './Navbar.css'
 
 const MainNavbar = () => {
-    const navigate = useNavigate()
-    const [user, loading] = useAuthState(auth)
-
-    const toastConfig = {
-        position: 'bottom-right'
-    }
-
-    const handleLogoutClick = () => {
-        auth.signOut()
-        toast.info('You have been signed out', toastConfig)
-    }
+    const { profile } = useLocalProfile()
 
     return (
         <>
         <nav className="navbar-div">
             <div className='navbar-div-content'>
                 <Link to={'/'}>
-                    <p className='navbar-logo gradient-bg-purple-blue'>ScoreBase</p>
+                    <p className='navbar-logo'>ScoreBase</p>
                 </Link>
                 <div className='navbar-links-container'>
-                    {!user && <p className='navbar-link navbar-login' onClick={() => navigate('/login')}>Login</p>}
-                    {user && <p className='navbar-link navbar-scorekeep' onClick={() => navigate('/scorekeeping')}>Scorekeep</p>}
-                    {user && <p className='navbar-link navbar-dashboard' onClick={() => navigate('/dashboard')}>Dashboard</p>}
-                    {user &&
-                        <DropdownButton className='navbar-user-dropdown-button' align='end' bsPrefix='navbar-user-dropdown-button' title={<img src={user.photoURL} className='navbar-user-avatar' referrerPolicy="no-referrer" />}>
-                            <Dropdown.Item onClick={handleLogoutClick}>Logout</Dropdown.Item>
-                        </DropdownButton>
-                    }
+                    {profile && <Link className='navbar-link navbar-scorekeep' to='/scorekeeping'>Scorekeep</Link>}
+                    {profile && <Link className='navbar-link navbar-dashboard' to='/dashboard'>Dashboard</Link>}
+                    {profile && <Link className='navbar-link navbar-profile' to='/profile'>{profile.displayName}</Link>}
+                    {!profile && <Link className='navbar-link navbar-login' to='/welcome'>Get started</Link>}
                 </div>
             </div>
         </nav>

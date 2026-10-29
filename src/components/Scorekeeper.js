@@ -1,9 +1,5 @@
 // todo: add highest question to keep track of where zeros should start for table. Maybe that part of the table can be faded as well.
 import React, { useState, useEffect } from 'react'
-import {collection, doc, addDoc, updateDoc, serverTimestamp} from 'firebase/firestore'
-import {auth, db} from '../Firebase/config'
-import {useAuthState} from 'react-firebase-hooks/auth'
-import {useNavigate} from 'react-router-dom'
 import ToolBar from './ToolBar'
 import ScoreTable from './ScoreTable'
 import ScoreBar from './ScoreBar'
@@ -15,6 +11,8 @@ import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
 import ScoresheetSetupModal from './ScoresheetSetupModal'
+import {ActiveLineupContext} from './ActiveLineupContext'
+import { createQuiz, updateQuiz } from '../storage/scorebaseDb'
 
 const Scorekeeper = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
@@ -41,6 +39,9 @@ const Scorekeeper = () => {
     const [yellow3Id, setYellow3Id] = useState(null)
     const [yellow4Id, setYellow4Id] = useState(null)
     const [yellow5Id, setYellow5Id] = useState(null)
+    const [activeRedQuizzers, setActiveRedQuizzers] = useState([])
+    const [activeYellowQuizzers, setActiveYellowQuizzers] = useState([])
+    const [teamConfirmed, setTeamConfirmed] = useState({red: false, yellow: false})
     const [division, setDivision] = useState('Experienced')
     const [question, setQuestion] = useState(1)
     const [currentTime, setCurrentTime] = useState(0)
@@ -62,22 +63,6 @@ const Scorekeeper = () => {
     const [isShownY4, setIsShownY4] = useState(false)
     const [isShownY5, setIsShownY5] = useState(false)
     const [showSetupModal, setShowSetupModal] = useState(true);
-    
-    const [user, loading] = useAuthState(auth)
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if (user) {
-            return
-        }
-        if (loading) {
-            return
-        }
-        if (!user) {
-            navigate('/login')
-        }
-    },[user, loading])
 
     const handleResetQuiz = () => {
         setRedBonusStart(true)
@@ -94,6 +79,19 @@ const Scorekeeper = () => {
         setYellow3Name('Y3')
         setYellow4Name('Y4')
         setYellow5Name('Y5')
+        setRed1Id(null)
+        setRed2Id(null)
+        setRed3Id(null)
+        setRed4Id(null)
+        setRed5Id(null)
+        setYellow1Id(null)
+        setYellow2Id(null)
+        setYellow3Id(null)
+        setYellow4Id(null)
+        setYellow5Id(null)
+        setActiveRedQuizzers([])
+        setActiveYellowQuizzers([])
+        setTeamConfirmed({red: false, yellow: false})
         setQuestion(1)
         setCurrentTime(0)
         setQuizTableData(initialQuizData)
@@ -101,14 +99,13 @@ const Scorekeeper = () => {
         setSearchList(initialSearchListData)
         setIsPending(false)
         setIsSaved(false)
+        setQuizId(null)
         setShowSetupModal(true)
     }
 
     const handleDivisionChange = () => {
         setRedBonusStart(true)
         setYellowBonusStart(true)
-        setRedName('Red')
-        setYellowName('Yellow')
         setQuestion(1)
         setCurrentTime(0)
         setQuizTableData(initialQuizData)
@@ -121,6 +118,12 @@ const Scorekeeper = () => {
     useEffect(() => {
         handleDivisionChange()
     }, [division])
+
+    useEffect(() => {
+        if (!showSetupModal) {
+            window.scrollTo(0, 0)
+        }
+    }, [showSetupModal])
 
     let initialQuizData = []
 
@@ -625,106 +628,71 @@ const Scorekeeper = () => {
     }
 
     const handleSaveQuiz = async () => {
-        //todo: load spinner if saving
         setIsSaving(true)
-        if (isSaved) {
-            try {
-                const quizRef = doc(db, 'quizzes', quizId)
-                const res = await updateDoc(quizRef, {
-                    name: `${redName} vs ${yellowName}`,
-                    redName: redName,
-                    yellowName: yellowName,
-                    quizTableData: quizTableData,
-                    red1Name: red1Name,
-                    red2Name: red2Name,
-                    red3Name: red3Name,
-                    red4Name: red4Name,
-                    red5Name: red5Name,
-                    yellow1Name: yellow1Name,
-                    yellow2Name: yellow2Name,
-                    yellow3Name: yellow3Name,
-                    yellow4Name: yellow4Name,
-                    yellow5Name: yellow5Name,
-                    red1Id: red1Id,
-                    red2Id: red2Id,
-                    red3Id: red3Id,
-                    red4Id: red4Id,
-                    red5Id: red5Id,
-                    yellow1Id: yellow1Id,
-                    yellow2Id: yellow2Id,
-                    yellow3Id: yellow3Id,
-                    yellow4Id: yellow4Id,
-                    yellow5Id: yellow5Id,
-                    quizzerIds: [red1Id, red2Id, red3Id, red4Id, red5Id, yellow1Id, yellow2Id, yellow3Id, yellow4Id, yellow5Id],
-                    rScore: calculateTeamScore(question, 'red', true),
-                    yScore: calculateTeamScore(question, 'yellow', true),
-                    division: division,
-                    notes: notes,
-                    searchList: searchList,
-                    saved: serverTimestamp()
-                })
-                setIsSaved(true)
-                toast.success('Your quiz has been saved.', toastOptions)
-                setIsSaving(false)
-            } catch (error) {
-                console.log(error)
-                toast.error('There was an error saving your quiz. Please try again.', toastOptions)
-                setIsSaving(false)
-            }
-        } else {
-            try {
-                const quizzesRef = collection(db, 'quizzes')
-                const res = await addDoc(quizzesRef, {
-                    name: `${redName} vs ${yellowName}`,
-                    redName: redName,
-                    yellowName: yellowName,
-                    quizTableData: quizTableData,
-                    red1Name: red1Name,
-                    red2Name: red2Name,
-                    red3Name: red3Name,
-                    red4Name: red4Name,
-                    red5Name: red5Name,
-                    yellow1Name: yellow1Name,
-                    yellow2Name: yellow2Name,
-                    yellow3Name: yellow3Name,
-                    yellow4Name: yellow4Name,
-                    yellow5Name: yellow5Name,
-                    red1Id: red1Id,
-                    red2Id: red2Id,
-                    red3Id: red3Id,
-                    red4Id: red4Id,
-                    red5Id: red5Id,
-                    yellow1Id: yellow1Id,
-                    yellow2Id: yellow2Id,
-                    yellow3Id: yellow3Id,
-                    yellow4Id: yellow4Id,
-                    yellow5Id: yellow5Id,
-                    quizzerIds: [red1Id, red2Id, red3Id, red4Id, red5Id, yellow1Id, yellow2Id, yellow3Id, yellow4Id, yellow5Id],
-                    rScore: calculateTeamScore(question, 'red', true),
-                    yScore: calculateTeamScore(question, 'yellow', true),
-                    division: division,
-                    notes: notes,
-                    searchList: searchList,
-                    user: user.uid,
-                    avatar: user.photoURL,
-                    username: user.displayName,
-                    saved: serverTimestamp()
-                })
-                setIsSaved(true)
-                setQuizId(res.id)
-                toast.success('Your quiz has been saved.', toastOptions)
-                setIsSaving(false)
-            } catch (error) {
-                console.log(error)
-                toast.error('There was an error saving your quiz. Please try again.', toastOptions)
-                setIsSaving(false)
-            }
+        const quiz = {
+            name: `${redName} vs ${yellowName}`,
+            redName,
+            yellowName,
+            quizTableData,
+            red1Name,
+            red2Name,
+            red3Name,
+            red4Name,
+            red5Name,
+            yellow1Name,
+            yellow2Name,
+            yellow3Name,
+            yellow4Name,
+            yellow5Name,
+            red1Id,
+            red2Id,
+            red3Id,
+            red4Id,
+            red5Id,
+            yellow1Id,
+            yellow2Id,
+            yellow3Id,
+            yellow4Id,
+            yellow5Id,
+            quizzerIds: [red1Id, red2Id, red3Id, red4Id, red5Id, yellow1Id, yellow2Id, yellow3Id, yellow4Id, yellow5Id],
+            activeRedQuizzers,
+            activeYellowQuizzers,
+            rScore: calculateTeamScore(question, 'red', true),
+            yScore: calculateTeamScore(question, 'yellow', true),
+            division,
+            notes,
+            searchList
+        }
+
+        try {
+            const savedQuiz = isSaved
+                ? await updateQuiz(quizId, quiz)
+                : await createQuiz(quiz)
+
+            setIsSaved(true)
+            setQuizId(savedQuiz.id)
+            toast.success('Your quiz has been saved.', toastOptions)
+        } catch (error) {
+            console.log(error)
+            toast.error('There was an error saving your quiz. Please try again.', toastOptions)
+        } finally {
+            setIsSaving(false)
         }
     }
 
+    const rosterProps = {
+        redName, setRedName, yellowName, setYellowName,
+        red1Name, setRed1Name, red2Name, setRed2Name, red3Name, setRed3Name, red4Name, setRed4Name, red5Name, setRed5Name,
+        yellow1Name, setYellow1Name, yellow2Name, setYellow2Name, yellow3Name, setYellow3Name, yellow4Name, setYellow4Name, yellow5Name, setYellow5Name,
+        red1Id, setRed1Id, red2Id, setRed2Id, red3Id, setRed3Id, red4Id, setRed4Id, red5Id, setRed5Id,
+        yellow1Id, setYellow1Id, yellow2Id, setYellow2Id, yellow3Id, setYellow3Id, yellow4Id, setYellow4Id, yellow5Id, setYellow5Id
+    }
+
     return (
+        <ActiveLineupContext.Provider value={{activeRedQuizzers, setActiveRedQuizzers, activeYellowQuizzers, setActiveYellowQuizzers, teamConfirmed, setTeamConfirmed}}>
         <div className='scorekeep-container'>
-            <ScoresheetSetupModal showSetupModal={showSetupModal} setShowSetupModal={setShowSetupModal} division={division} setDivision={setDivision} />
+            <ScoresheetSetupModal {...rosterProps} showSetupModal={showSetupModal} setShowSetupModal={setShowSetupModal} division={division} setDivision={setDivision} />
+            {!showSetupModal && <>
             <ToolBar division={division} setDivision={setDivision} isSaving={isSaving} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
@@ -738,7 +706,9 @@ const Scorekeeper = () => {
                     <MaterialSearch division={division} question={question} searchList={searchList} setSearchList={setSearchList} viewOnly={false} />
                 </div>
             </div>
+            </>}
         </div>
+        </ActiveLineupContext.Provider>
     )
 }
 

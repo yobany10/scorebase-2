@@ -1,41 +1,29 @@
 import {useEffect, useState} from 'react'
-import {auth, db} from '../Firebase/config'
-import {collection, onSnapshot, where, query, orderBy, limit, serverTimestamp} from 'firebase/firestore'
-import {useAuthState} from 'react-firebase-hooks/auth'
-import {useNavigate} from 'react-router-dom'
 import QuizItem from './QuizItem'
 import './Dashboard.css'
 import noData from '../assets/svg/no-data.svg'
+import { listQuizzes } from '../storage/scorebaseDb'
 
-const Dashboard = (props) => {
+const Dashboard = () => {
     const [quizzes, setQuizzes] = useState([])
-    const navigate = useNavigate()
-    const [user, loading] = useAuthState(auth)
-
-    const getQuizzes = async () => {
-        console.log('getting quizzes')
-        const q = query(collection(db, 'quizzes'), where('user', '==', `${user.uid}`), orderBy('saved', 'desc'), limit(8))
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.docs.map(doc => console.log(doc.data()))
-            setQuizzes(querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
-        })
-        return unsubscribe
-    }
-
-    // See if user is logged
-    const checkAuth = async () => {
-        if (user) {
-            getQuizzes()
-            console.log(user)
-            return;
-        }
-        if (loading) return;
-        if (!user) return navigate('/login')
-    }
 
     useEffect(() => {
-        checkAuth()
-    },[user, loading])
+        let isMounted = true
+
+        const loadQuizzes = async () => {
+            const savedQuizzes = await listQuizzes(8)
+
+            if (isMounted) {
+                setQuizzes(savedQuizzes)
+            }
+        }
+
+        loadQuizzes()
+
+        return () => {
+            isMounted = false
+        }
+    }, [])
 
     return (
         <div className='dashboard-page-container'>
@@ -47,8 +35,8 @@ const Dashboard = (props) => {
                 <h1 className='dashboard-title'>Saved Quizzes</h1>
                 <p className='dashboard-info-subtitle'>{quizzes.length} quizzes</p>
                 <div className='dashboard-quiz-list'>
-                    {quizzes != [] && quizzes.map(item => {
-                        return <QuizItem key={item.id} quiz={item} />
+                    {quizzes.map(item => {
+                        return <QuizItem key={item.id} quiz={item} onDelete={() => setQuizzes(currentQuizzes => currentQuizzes.filter(quiz => quiz.id !== item.id))} />
                     })}
                 </div>
                 {quizzes.length < 1 &&

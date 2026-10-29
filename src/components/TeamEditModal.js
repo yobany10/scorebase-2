@@ -1,317 +1,170 @@
-import { useState, useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form'
-import {collection, doc, addDoc, deleteDoc, onSnapshot, query, where, orderBy, serverTimestamp} from 'firebase/firestore'
-import {auth, db} from '../Firebase/config'
-import {useAuthState} from 'react-firebase-hooks/auth'
-import {useNavigate} from 'react-router-dom'
-import {toast} from 'react-toastify'
-import {RiTeamFill} from 'react-icons/ri'
-import QuizzersList from './QuizzersList'
+import { useContext, useState } from 'react'
+import Modal from 'react-bootstrap/Modal'
+import { RiArrowLeftRightLine, RiTeamFill } from 'react-icons/ri'
+import { toast } from 'react-toastify'
+import { ActiveLineupContext } from './ActiveLineupContext'
 import './TeamEditModal.css'
 
 const TeamEditModal = (props) => {
-  const [show, setShow] = useState(false);
-  const [quizzers, setQuizzers] = useState([])
-  const [user, loading] = useAuthState(auth)
-  const navigate = useNavigate()
+  const [show, setShow] = useState(false)
+  const [showSwapModal, setShowSwapModal] = useState(false)
+  const [swapSource, setSwapSource] = useState(null)
+  const activeLineup = useContext(ActiveLineupContext)
+  const toastOptions = { position: 'bottom-right' }
 
-  function getQuizzers () {
-    const q = query(collection(db, 'quizzers'), where('createdByUser', '==', `${user.uid}`), orderBy('firstName', 'asc'))
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        // querySnapshot.docs.map(doc => console.log(doc.data()))
-        setQuizzers(querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
+  const getTeamSlots = (team) => {
+    const prefix = team === 'red' ? 'red' : 'yellow'
+    const rawTeamName = team === 'red' ? props.redName : props.yellowName
+    const teamName = (rawTeamName || '').trim() || (team === 'red' ? 'Red' : 'Yellow')
+
+    return [1, 2, 3, 4, 5].map(number => ({
+      key: `${prefix}${number}`,
+      name: props[`${prefix}${number}Name`],
+      id: props[`${prefix}${number}Id`]
+    })).filter(slot => {
+      const seatNumber = slot.key.slice(prefix.length)
+      return slot.id || slot.name === `${teamName} ${seatNumber}`
     })
-    return unsubscribe
   }
 
-// See if user is logged
-const checkAuth = async () => {
-  if (user) {
-      getQuizzers()
-      return;
-  }
-  if (loading) return;
-  if (!user) return navigate('/login')
-}
+  const teamCanSubstitute = (team) => getTeamSlots(team).length > 3
+  const canSubstitute = teamCanSubstitute('red') || teamCanSubstitute('yellow')
 
-useEffect(() => {
-  checkAuth()
-},[user, loading])
+  const getActiveQuizzers = (team) => team === 'red' ? activeLineup.activeRedQuizzers : activeLineup.activeYellowQuizzers
 
-const toastOptions = {
-  position: 'bottom-right'
-}
-
-const addQuizzer = async (e) => {
-  e.preventDefault()
-  let firstName = e.target.firstName.value
-  let lastName = e.target.lastName.value
-  let division = e.target.division.value
-  let dob = e.target.dob.value
-  try {
-    const quizzersRef = collection(db, 'quizzers')
-    await addDoc(quizzersRef, {
-      firstName: firstName,
-      lastName: lastName,
-      fullName: `${firstName} ${lastName}`,
-      createdByUser: user.uid,
-      createdByUserName: user.displayName,
-      division: division,
-      dob: dob,
-      created: serverTimestamp()
-    })
-  } catch (error) {
-    console.log(error)
-  }
-  e.target.firstName.value = ''
-  e.target.lastName.value = ''
-  e.target.dob.value = ''
-  toast.info('New quizzer was added', toastOptions)
-}
-
-const deleteQuizzer = async (id) => {
-  try {
-    await deleteDoc(doc(db, 'quizzers', id))
-    if (id == props.red1Id) {
-      props.setRed1Name('R1')
-      props.setRed1Id(null)
-    } else if (id == props.red2Id) {
-      props.setRed2Name('R2')
-      props.setRed2Id(null)
-    } else if (id == props.red3Id) {
-      props.setRed3Name('R3')
-      props.setRed3Id(null)
-    } else if (id == props.red4Id) {
-      props.setRed4Name('R4')
-      props.setRed4Id(null)
-    } else if (id == props.red5Id) {
-      props.setRed5Name('R5')
-      props.setRed5Id(null)
-    } else if (id == props.yellow1Id) {
-      props.setYellow1Name('Y1')
-      props.setYellow1Id(null)
-    } else if (id == props.yellow2Id) {
-      props.setYellow2Name('Y2')
-      props.setYellow2Id(null)
-    } else if (id == props.yellow3Id) {
-      props.setYellow3Name('Y3')
-      props.setYellow3Id(null)
-    } else if (id == props.yellow4Id) {
-      props.setYellow4Name('Y4')
-      props.setYellow4Id(null)
-    } else if (id == props.yellow5Id) {
-      props.setYellow5Name('Y5')
-      props.setYellow5Id(null)
+  const setActiveQuizzers = (team, quizzers) => {
+    if (team === 'red') {
+      activeLineup.setActiveRedQuizzers(quizzers)
     } else {
+      activeLineup.setActiveYellowQuizzers(quizzers)
+    }
+  }
+
+  const getQuizzerName = (team, quizzer) => getTeamSlots(team).find(slot => slot.key === quizzer).name
+
+  const getQuizzerRole = (team, quizzer) => {
+    const tableSeat = getActiveQuizzers(team).indexOf(quizzer)
+    return tableSeat === -1 ? 'Substitute' : `Table seat ${tableSeat + 1}`
+  }
+
+  const getQuizzerOrder = (team) => {
+    const selectedSlots = getTeamSlots(team)
+    const activeQuizzers = getActiveQuizzers(team)
+    const activeSlots = activeQuizzers.map(quizzer => selectedSlots.find(slot => slot.key === quizzer)).filter(Boolean)
+    const substitutes = selectedSlots.filter(slot => !activeQuizzers.includes(slot.key))
+
+    return [...activeSlots, ...substitutes]
+  }
+
+  const openSwapModal = (team, quizzer) => {
+    if (!teamCanSubstitute(team)) {
       return
     }
-  } catch (error) {
-    console.log(error)
+
+    setSwapSource({ team, quizzer })
+    setShowSwapModal(true)
   }
-}
+
+  const completeSwap = (targetQuizzer) => {
+    if (!swapSource || !teamCanSubstitute(swapSource.team)) {
+      return
+    }
+
+    const { team, quizzer: sourceQuizzer } = swapSource
+    const activeQuizzers = getActiveQuizzers(team)
+    const sourceSeat = activeQuizzers.indexOf(sourceQuizzer)
+    const targetSeat = activeQuizzers.indexOf(targetQuizzer)
+
+    if ((sourceSeat !== -1) === (targetSeat !== -1)) {
+      return
+    }
+
+    const updatedQuizzers = [...activeQuizzers]
+
+    if (sourceSeat !== -1) {
+      updatedQuizzers[sourceSeat] = targetQuizzer
+    } else {
+      updatedQuizzers[targetSeat] = sourceQuizzer
+    }
+
+    setActiveQuizzers(team, updatedQuizzers)
+    setShowSwapModal(false)
+    setSwapSource(null)
+    toast.info('The active lineup has been updated.', toastOptions)
+  }
+
+  const renderTeam = (team) => {
+    const teamName = team === 'red' ? props.redName : props.yellowName
+
+    return (
+      <div className={`${team}-team-edit-container`}>
+        <h1 className='team-edit-title'><RiTeamFill style={{ marginRight: '0.5rem' }} />{teamName}</h1>
+        <div className={`team-builder team-builder-${team}`}>
+          {getQuizzerOrder(team).map(slot => (
+            <div className='confirmed-quizzer' key={slot.key}>
+              <div>
+                <p>{slot.name}</p>
+                <span>{getQuizzerRole(team, slot.key)}</span>
+              </div>
+              {teamCanSubstitute(team) &&
+                <button type='button' className='swap-button' aria-label={`Swap ${slot.name}`} title={`Swap ${slot.name}`} onClick={() => openSwapModal(team, slot.key)}>
+                  <RiArrowLeftRightLine />
+                </button>
+              }
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  const swapOptions = swapSource
+    ? getTeamSlots(swapSource.team).filter(slot => {
+      const activeQuizzers = getActiveQuizzers(swapSource.team)
+      const sourceIsActive = activeQuizzers.includes(swapSource.quizzer)
+      const targetIsActive = activeQuizzers.includes(slot.key)
+
+      return slot.key !== swapSource.quizzer && sourceIsActive !== targetIsActive
+    })
+    : []
 
   return (
     <>
-    <button type='button' className="toolbar-button" onClick={() => setShow(true)}>
-      Edit Teams
-    </button>
-      <Modal className='team-edit-modal' show={show} size='lg' centered='true' onHide={() => setShow(false)}>
+      {canSubstitute &&
+        <>
+          <button type='button' className='toolbar-button' onClick={() => setShow(true)}>Substitution</button>
+          <Modal className='team-edit-modal' show={show} size='lg' centered onHide={() => setShow(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Substitution</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className='team-edit-teams-container'>
+                {renderTeam('red')}
+                {renderTeam('yellow')}
+              </div>
+            </Modal.Body>
+          </Modal>
+        </>
+      }
+      <Modal show={showSwapModal} centered onHide={() => setShowSwapModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Teams</Modal.Title>
+          <Modal.Title>Swap Quizzer</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className='team-edit-body'>
-          <div className='team-edit-teams-container'>
-            <div className='red-team-edit-container'>
-              <h1 className='team-edit-title'><RiTeamFill style={{marginRight: '0.5rem'}} />Red Team</h1>
-                <form className='edit-teams-form' style={{borderTop: '4px solid red'}} >
-                  <label>
-                    Red 1 Name
-                    <Form.Select value={props.red1Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      // console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setRed1Name(e.target.value)
-                      props.setRed1Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>R1</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Red 2 Name
-                    <Form.Select value={props.red2Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setRed2Name(e.target.value)
-                      props.setRed2Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>R2</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Red 3 Name
-                    <Form.Select value={props.red3Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setRed3Name(e.target.value)
-                      props.setRed3Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>R3</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Red 4 Name
-                    <Form.Select value={props.red4Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setRed4Name(e.target.value)
-                      props.setRed4Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>R4</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Red 5 Name
-                    <Form.Select value={props.red5Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setRed5Name(e.target.value)
-                      props.setRed5Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>R5</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                </form>
-            </div>
-            <div className='yellow-team-edit-container'>
-              <h1 className='team-edit-title'><RiTeamFill style={{marginRight: '0.5rem'}} />Yellow Team</h1>
-                <form className='edit-teams-form' style={{borderTop: '4px solid yellow'}} >
-                <label>
-                    Yellow 1 Name
-                    <Form.Select value={props.yellow1Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setYellow1Name(e.target.value)
-                      props.setYellow1Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>Y1</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Yellow 2 Name
-                    <Form.Select value={props.yellow2Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setYellow2Name(e.target.value)
-                      props.setYellow2Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>Y2</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Yellow 3 Name
-                    <Form.Select value={props.yellow3Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setYellow3Name(e.target.value)
-                      props.setYellow3Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>Y3</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Yellow 4 Name
-                    <Form.Select value={props.yellow4Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setYellow4Name(e.target.value)
-                      props.setYellow4Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>Y4</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                  <label>
-                    Yellow 5 Name
-                    <Form.Select value={props.yellow5Name} onChange={(e) => {
-                      const index = e.target.options.selectedIndex
-                      console.log(e.target.options[index].getAttribute('data-quizzerid'))
-                      props.setYellow5Name(e.target.value)
-                      props.setYellow5Id(e.target.options[index].getAttribute('data-quizzerid'))
-                    }}>
-                      <option>Y5</option>
-                      {quizzers != [] && quizzers.map(item => {
-                        return <option key={item.id} data-quizzerid={item.id} value={item.fullName}>{item.fullName}</option>  
-                      })}
-                    </Form.Select>
-                  </label>
-                </form>
-            </div>
-          </div>
-          <div className='team-edit-create-quizzer'>
-              <h1 className='team-edit-title'>Add a New Quizzer</h1>
-              <form className='team-edit-create-quizzer-form' onSubmit={(e) => addQuizzer(e)}>
-                <label>
-                  First Name *
-                  <input type='text' name='firstName' required className='edit-teams-input' />
-                </label>
-                <label>
-                  Last Name *
-                  <input type='text' name='lastName' required className='edit-teams-input' />
-                </label>
-                <label>
-                  Division *
-                  <Form.Select name='division' defaultValue='Intermediate'>
-                    <option value='Beginner'>Beginner</option>
-                    <option value='Junior'>Junior</option>
-                    <option value='Intermediate'>Intermediate</option>
-                    <option value='Experienced'>Experienced</option>
-                  </Form.Select>
-                </label>
-                <label>
-                  Date of Birth
-                  <input type='date' name='dob' className='edit-teams-input' />
-                </label>
-                <button type='submit' className='submit-button' id='team-edit-create-quizzer-button'>Submit</button>
-              </form>
-            </div>
-            {quizzers.length > 0 &&
-              <div className='team-edit-my-quizzers'>
-              <h1 className='team-edit-title'>My Quizzers</h1>
-              <QuizzersList quizzers={quizzers} setQuizzers={setQuizzers} deleteQuizzer={deleteQuizzer} />
+          {swapSource &&
+            <div className='swap-modal-body'>
+              <p>Who should {getQuizzerName(swapSource.team, swapSource.quizzer)} swap with?</p>
+              <div className='swap-options'>
+                {swapOptions.map(slot => (
+                  <button type='button' key={slot.key} onClick={() => completeSwap(slot.key)}>{slot.name}</button>
+                ))}
               </div>
-            }
-          </div>
+            </div>
+          }
         </Modal.Body>
       </Modal>
     </>
-  );
+  )
 }
 
 export default TeamEditModal

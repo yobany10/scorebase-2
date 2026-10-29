@@ -59,36 +59,26 @@ body {
 
 /* button styling */
 .primary-button {
-  background-color: #6c757d;
+        background-color: var(--custom-black);
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 0.25rem 1rem;
+        padding: 8px 24px;
 }
 .primary-button:hover {
-  background-color: #434E4E;
+        background-color: var(--blue);
 }
 
-.info-button {
-  background-color: rgb(45, 68, 110);
-  color: white;
-  border: none;
+.secondary-button {
+  background-color: white;
+  color: var(--custom-black);
+  border: 2px solid var(--custom-black);
   border-radius: 5px;
-  padding: 0.25rem 1rem;
+  padding: 8px 16px;
 }
-.info-button:hover {
-  background-color: rgb(18, 41, 82);
-}
-
-.submit-button {
-  background-color: var(--green);
+.secondary-button:hover {
+  background-color: var(--custom-black);
   color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 0.25rem 1rem;
-}
-.submit-button:hover {
-  background-color: var(--green-light);
 }
 
 /* dropdown styling */
