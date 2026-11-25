@@ -13,6 +13,7 @@ import './Scorekeeper.css'
 import ScoresheetSetupModal from './ScoresheetSetupModal'
 import {ActiveLineupContext} from './ActiveLineupContext'
 import { createQuiz, updateQuiz } from '../storage/scorebaseDb'
+import { calculateQuizzerValue as scoreQuizzerQuestion } from '../utils/quizScoring'
 
 const Scorekeeper = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
@@ -64,7 +65,20 @@ const Scorekeeper = () => {
     const [isShownY5, setIsShownY5] = useState(false)
     const [showSetupModal, setShowSetupModal] = useState(true);
 
-    const handleResetQuiz = () => {
+    const resetQuizzerIndicators = () => {
+        setIsShownR1(false)
+        setIsShownR2(false)
+        setIsShownR3(false)
+        setIsShownR4(false)
+        setIsShownR5(false)
+        setIsShownY1(false)
+        setIsShownY2(false)
+        setIsShownY3(false)
+        setIsShownY4(false)
+        setIsShownY5(false)
+    }
+
+    const handleNewQuiz = () => {
         setRedBonusStart(true)
         setYellowBonusStart(true)
         setRedName('Red')
@@ -100,6 +114,7 @@ const Scorekeeper = () => {
         setIsPending(false)
         setIsSaved(false)
         setQuizId(null)
+        resetQuizzerIndicators()
         setShowSetupModal(true)
     }
 
@@ -113,6 +128,12 @@ const Scorekeeper = () => {
         setSearchList(initialSearchListData)
         setIsPending(false)
         setIsSaved(false)
+    }
+
+    const handleClearQuiz = () => {
+        handleDivisionChange()
+        setQuizId(null)
+        resetQuizzerIndicators()
     }
 
     useEffect(() => {
@@ -345,27 +366,7 @@ const Scorekeeper = () => {
     }
 
     const calculateQuizzerValue = (item, quizzer) => {
-        let question = item.question
-        let value = 10
-        let score = 0
-        if (division === 'Intermediate' || division === 'Experienced') {
-            question > 20 ? value = 20 : question > 17 && question <= 20 ? value = 30 : question <= 17 && question >= 9 ? value = 20 : value = 10;
-        } else {
-            question > 15 ? value = 20 : question > 12 && question <= 15 ? value = 30 : question <= 12 && question >= 7 ? value = 20 : value = 10;
-        }
-        if (item[quizzer].correct === true) {
-            score = score + value
-        }
-        if (item[quizzer].error === true) {
-            score = score - (value / 2)
-        }
-        if (item[quizzer].foul === true) {
-            score = score - 5
-        }
-        if (item[quizzer].quizOut === true) {
-            score = score + 10
-        }
-        return score
+        return scoreQuizzerQuestion(item, quizzer, division)
     }
 
     // (1, 'red', true)
@@ -693,7 +694,7 @@ const Scorekeeper = () => {
         <div className='scorekeep-container'>
             <ScoresheetSetupModal {...rosterProps} showSetupModal={showSetupModal} setShowSetupModal={setShowSetupModal} division={division} setDivision={setDivision} />
             {!showSetupModal && <>
-            <ToolBar division={division} setDivision={setDivision} isSaving={isSaving} handleResetQuiz={handleResetQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
+            <ToolBar division={division} setDivision={setDivision} isSaving={isSaving} handleNewQuiz={handleNewQuiz} handleClearQuiz={handleClearQuiz} handleSaveQuiz={handleSaveQuiz} redName={redName} setRedName={setRedName} yellowName={yellowName} setYellowName={setYellowName} red1Name={red1Name} setRed1Name={setRed1Name} red2Name={red2Name} setRed2Name={setRed2Name} red3Name={red3Name} setRed3Name={setRed3Name} red4Name={red4Name} setRed4Name={setRed4Name} red5Name={red5Name} setRed5Name={setRed5Name} yellow1Name={yellow1Name} setYellow1Name={setYellow1Name} yellow2Name={yellow2Name} setYellow2Name={setYellow2Name} yellow3Name={yellow3Name} setYellow3Name={setYellow3Name} yellow4Name={yellow4Name} setYellow4Name={setYellow4Name} yellow5Name={yellow5Name} setYellow5Name={setYellow5Name} red1Id={red1Id} setRed1Id={setRed1Id} red2Id={red2Id} setRed2Id={setRed2Id} red3Id={red3Id} setRed3Id={setRed3Id} red4Id={red4Id} setRed4Id={setRed4Id} red5Id={red5Id} setRed5Id={setRed5Id} yellow1Id={yellow1Id} setYellow1Id={setYellow1Id} yellow2Id={yellow2Id} setYellow2Id={setYellow2Id} yellow3Id={yellow3Id} setYellow3Id={setYellow3Id} yellow4Id={yellow4Id} setYellow4Id={setYellow4Id} yellow5Id={yellow5Id} setYellow5Id={setYellow5Id} />
             <div className='scorekeep-div'>
                 <div className='scoresheet-div'>
                     <ScoreBar rScore={calculateTeamScore(question, 'red', true)} yScore={calculateTeamScore(question, 'yellow', true)} handleCheckboxChange={handleCheckboxChange} handleNameChange={handleNameChange} quizTableData={quizTableData} question={question} handle30={handle30} handleClear={handleClear} isPending={isPending} setIsPending={setIsPending} redName={redName} yellowName={yellowName} red1Name={red1Name} red2Name={red2Name} red3Name={red3Name} red4Name={red4Name} red5Name={red5Name} yellow1Name={yellow1Name} yellow2Name={yellow2Name} yellow3Name={yellow3Name} yellow4Name={yellow4Name} yellow5Name={yellow5Name} isShownR1={isShownR1} isShownR2={isShownR2} isShownR3={isShownR3} isShownR4={isShownR4} isShownR5={isShownR5} isShownY1={isShownY1} isShownY2={isShownY2} isShownY3={isShownY3} isShownY4={isShownY4} isShownY5={isShownY5} setIsShownR1={setIsShownR1} setIsShownR2={setIsShownR2} setIsShownR3={setIsShownR3} setIsShownR4={setIsShownR4} setIsShownR5={setIsShownR5} setIsShownY1={setIsShownY1} setIsShownY2={setIsShownY2} setIsShownY3={setIsShownY3} setIsShownY4={setIsShownY4} setIsShownY5={setIsShownY5} />

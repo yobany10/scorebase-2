@@ -17,7 +17,8 @@ const ToolBar = (props) => {
             }
             {!props.viewOnly && 
                 <div id='toolbar-div'>
-                    <button className='toolbar-button' onClick={props.handleResetQuiz}>Reset Quiz</button>
+                    <button className='toolbar-button' onClick={props.handleNewQuiz}>New Quiz</button>
+                    <button className='toolbar-button' onClick={props.handleClearQuiz}>Reset Quiz</button>
                     {props.isSaving ?
                         <button className='toolbar-button' disabled>
                             <Spinner

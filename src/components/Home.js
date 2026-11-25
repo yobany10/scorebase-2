@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Home.css'
 
-const headlineWords = ['easy', 'fun', 'simple', 'awesome', 'cool', 'fast', 'free']
+const headlineWords = ['scorekeep', 'take notes', 'lookup verses', 'store quizzes', 'view quizzing stats', 'have fun']
 
 const Home = () => {
     const [wordIndex, setWordIndex] = useState(0)
@@ -12,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         const currentWord = headlineWords[wordIndex]
         const wordIsComplete = typedWord === currentWord
-        const delay = isDeleting ? 70 : wordIsComplete ? 1100 : 140
+        const delay = isDeleting ? 45 : wordIsComplete ? 1100 : 140
 
         const timeoutId = setTimeout(() => {
             if (isDeleting) {
@@ -53,7 +53,7 @@ const Home = () => {
                 <div className='landing-grid' aria-hidden='true' />
                 <div id='full-page-banner-text-container'>
                     <h1 id='full-page-banner-text-large' className='flip-horizontal-bottom'>
-                        <span className='typewriter-prefix'>Scorebase is</span>
+                        <span className='typewriter-prefix'>Use ScoreBase to</span>
                         <span className='typewriter-word'>
                             {typedWord}
                             <span className='typewriter-cursor' aria-hidden='true' />

@@ -407,6 +407,7 @@ const ScoresheetSetupModal = (props) => {
               <option value='Experienced'>Experienced</option>
             </Form.Select>
           </label>
+          <button type='button' className='primary-button' onClick={handleSetupSubmit}>Start Quiz</button>
           <button type='button' className='secondary-button' onClick={handleSwapTeams}>Flip teams</button>
           <button type='button' className='secondary-button' onClick={() => setShowClearFieldsModal(true)}>Clear fields</button>
         </div>

@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 
 import './Scorekeeper.css'
 import { getQuiz } from '../storage/scorebaseDb'
+import { calculateQuizzerValue as scoreQuizzerQuestion } from '../utils/quizScoring'
 
 const ViewQuiz = () => {
     const [redBonusStart, setRedBonusStart] = useState(true)
@@ -302,27 +303,7 @@ const ViewQuiz = () => {
     }
 
     const calculateQuizzerValue = (item, quizzer) => {
-        let question = item.question
-        let value = 10
-        let score = 0
-        if (division === 'Senior') {
-            question > 20 ? value = 20 : question > 17 && question <= 20 ? value = 30 : question <= 17 && question >= 9 ? value = 20 : value = 10;
-        } else {
-            question > 15 ? value = 20 : question > 12 && question <= 15 ? value = 30 : question <= 12 && question >= 7 ? value = 20 : value = 10;
-        }
-        if (item[quizzer].correct === true) {
-            score = score + value
-        }
-        if (item[quizzer].error === true) {
-            score = score - (value / 2)
-        }
-        if (item[quizzer].foul === true) {
-            score = score - 5
-        }
-        if (item[quizzer].quizOut === true) {
-            score = score + 10
-        }
-        return score
+        return scoreQuizzerQuestion(item, quizzer, division)
     }
 
     // (1, 'red', true)
