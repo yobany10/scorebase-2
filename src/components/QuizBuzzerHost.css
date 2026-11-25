@@ -1,0 +1,254 @@
+.buzzer-host {
+  width: min(1400px, calc(100% - 1.5rem));
+  margin: 0 auto 1rem;
+  background: #fff;
+  border: 1px solid #d8dee5;
+  border-left: 10px solid #000;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(22, 22, 22, 0.08);
+}
+
+.buzzer-host-error-state,
+.buzzer-host-connecting,
+.buzzer-host-toolbar {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.buzzer-host-connecting {
+  justify-content: flex-start;
+}
+
+.buzzer-host-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.buzzer-host-heading > svg {
+  flex: 0 0 auto;
+  color: #168aad;
+  font-size: 1.55rem;
+}
+
+.buzzer-host h2,
+.buzzer-host p {
+  margin: 0;
+}
+
+.buzzer-host h2 {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.buzzer-host-heading p,
+.buzzer-host-share-copy > span {
+  color: #59636e;
+  font-size: 0.78rem;
+}
+
+.buzzer-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.3rem;
+  background: #138a36;
+  border-radius: 50%;
+}
+
+.buzzer-host-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.buzzer-icon-button,
+.buzzer-invite-field button {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  color: #222;
+  background: #f3f5f7;
+  border: 1px solid #cbd2d9;
+  border-radius: 4px;
+}
+
+.buzzer-icon-button:hover,
+.buzzer-icon-button:focus-visible,
+.buzzer-invite-field button:hover,
+.buzzer-invite-field button:focus-visible {
+  color: #fff;
+  background: #168aad;
+  border-color: #168aad;
+}
+
+.buzzer-stop-button:hover,
+.buzzer-stop-button:focus-visible {
+  background: #b42318;
+  border-color: #b42318;
+}
+
+.buzzer-host-content {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.6fr);
+  gap: 1rem;
+  padding: 0 1rem 1rem;
+}
+
+.buzzer-host-share {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.buzzer-host-share > svg {
+  width: 104px;
+  height: 104px;
+  border: 6px solid #fff;
+  box-shadow: 0 0 0 1px #cbd2d9;
+}
+
+.buzzer-host-share-copy {
+  min-width: 0;
+}
+
+.buzzer-host-share-copy label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.buzzer-invite-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px;
+  margin-bottom: 0.35rem;
+}
+
+.buzzer-invite-field input {
+  min-width: 0;
+  height: 38px;
+  padding: 0 0.55rem;
+  color: #343a40;
+  background: #f8f9fa;
+  border: 1px solid #cbd2d9;
+  border-right: 0;
+  border-radius: 4px 0 0 4px;
+  font-size: 0.72rem;
+}
+
+.buzzer-invite-field button {
+  border-radius: 0 4px 4px 0;
+}
+
+.buzzer-invite-field button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.buzzer-host-roster {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.buzzer-host-seat {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 0.1rem;
+  padding: 0.7rem 0.6rem;
+  background: #fff;
+  border: 1px solid #cbd2d9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(22, 22, 22, 0.08);
+}
+
+.buzzer-host-seat strong {
+  font-size: 0.78rem;
+}
+
+.buzzer-host-seat span {
+  overflow: hidden;
+  color: #343a40;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buzzer-host-seat small {
+  color: #68737d;
+  font-size: 0.68rem;
+}
+
+.buzzer-host-seat-red {
+  border-top: 3px solid #c53030;
+}
+
+.buzzer-host-seat-yellow {
+  border-top: 3px solid #d69e00;
+}
+
+.buzzer-host-seat-winner {
+  color: #075985;
+  background: #e0f2fe;
+  border-color: #7dd3fc;
+}
+
+.buzzer-winner-banner {
+  padding: 0.7rem 1rem;
+  color: #075985;
+  background: #e0f2fe;
+  border-top: 1px solid #bae6fd;
+  font-size: 0.86rem;
+}
+
+.buzzer-host-error {
+  padding: 0.65rem 1rem;
+  color: #8a241f;
+  background: #fff0ee;
+  border-top: 1px solid #f3c4c0;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 1000px) {
+  .buzzer-host-content {
+    grid-template-columns: 1fr;
+  }
+
+  .buzzer-host-roster {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .buzzer-host-error-state,
+  .buzzer-host-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .buzzer-host-content {
+    padding: 0 0.75rem 0.75rem;
+  }
+
+  .buzzer-host-share {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .buzzer-host-share > svg {
+    width: 88px;
+    height: 88px;
+  }
+
+  .buzzer-host-roster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

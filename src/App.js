@@ -9,8 +9,9 @@ import Profile from './Profile/Profile'
 import ProfileRoute from './Profile/ProfileRoute'
 import Dashboard from './components/Dashboard'
 import QuizzerStats from './components/QuizzerStats'
+import QuizBuzzer from './components/QuizBuzzer'
 import ViewQuiz from './components/ViewQuiz'
-import { Navigate, Routes, Route } from 'react-router-dom'
+import { Navigate, Routes, Route, useLocation } from 'react-router-dom'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
@@ -19,11 +20,13 @@ const App = () => {
   
   const TRACKING_ID = 'G-RV5G16LQSR'
   ReactGA.initialize(TRACKING_ID)
+  const location = useLocation()
+  const isPhoneBuzzer = location.pathname.startsWith('/buzz/')
   
   return (
       <div className='app'>
         <ToastContainer limit={2} />
-        <Navbar />
+        {!isPhoneBuzzer && <Navbar />}
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/welcome' element={<NamePrompt/>} />
@@ -32,9 +35,10 @@ const App = () => {
             <Route path='/viewquiz/:id' element={<ProfileRoute><ViewQuiz/></ProfileRoute>} />
             <Route path='/dashboard' element={<ProfileRoute><Dashboard/></ProfileRoute>} />
             <Route path='/stats' element={<ProfileRoute><QuizzerStats/></ProfileRoute>} />
+            <Route path='/buzz/:invite' element={<QuizBuzzer/>} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
-          <Footer />
+          {!isPhoneBuzzer && <Footer />}
       </div>
   )
 }
