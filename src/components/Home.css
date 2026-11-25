@@ -126,7 +126,8 @@
 
 .typewriter-word {
     display: block;
-    width: 5em;
+    width: max-content;
+    min-width: 5em;
     margin: 0 auto;
     text-align: center;
     white-space: nowrap;
@@ -137,6 +138,7 @@
     width: 0.06em;
     height: 0.85em;
     margin-left: 0.08em;
+    margin-right: -0.14em;
     background-color: currentColor;
     vertical-align: -0.08em;
     animation: typewriter-cursor-blink 1s steps(2, start) infinite;

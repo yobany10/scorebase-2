@@ -41,7 +41,7 @@ const NamePrompt = () => {
             <form className='profile-form-container' onSubmit={handleSubmit}>
                 <div>
                     <h1 className='profile-title'>Welcome to ScoreBase</h1>
-                    <p className='profile-subtitle'>What name should we use for this browser?</p>
+                    <p className='profile-subtitle'>What name should we use for the account on this browser?</p>
                 </div>
                 <label className='profile-field'>
                     Your name

@@ -8,6 +8,7 @@ import NamePrompt from './Profile/NamePrompt'
 import Profile from './Profile/Profile'
 import ProfileRoute from './Profile/ProfileRoute'
 import Dashboard from './components/Dashboard'
+import QuizzerStats from './components/QuizzerStats'
 import ViewQuiz from './components/ViewQuiz'
 import { Navigate, Routes, Route } from 'react-router-dom'
 import {ToastContainer} from 'react-toastify'
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='/scorekeeping' element={<ProfileRoute><Scorekeeper/></ProfileRoute>} />
             <Route path='/viewquiz/:id' element={<ProfileRoute><ViewQuiz/></ProfileRoute>} />
             <Route path='/dashboard' element={<ProfileRoute><Dashboard/></ProfileRoute>} />
+            <Route path='/stats' element={<ProfileRoute><QuizzerStats/></ProfileRoute>} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
           <Footer />

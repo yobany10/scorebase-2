@@ -16,7 +16,8 @@ const MainNavbar = () => {
                 <div className='navbar-links-container'>
                     {profile && <Link className='navbar-link navbar-scorekeep' to='/scorekeeping'>Scorekeep</Link>}
                     {profile && <Link className='navbar-link navbar-dashboard' to='/dashboard'>Dashboard</Link>}
-                    {profile && <Link className='navbar-link navbar-profile' to='/profile'>{profile.displayName}</Link>}
+                    {profile && <Link className='navbar-link navbar-stats' to='/stats'>Stats</Link>}
+                    {profile && <Link className='navbar-link navbar-profile' to='/profile'>Profile</Link>}
                     {!profile && <Link className='navbar-link navbar-login' to='/welcome'>Get started</Link>}
                 </div>
             </div>
