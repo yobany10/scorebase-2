@@ -64,6 +64,7 @@ const ScoreBar = props => {
     if ((answer === 'correct' || answer === 'error') && currentAnswer === false) {
       quizzerControls[quizzer].setShown(false)
       props.handleClear()
+      props.onActionResolved?.()
     }
 
     props.handleCheckboxChange(event)

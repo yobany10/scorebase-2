@@ -4,6 +4,8 @@ import {TbReportSearch} from 'react-icons/tb'
 import './ToolBar.css'
 
 const ToolBar = (props) => {
+    const buzzersEnabled = props.buzzerStatus === 'connecting' || props.buzzerStatus === 'live'
+
     return (
         <div>
             {props.viewOnly &&
@@ -34,6 +36,14 @@ const ToolBar = (props) => {
                         <button className='toolbar-button' onClick={props.handleSaveQuiz}>Save Quiz</button>
                     }
                     <TeamEditModal {...props} />
+                    <button
+                        type='button'
+                        className={`toolbar-button${buzzersEnabled ? ' toolbar-button-active' : ''}`}
+                        onClick={buzzersEnabled ? props.stopBuzzer : props.enableBuzzer}
+                        aria-pressed={buzzersEnabled}
+                    >
+                        {buzzersEnabled ? 'Disconnect phone buzzers' : 'Enable phone buzzers'}
+                    </button>
                 </div>
             }
         </div>

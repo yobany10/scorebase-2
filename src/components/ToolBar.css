@@ -1,8 +1,9 @@
 #toolbar-div {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     padding: 0.5rem 1rem 0 1rem;
-    margin: auto;
+    margin: auto auto 24px;
     max-width: 1400px;
 }
 
@@ -12,6 +13,11 @@
     border-radius: 3px;
     font-size: 14px;
     color: #6c757d;
+}
+
+.toolbar-button-active {
+    color: #b42318;
+    font-weight: 600;
 }
 
 .toolbar-button:hover {
