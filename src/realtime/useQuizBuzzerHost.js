@@ -164,6 +164,7 @@ export const useQuizBuzzerHost = ({ roster, onBuzz }) => {
         connectedPeers: []
       })
     } catch (error) {
+      console.error('Unable to start Trystero phone buzzers.', error)
       if (isMountedRef.current) {
         setConnection(current => ({
           ...current,

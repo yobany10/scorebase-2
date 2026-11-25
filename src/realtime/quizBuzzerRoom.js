@@ -1,4 +1,4 @@
-import { joinRoom, roles } from 'trystero'
+import { createUserIdentity, joinRoom, roles } from 'trystero'
 
 const APP_ID = 'scorebase/quiz-buzzer'
 const MAX_ROOM_USERS = 7
@@ -40,8 +40,10 @@ export const createHostBuzzerRoom = async ({
   onPeerLeave,
   onError
 }) => {
+  const identity = await createUserIdentity()
   const room = joinRoom({
     appId: APP_ID,
+    identity,
     maxUsers: MAX_ROOM_USERS,
     password,
     use: [roles({ selfAsAdmin: true })]
@@ -109,9 +111,10 @@ export const joinQuizBuzzerRoom = async ({
   onHostLeave,
   onError
 }) => {
+  const identity = await createUserIdentity()
   const room = joinRoom({
     appId: APP_ID,
-    identity: 'none',
+    identity,
     maxUsers: MAX_ROOM_USERS,
     password,
     use: [roles()]

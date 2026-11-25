@@ -20,9 +20,9 @@ After starting a quiz, use **Enable phone buzzers** in the scorekeeping page. Th
 - Selecting a correct or error action, changing questions, or using **Reopen buzzing** starts a new round for all phones.
 - Phone claims, invite URLs, round state, and buzz events are temporary. They are not saved in IndexedDB.
 
-Phone buzzers require HTTPS in production because WebRTC signaling and browser audio features are restricted on insecure origins. `localhost` is suitable for browser development, but a phone must reach the app over an HTTPS tunnel or deployed HTTPS URL.
+Phone buzzers require HTTPS in production because WebRTC signaling and browser audio features are restricted on insecure origins. `localhost` is suitable for browser development, but a phone must reach the app over an HTTPS tunnel or deployed HTTPS URL. Use a current browser with BigInt and Web Crypto support, at minimum Chrome 80, Firefox 78, Safari 14, or Edge 80.
 
-Trystero uses public signaling relays for peer discovery; buzzer data then travels directly over encrypted WebRTC data channels when a connection can be established. The host accepts buzzes in arrival order, so this MVP is intended for ordinary local quiz rooms rather than tournament-grade timestamp arbitration. Restrictive school or cellular networks may require configured TURN infrastructure or a hosted WebSocket/Realtime backend for stronger reliability.
+Trystero uses public signaling relays for peer discovery; buzzer data then travels directly over encrypted WebRTC data channels when a connection can be established. An unavailable public relay can appear as a WebSocket error in the console while Trystero continues through its other relays. The host accepts buzzes in arrival order, so this MVP is intended for ordinary local quiz rooms rather than tournament-grade timestamp arbitration. Restrictive school or cellular networks may require configured TURN infrastructure or a hosted WebSocket/Realtime backend for stronger reliability.
 
 ## Development
 
